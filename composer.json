@@ -1,0 +1,16 @@
+{
+	"name": "rakko/newsdesk",
+	"description": "News for Rakko",
+	"keywords": ["NewsDesk", "CMS", "Rakko"],
+	"require": {
+		"laravel/framework": "5.1.*",
+		"baum/baum": "~1.1",
+		"cviebrock/eloquent-sluggable": ">=3.0.0-beta",
+		"vespakoen/menu": "3.*"
+	},
+	"config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
+}
