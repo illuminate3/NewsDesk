@@ -63,13 +63,13 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::pattern('id', '[0-9]+');
 
 // Controllers
-	Route::resource('contents', 'ContentsController');
-	Route::resource('print_statuses', 'PrintStatusesController');
+	Route::resource('news', 'NewsController');
+	Route::resource('news_statuses', 'NewsStatusesController');
 
 // Routes
-// 	Route::delete('contents/{id}', array(
-// 		'as'=>'contents.destroy',
-// 		'uses'=>'ContentsController@destroy'
+// 	Route::delete('news/{id}', array(
+// 		'as'=>'news.destroy',
+// 		'uses'=>'NewsController@destroy'
 // 		));
 // 	Route::delete('sites/{id}', array(
 // 	//	'as'=>'sites.destroy',
@@ -77,14 +77,14 @@ Route::group(['prefix' => 'admin'], function() {
 // 		));
 
 // API DATA
-	Route::get('api/print_statuses', array(
-//		'as'=>'api.print_statuses',
-		'uses'=>'PrintStatusesController@data'
+	Route::get('api/news_statuses', array(
+//		'as'=>'api.news_statuses',
+		'uses'=>'NewsStatusesController@data'
 		));
 
 });
 
-Route::get('{page}', 'FrontendController@get_page')->where('page', '.*');
+Route::get('{page}', 'FrontDeskController@get_page')->where('page', '.*');
 
 
 

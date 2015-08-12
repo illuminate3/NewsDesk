@@ -2,13 +2,13 @@
 
 namespace App\Modules\NewsDesk\Http\Controllers;
 
-use App\Modules\NewsDesk\Http\Models\PrintStatus;
-use App\Modules\NewsDesk\Http\Repositories\PrintStatusRepository;
+use App\Modules\NewsDesk\Http\Models\NewsStatus;
+use App\Modules\NewsDesk\Http\Repositories\NewsStatusRepository;
 
 use Illuminate\Http\Request;
 use App\Modules\NewsDesk\Http\Requests\DeleteRequest;
-use App\Modules\NewsDesk\Http\Requests\PrintStatusCreateRequest;
-use App\Modules\NewsDesk\Http\Requests\PrintStatusUpdateRequest;
+use App\Modules\NewsDesk\Http\Requests\NewsStatusCreateRequest;
+use App\Modules\NewsDesk\Http\Requests\NewsStatusUpdateRequest;
 
 use Datatables;
 use Flash;
@@ -16,7 +16,7 @@ use Session;
 use Theme;
 
 
-class PrintStatusesController extends NewsDeskController {
+class NewsStatusesController extends NewsDeskController {
 
 	/**
 	 * Status Repository
@@ -26,7 +26,7 @@ class PrintStatusesController extends NewsDeskController {
 	protected $status;
 
 	public function __construct(
-			PrintStatusRepository $status_repo
+			NewsStatusRepository $status_repo
 		)
 	{
 		$this->status_repo = $status_repo;
@@ -47,14 +47,14 @@ class PrintStatusesController extends NewsDeskController {
 	{
 		$lang = Session::get('locale');
 //		$locales = $this->status_repo->getLocales();
-		$print_statuses = $this->status_repo->all();
+		$news_statuses = $this->status_repo->all();
 //dd($lang);
 
-		return Theme::View('modules.newsdesk.print_statuses.index',
+		return Theme::View('modules.newsdesk.news_statuses.index',
 			compact(
 				'lang',
 //				'locales',
-				'print_statuses'
+				'news_statuses'
 				));
 	}
 
@@ -66,7 +66,7 @@ class PrintStatusesController extends NewsDeskController {
 	 */
 	public function create()
 	{
-		return Theme::View('modules.newsdesk.print_statuses.create',  $this->status_repo->create());
+		return Theme::View('modules.newsdesk.news_statuses.create',  $this->status_repo->create());
 	}
 
 
@@ -76,13 +76,13 @@ class PrintStatusesController extends NewsDeskController {
 	 * @return Response
 	 */
 	public function store(
-		PrintStatusCreateRequest $request
+		NewsStatusCreateRequest $request
 		)
 	{
 		$this->status->store($request->all());
 
 		Flash::success( trans('kotoba::general.success.status_create') );
-		return redirect('admin/print_statuses');
+		return redirect('admin/news_statuses');
 	}
 
 
@@ -113,11 +113,11 @@ class PrintStatusesController extends NewsDeskController {
 
 		$modal_title = trans('kotoba::general.command.delete');
 		$modal_body = trans('kotoba::general.ask.delete');
-		$modal_route = 'admin.print_statuses.destroy';
+		$modal_route = 'admin.news_statuses.destroy';
 		$modal_id = $id;
 		$model = '$status';
 
-		return Theme::View('modules.newsdesk.print_statuses.edit',
+		return Theme::View('modules.newsdesk.news_statuses.edit',
 			compact(
 				'status',
 				'lang',
@@ -127,7 +127,7 @@ class PrintStatusesController extends NewsDeskController {
 				'modal_id',
 				'model'
 		));
-//		return View('modules.newsdesk.print_statuses.edit',  $this->status->edit($id));
+//		return View('modules.newsdesk.news_statuses.edit',  $this->status->edit($id));
 	}
 
 
@@ -138,7 +138,7 @@ class PrintStatusesController extends NewsDeskController {
 	 * @return Response
 	 */
 	public function update(
-		PrintStatusUpdateRequest $request,
+		NewsStatusUpdateRequest $request,
 		$id
 		)
 	{
@@ -146,7 +146,7 @@ class PrintStatusesController extends NewsDeskController {
 		$this->status->update($request->all(), $id);
 
 		Flash::success( trans('kotoba::general.success.status_update') );
-		return redirect('admin/print_statuses');
+		return redirect('admin/news_statuses');
 	}
 
 
@@ -160,7 +160,7 @@ class PrintStatusesController extends NewsDeskController {
 	{
 		$this->status->find($id)->delete();
 
-		return Redirect::route('admin.print_statuses.index');
+		return Redirect::route('admin.news_statuses.index');
 	}
 
 
@@ -171,11 +171,11 @@ class PrintStatusesController extends NewsDeskController {
 	*/
 	public function data()
 	{
-//		$query = PrintStatus::select(array('statuses.id','statuses.name','statuses.description'))
+//		$query = NewsStatus::select(array('statuses.id','statuses.name','statuses.description'))
 //			->orderBy('statuses.name', 'ASC');
-//		$query = PrintStatus::select('id', 'name' 'description', 'updated_at');
+//		$query = NewsStatus::select('id', 'name' 'description', 'updated_at');
 //			->orderBy('name', 'ASC');
-		$query = PrintStatus::select('id', 'name', 'description', 'updated_at');
+		$query = NewsStatus::select('id', 'name', 'description', 'updated_at');
 //dd($query);
 
 		return Datatables::of($query)
@@ -184,7 +184,7 @@ class PrintStatusesController extends NewsDeskController {
 			->addColumn(
 				'actions',
 				'
-					<a href="{{ URL::to(\'admin/print_statuses/\' . $id . \'/edit\' ) }}" class="btn btn-success btn-sm" >
+					<a href="{{ URL::to(\'admin/news_statuses/\' . $id . \'/edit\' ) }}" class="btn btn-success btn-sm" >
 						<span class="glyphicon glyphicon-pencil"></span>  {{ trans("kotoba::button.edit") }}
 					</a>
 				'

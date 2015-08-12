@@ -24,7 +24,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 	use SluggableTrait;
 	use Translatable;
 
-	protected $table = 'contents';
+	protected $table = 'news';
 
 // Presenter -------------------------------------------------------
 	protected $presenter = 'App\Modules\NewsDesk\Http\Presenters\NewsDesk';
@@ -48,7 +48,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		'order',
 		'publish_start',
 		'publish_end',
-		'print_status_id',
+		'news_status_id',
 		'slug',
 		'user_id',
 		// Translatable columns
@@ -128,12 +128,12 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-		$page = DB::table('contents')
-			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+		$page = DB::table('news')
+			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
 			->where('content_translations.locale_id', '=', $locale_id)
-			->where('contents.is_online', '=', 1, 'AND')
-			->where('contents.is_deleted', '=', 0, 'AND')
-			->where('contents.parent_id', '=', null, 'AND')
+			->where('news.is_online', '=', 1, 'AND')
+			->where('news.is_deleted', '=', 0, 'AND')
+			->where('news.parent_id', '=', null, 'AND')
 //			->where('content_translations.slug', '=', $slug, 'AND')
 //			->first();
 			->orderBy('order')
@@ -148,12 +148,12 @@ dd($page);
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-		$page = DB::table('contents')
-			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+		$page = DB::table('news')
+			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
 			->where('content_translations.locale_id', '=', $locale_id)
-			->where('contents.is_online', '=', 1, 'AND')
-			->where('contents.is_deleted', '=', 0, 'AND')
-			->where('contents.parent_id', '=', null, 'AND')
+			->where('news.is_online', '=', 1, 'AND')
+			->where('news.is_deleted', '=', 0, 'AND')
+			->where('news.parent_id', '=', null, 'AND')
 //			->where('content_translations.slug', '=', $slug, 'AND')
 //			->first();
 			->orderBy('order')
@@ -166,7 +166,7 @@ dd($page);
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-			return static::join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+			return static::join('content_translations', 'news.id', '=', 'content_translations.content_id')
 							->whereIsCurrent(1)
 							->whereIsOnline(1)
 							->whereIsDeleted(0)
@@ -210,12 +210,12 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $page;
 	}
 
-	public function scopeInPrint($query)
+	public function scopeInNews($query)
 	{
 		return $query
 //			->where('is_published', '=', 1);
-			->where('print_status_id', '=', 2);
-// 			->where('print_status_id', '<', 5, 'OR');
+			->where('news_status_id', '=', 2);
+// 			->where('news_status_id', '<', 5, 'OR');
 	}
 
 	public function scopeIsFeatured($query)

@@ -31,19 +31,19 @@ class NewsDesk extends Presenter {
 
 
 	/**
-	 * Present print_status
+	 * Present news_status
 	 *
 	 * @return string
 	 */
-	public function print_status($print_status_id)
+	public function news_status($news_status_id)
 	{
-//dd($print_status_id);
-//		return $print_status_id ? trans('kotoba::general.active') : trans('kotoba::general.deactivated');
-		$print_status = DB::table('print_status_translations')
-			->where('id', '=', $print_status_id)
+//dd($news_status_id);
+//		return $news_status_id ? trans('kotoba::general.active') : trans('kotoba::general.deactivated');
+		$news_status = DB::table('news_status_translations')
+			->where('id', '=', $news_status_id)
 			->pluck('name');
 
-		return $print_status;
+		return $news_status;
 
 	}
 

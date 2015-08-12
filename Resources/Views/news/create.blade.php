@@ -39,7 +39,7 @@
 
 <div class="row margin-top-lg">
 {!! Form::open([
-	'url' => 'admin/contents',
+	'url' => 'admin/news',
 	'method' => 'POST',
 	'class' => 'form-horizontal'
 ]) !!}
@@ -183,8 +183,8 @@
 			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!!
 				Form::select(
-					'print_status_id',
-					$print_statuses,
+					'news_status_id',
+					$news_statuses,
 					null,
 					array(
 						'class' => 'form-control chosen-select'
@@ -195,7 +195,7 @@
 	@else
 		<div class="form-group">
 			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
-			{!! Form::hidden('print_status_id', 1) !!}
+			{!! Form::hidden('news_status_id', 1) !!}
 			{{ Lang::choice('kotoba::cms.draft', 1) }}
 		</div>
 	@endif
@@ -296,7 +296,7 @@
 
 <div class="row">
 <div class="col-sm-6">
-	<a href="/admin/contents" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
+	<a href="/admin/news" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
 		<i class="fa fa-times fa-fw"></i>
 		{{ trans('kotoba::button.cancel') }}
 	</a>

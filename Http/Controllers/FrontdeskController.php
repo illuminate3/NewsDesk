@@ -24,7 +24,7 @@ use Route;
 use Theme;
 
 
-class FrontendController extends NewsDeskController {
+class FrontDeskController extends NewsDeskController {
 
 	public function __construct(
 			Content $content,

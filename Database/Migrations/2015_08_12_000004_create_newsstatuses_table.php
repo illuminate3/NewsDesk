@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Bluenews;
 
 
-class CreatePrintStatusesTable extends Migration
+class CreateNewsStatusesTable extends Migration
 {
 
 	public function __construct()
@@ -22,7 +22,7 @@ class CreatePrintStatusesTable extends Migration
 	public function up()
 	{
 /*
-		Schema::create($this->prefix . 'print_statuses', function(Blueprint $table) {
+		Schema::create($this->prefix . 'news_statuses', function(Bluenews $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id');
@@ -35,7 +35,7 @@ class CreatePrintStatusesTable extends Migration
 
 		});
 */
-		Schema::create($this->prefix . 'print_statuses', function(Blueprint $table) {
+		Schema::create($this->prefix . 'news_statuses', function(Bluenews $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id')->unsigned();
@@ -48,7 +48,7 @@ class CreatePrintStatusesTable extends Migration
 
 		});
 
-		Schema::create($this->prefix . 'print_status_translations', function(Blueprint $table) {
+		Schema::create($this->prefix . 'news_status_translations', function(Bluenews $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id')->unsigned();
@@ -56,13 +56,13 @@ class CreatePrintStatusesTable extends Migration
 			$table->string('name')->nullable();
 			$table->string('description')->nullable();
 
-			$table->integer('print_status_id')->unsigned()->index();
-			$table->foreign('print_status_id')->references('id')->on('print_statuses')->onDelete('cascade');
+			$table->integer('news_status_id')->unsigned()->index();
+			$table->foreign('news_status_id')->references('id')->on('news_statuses')->onDelete('cascade');
 
 			$table->integer('locale_id')->unsigned()->index();
 			$table->foreign('locale_id')->references('id')->on('locales')->onDelete('cascade');
 
-			$table->unique(['print_status_id', 'locale_id']);
+			$table->unique(['news_status_id', 'locale_id']);
 
 			$table->softDeletes();
 			$table->timestamps();
@@ -79,8 +79,8 @@ class CreatePrintStatusesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop($this->prefix . 'print_status_translations');
-		Schema::drop($this->prefix . 'print_statuses');
+		Schema::drop($this->prefix . 'news_status_translations');
+		Schema::drop($this->prefix . 'news_statuses');
 	}
 
 }

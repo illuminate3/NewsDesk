@@ -15,9 +15,9 @@ class ModuleSeeder extends Seeder {
 // Permissions -------------------------------------------------------------
 		$permissions = array(
 			[
-				'name'				=> 'Manage NewsDesk CMS',
+				'name'				=> 'Manage NewsDesk',
 				'slug'				=> 'manage_newsdesk',
-				'description'		=> 'Give permission to user to manage CMS'
+				'description'		=> 'Give permission to user to manage the NewsDesk system'
 			],
 		 );
 
@@ -47,8 +47,8 @@ class ModuleSeeder extends Seeder {
 
 		$ink_name_trans = array([
 			'status'				=> 1,
-			'title'					=> 'Contents',
-			'url'					=> '/admin/contents',
+			'title'					=> 'News',
+			'url'					=> '/admin/news',
 			'menulink_id'			=> $last_insert_id,
 			'locale_id'				=> $locale_id // English ID
 		]);
@@ -77,8 +77,8 @@ class ModuleSeeder extends Seeder {
 
 		$ink_name_trans = array([
 			'status'				=> 1,
-			'title'					=> 'Print Statuses',
-			'url'					=> '/admin/print_statuses',
+			'title'					=> 'News Statuses',
+			'url'					=> '/admin/news_statuses',
 			'menulink_id'			=> $last_insert_id,
 			'locale_id'				=> $locale_id // English ID
 		]);

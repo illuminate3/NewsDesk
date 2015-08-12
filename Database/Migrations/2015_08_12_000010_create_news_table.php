@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Bluenews;
 
 
-class CreateContentsTable extends Migration
+class CreateNewsTable extends Migration
 {
 
 	public function __construct()
@@ -21,7 +21,7 @@ class CreateContentsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create($this->prefix . 'contents', function(Blueprint $table) {
+		Schema::create($this->prefix . 'news', function(Bluenews $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id')->unsigned();
@@ -41,7 +41,7 @@ class CreateContentsTable extends Migration
 			$table->string('class', 50)->nullable();
 //			$table->text('link', 255)->nullable();
 
-			$table->tinyInteger('print_status_id')->default(0);
+			$table->tinyInteger('news_status_id')->default(0);
 //			$table->tinyInteger('is_published')->default(0);
 			$table->tinyInteger('is_featured')->default(0);
 // 			$table->tinyInteger('menu_id')->default(1);
@@ -79,7 +79,7 @@ class CreateContentsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop($this->prefix . 'contents');
+		Schema::drop($this->prefix . 'news');
 	}
 
 }

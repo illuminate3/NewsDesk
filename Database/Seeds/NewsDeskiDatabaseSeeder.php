@@ -18,7 +18,7 @@ class NewsDeskDatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('App\Modules\NewsDesk\Database\Seeds\ModuleSeeder');
-		$this->call('App\Modules\NewsDesk\Database\Seeds\PrintStatusesSeeder');
+		$this->call('App\Modules\NewsDesk\Database\Seeds\NewsStatusesSeeder');
 
 	}
 

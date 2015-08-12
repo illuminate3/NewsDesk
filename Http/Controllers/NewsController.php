@@ -22,7 +22,7 @@ use Session;
 use Theme;
 
 
-class ContentsController extends NewsDeskController {
+class NewsController extends NewsDeskController {
 
 	/**
 	 * Content Repository
@@ -58,18 +58,18 @@ class ContentsController extends NewsDeskController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-		$contents = $this->content->all();
-//		$contents = Content::getNestedList('title', 'id', '>> ');
-//dd($contents);
+		$news = $this->content->all();
+//		$news = Content::getNestedList('title', 'id', '>> ');
+//dd($news);
 
 		$list = Content::all();
 		$list = $list->toHierarchy();
 //dd($list);
 
 
-		return Theme::View('modules.newsdesk.contents.index',
+		return Theme::View('modules.newsdesk.news.index',
 			compact(
-				'contents',
+				'news',
 				'list',
 				'lang',
 				'locales',
@@ -85,7 +85,7 @@ class ContentsController extends NewsDeskController {
 	 */
 	public function create()
 	{
-		return Theme::View('modules.newsdesk.contents.create',  $this->content->create());
+		return Theme::View('modules.newsdesk.news.create',  $this->content->create());
 	}
 
 
@@ -104,7 +104,7 @@ class ContentsController extends NewsDeskController {
 		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.content_create') );
-		return redirect('admin/contents');
+		return redirect('admin/news');
 	}
 
 
@@ -118,7 +118,7 @@ class ContentsController extends NewsDeskController {
 	{
 // 		$content = $this->content->findOrFail($id);
 //
-// 		return View::make('HR::contents.show', compact('content'));
+// 		return View::make('HR::news.show', compact('content'));
 	}
 
 
@@ -132,14 +132,14 @@ class ContentsController extends NewsDeskController {
 	{
 		$modal_title = trans('kotoba::general.command.delete');
 		$modal_body = trans('kotoba::general.ask.delete');
-		$modal_route = 'admin.contents.destroy';
+		$modal_route = 'admin.news.destroy';
 		$modal_id = $id;
 //		$model = '$content';
 		$model = 'content';
 //dd($model);
 
-		return Theme::View('modules.newsdesk.contents.edit',
-//		return Theme::View('contents.edit',
+		return Theme::View('modules.newsdesk.news.edit',
+//		return Theme::View('news.edit',
 			$this->content->edit($id),
 				compact(
 					'modal_title',
@@ -168,7 +168,7 @@ class ContentsController extends NewsDeskController {
 		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.content_update') );
-		return redirect('admin/contents');
+		return redirect('admin/news');
 	}
 
 
@@ -184,7 +184,7 @@ class ContentsController extends NewsDeskController {
 		Content::find($id)->delete();
 
 		Flash::success( trans('kotoba::cms.success.content_delete') );
-		return redirect('admin/contents');
+		return redirect('admin/news');
 	}
 
 
@@ -195,8 +195,8 @@ class ContentsController extends NewsDeskController {
 	*/
 	public function data()
 	{
-//		$query = Content::select(array('contents.id','contents.name','contents.description'))
-//			->orderBy('contents.name', 'ASC');
+//		$query = Content::select(array('news.id','news.name','news.description'))
+//			->orderBy('news.name', 'ASC');
 //		$query = Content::select('id', 'name' 'description', 'updated_at');
 //			->orderBy('name', 'ASC');
 		$query = Content::select('id', 'name', 'description', 'updated_at');
@@ -208,7 +208,7 @@ class ContentsController extends NewsDeskController {
 			->addColumn(
 				'actions',
 				'
-					<a href="{{ URL::to(\'admin/contents/\' . $id . \'/edit\' ) }}" class="btn btn-success btn-sm" >
+					<a href="{{ URL::to(\'admin/news/\' . $id . \'/edit\' ) }}" class="btn btn-success btn-sm" >
 						<span class="glyphicon glyphicon-pencil"></span>  {{ trans("kotoba::button.edit") }}
 					</a>
 				'

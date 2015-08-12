@@ -9,7 +9,7 @@ use Vinkla\Translator\Translatable;
 use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
 
 
-class PrintStatus extends Model implements TranslatableContract {
+class NewsStatus extends Model implements TranslatableContract {
 
 	use PresentableTrait;
 	use Translatable;
@@ -19,13 +19,13 @@ class PrintStatus extends Model implements TranslatableContract {
 	 *
 	 * @var string
 	 */
-	protected $table = 'print_statuses';
+	protected $table = 'news_statuses';
 
 // Presenter -------------------------------------------------------
 	protected $presenter = 'App\Modules\NewsDesk\Http\Presenters\NewsDesk';
 
 // Translation Model -------------------------------------------------------
-	protected $translator = 'App\Modules\NewsDesk\Http\Models\PrintStatusTranslation';
+	protected $translator = 'App\Modules\NewsDesk\Http\Models\NewsStatusTranslation';
 
 // DEFINE Hidden -------------------------------------------------------
 	protected $hidden = [

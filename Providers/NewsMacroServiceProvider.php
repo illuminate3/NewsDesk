@@ -39,13 +39,13 @@ class ContentMacroServiceProvider extends ServiceProvider
 				//glyphicon for closed entries
 				if($mode != 'plain')
 					$classSpan .= ' glyphicon-chevron-right';
-				return '<li class="' . $classLi . '"> <a href="' . url('contents/' . $node['id']) . '">' . '<span class="' . $classSpan . '"></span>' . $node['slug'] . '</a></li>';
+				return '<li class="' . $classLi . '"> <a href="' . url('news/' . $node['id']) . '">' . '<span class="' . $classSpan . '"></span>' . $node['slug'] . '</a></li>';
 			} else {
 				//$html = "Anzahl Kinder von:". $node['name'] . ' -> ' . count($node['children']);
 				//glyphicon for opened entries
 				if($mode != 'plain')
 					$classSpan .= ' glyphicon-chevron-down';
-				$html = '<li class="' . $classLi . '"><a href="' . url('contents/' . $node['id']) . '">' . '<span class="' . $classSpan . '"></span>' . $node['slug'] . '</a>';
+				$html = '<li class="' . $classLi . '"><a href="' . url('news/' . $node['id']) . '">' . '<span class="' . $classSpan . '"></span>' . $node['slug'] . '</a>';
 				$html .= '<ul class="' . $classUl . '">';
 
 				foreach($node['children'] as $child)
@@ -69,7 +69,7 @@ class ContentMacroServiceProvider extends ServiceProvider
 
 			if( empty($node['children']) ) {
 
-				return '<li> empty child <a href="' . url('contents/' . $node['slug']) . '">' . $title . '</a></li>';
+				return '<li> empty child <a href="' . url('news/' . $node['slug']) . '">' . $title . '</a></li>';
 
 			} else {
 
@@ -83,11 +83,11 @@ class ContentMacroServiceProvider extends ServiceProvider
 
 				$html .= '<td>' . $node['order'] . '</td>';
 
-				$html .= '<td>' . $node->present()->print_status($node->print_status_id) . '</td>';
+				$html .= '<td>' . $node->present()->news_status($node->news_status_id) . '</td>';
 
 				$html .= '<td>';
 				$html .= '
-					<a href="/admin/contents/' . $node['id'] . '/edit" class="btn btn-success" title="' . trans("kotoba::button.edit") . '">
+					<a href="/admin/news/' . $node['id'] . '/edit" class="btn btn-success" title="' . trans("kotoba::button.edit") . '">
 						<i class="fa fa-pencil fa-fw"></i>' . trans("kotoba::button.edit") . '
 					</a>
 						';
@@ -105,7 +105,7 @@ class ContentMacroServiceProvider extends ServiceProvider
 	}
 
 
-	Html::macro('printNodes', function($nodes, $mode) {
+	Html::macro('newsNodes', function($nodes, $mode) {
 		return renderNode($nodes, $mode);
 	});
 

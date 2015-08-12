@@ -2,20 +2,20 @@
 
 namespace App\Modules\NewsDesk\Http\Repositories;
 
-use App\Modules\NewsDesk\Http\Models\PrintStatus;
+use App\Modules\NewsDesk\Http\Models\NewsStatus;
 
 use DB;
 use Session;
 
 
-class PrintStatusRepository extends BaseRepository {
+class NewsStatusRepository extends BaseRepository {
 
 	/**
 	 * The Module instance.
 	 *
 	 * @var App\Modules\ModuleManager\Http\Models\Module
 	 */
-	protected $print_status;
+	protected $news_status;
 
 	/**
 	 * Create a new ModuleRepository instance.
@@ -24,10 +24,10 @@ class PrintStatusRepository extends BaseRepository {
 	 * @return void
 	 */
 	public function __construct(
-		PrintStatus $print_status
+		NewsStatus $news_status
 		)
 	{
-		$this->model = $print_status;
+		$this->model = $news_status;
 	}
 
 
@@ -85,7 +85,7 @@ class PrintStatusRepository extends BaseRepository {
 	public function store($input)
 	{
 //dd($input);
-		$this->model = new PrintStatus;
+		$this->model = new NewsStatus;
 		$this->model->create($input);
 	}
 
@@ -100,7 +100,7 @@ class PrintStatusRepository extends BaseRepository {
 	public function update($input, $id)
 	{
 //dd($input['enabled']);
-		$status = PrintStatus::find($id);
+		$status = NewsStatus::find($id);
 		$status->update($input);
 	}
 

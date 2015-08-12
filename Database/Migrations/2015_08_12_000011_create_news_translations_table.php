@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Bluenews;
 
 
 class CreateContentTranslationsTable extends Migration
@@ -22,7 +22,7 @@ class CreateContentTranslationsTable extends Migration
 	public function up()
 	{
 
-		Schema::create($this->prefix . 'content_translations', function(Blueprint $table) {
+		Schema::create($this->prefix . 'content_translations', function(Bluenews $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id')->unsigned();
@@ -42,7 +42,7 @@ class CreateContentTranslationsTable extends Migration
 			$table->string('meta_description')->nullable();
 
 			$table->integer('content_id')->unsigned()->index();
-			$table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
+			$table->foreign('content_id')->references('id')->on('news')->onDelete('cascade');
 
 			$table->integer('locale_id')->unsigned()->index();
 			$table->foreign('locale_id')->references('id')->on('locales')->onDelete('cascade');
