@@ -8,14 +8,14 @@ Beta Development
 
 ## Description
 
-This module provides a base CMS as in page management.
+This module provides a basenews management system.
 
 
 ## Functionality
 
 
 ### Contents
-Mulit-lingual Content Management
+Mulit-lingual News Management
 
 
 ### Print Statuses
@@ -24,9 +24,9 @@ Simple print designations such as draft, edit, in print and such.
 
 ## Routes
 
-* /admin/contents
+* /admin/news
 * /admin/print_statuses
-* /{page}
+* /{news}
 
 
 ## Install
