@@ -15,7 +15,7 @@
 @stop
 
 
-{{-- Content --}}
+{{-- News --}}
 @section('content')
 
 

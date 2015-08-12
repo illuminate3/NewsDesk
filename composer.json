@@ -1,7 +1,7 @@
 {
 	"name": "rakko/newsdesk",
-	"description": "News for Rakko",
-	"keywords": ["NewsDesk", "CMS", "Rakko"],
+	"description": "NewsDesk for Rakko",
+	"keywords": ["NewsDesk", "Articles", "Rakko"],
 	"require": {
 		"laravel/framework": "5.1.*",
 		"baum/baum": "~1.1",

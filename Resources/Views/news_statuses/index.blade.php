@@ -16,7 +16,7 @@
 @stop
 
 
-{{-- Content --}}
+{{-- News --}}
 @section('content')
 
 <div class="row">

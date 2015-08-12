@@ -16,9 +16,9 @@ use Baum\Node;
 use Cache;
 use DB;
 
-//class Content extends Node {
-class Content extends Node implements TranslatableContract, SluggableInterface {
-//class Content extends Node implements TranslatableContract {
+//class News extends Node {
+class News extends Node implements TranslatableContract, SluggableInterface {
+//class News extends Node implements TranslatableContract {
 
 	use PresentableTrait;
 	use SluggableTrait;
@@ -30,7 +30,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 	protected $presenter = 'App\Modules\NewsDesk\Http\Presenters\NewsDesk';
 
 // Translation Model -------------------------------------------------------
-	protected $translator = 'App\Modules\NewsDesk\Http\Models\ContentTranslation';
+	protected $translator = 'App\Modules\NewsDesk\Http\Models\NewsTranslation';
 
 // DEFINE Hidden -------------------------------------------------------
 	protected $hidden = [
@@ -83,9 +83,9 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 // 		'title'
 // 		];
 
-	public function getContentAttribute()
+	public function getNewsAttribute()
 	{
-		return $this->content;
+		return $this->news;
 	}
 
 	public function getSummaryAttribute()
@@ -129,7 +129,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		// $roots = Cache::rememberForever('roots', function()
 		// {
 		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 			->where('content_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
@@ -149,7 +149,7 @@ dd($page);
 		// $roots = Cache::rememberForever('roots', function()
 		// {
 		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 			->where('content_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
@@ -166,7 +166,7 @@ dd($page);
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-			return static::join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			return static::join('content_translations', 'news.id', '=', 'content_translations.news_id')
 							->whereIsCurrent(1)
 							->whereIsOnline(1)
 							->whereIsDeleted(0)

@@ -4,13 +4,13 @@ namespace App\Modules\NewsDesk\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
 
-use App\Modules\NewsDesk\Http\Models\Content;
-use App\Modules\NewsDesk\Http\Repositories\ContentRepository;
+use App\Modules\NewsDesk\Http\Models\News;
+use App\Modules\NewsDesk\Http\Repositories\NewsRepository;
 
 use Illuminate\Http\Request;
 use App\Modules\NewsDesk\Http\Requests\DeleteRequest;
-use App\Modules\NewsDesk\Http\Requests\ContentCreateRequest;
-use App\Modules\NewsDesk\Http\Requests\ContentUpdateRequest;
+use App\Modules\NewsDesk\Http\Requests\NewsCreateRequest;
+use App\Modules\NewsDesk\Http\Requests\NewsUpdateRequest;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
@@ -25,19 +25,19 @@ use Theme;
 class NewsController extends NewsDeskController {
 
 	/**
-	 * Content Repository
+	 * News Repository
 	 *
-	 * @var Content
+	 * @var News
 	 */
-	protected $content;
+	protected $news;
 
 	public function __construct(
 			LocaleRepository $locale_repo,
-			ContentRepository $content
+			NewsRepository $news
 		)
 	{
 		$this->locale_repo = $locale_repo;
-		$this->content = $content;
+		$this->news = $news;
 // middleware
 		parent::__construct();
 // middleware
@@ -58,11 +58,11 @@ class NewsController extends NewsDeskController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-		$news = $this->content->all();
-//		$news = Content::getNestedList('title', 'id', '>> ');
+		$news = $this->news->all();
+//		$news = News::getNestedList('title', 'id', '>> ');
 //dd($news);
 
-		$list = Content::all();
+		$list = News::all();
 		$list = $list->toHierarchy();
 //dd($list);
 
@@ -85,7 +85,7 @@ class NewsController extends NewsDeskController {
 	 */
 	public function create()
 	{
-		return Theme::View('modules.newsdesk.news.create',  $this->content->create());
+		return Theme::View('modules.newsdesk.news.create',  $this->news->create());
 	}
 
 
@@ -95,12 +95,12 @@ class NewsController extends NewsDeskController {
 	 * @return Response
 	 */
 	public function store(
-		ContentCreateRequest $request
+		NewsCreateRequest $request
 		)
 	{
 //dd($request);
 
-		$this->content->store($request->all());
+		$this->news->store($request->all());
 		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.content_create') );
@@ -116,7 +116,7 @@ class NewsController extends NewsDeskController {
 	 */
 	public function show($id)
 	{
-// 		$content = $this->content->findOrFail($id);
+// 		$news = $this->news->findOrFail($id);
 //
 // 		return View::make('HR::news.show', compact('content'));
 	}
@@ -134,13 +134,13 @@ class NewsController extends NewsDeskController {
 		$modal_body = trans('kotoba::general.ask.delete');
 		$modal_route = 'admin.news.destroy';
 		$modal_id = $id;
-//		$model = '$content';
+//		$model = '$news';
 		$model = 'content';
 //dd($model);
 
 		return Theme::View('modules.newsdesk.news.edit',
 //		return Theme::View('news.edit',
-			$this->content->edit($id),
+			$this->news->edit($id),
 				compact(
 					'modal_title',
 					'modal_body',
@@ -158,13 +158,13 @@ class NewsController extends NewsDeskController {
 	 * @return Response
 	 */
 	public function update(
-		ContentUpdateRequest $request,
+		NewsUpdateRequest $request,
 		$id
 		)
 	{
 //dd($request);
 
-		$this->content->update($request->all(), $id);
+		$this->news->update($request->all(), $id);
 		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.content_update') );
@@ -181,7 +181,7 @@ class NewsController extends NewsDeskController {
 	public function destroy($id)
 	{
 //dd($id);
-		Content::find($id)->delete();
+		News::find($id)->delete();
 
 		Flash::success( trans('kotoba::cms.success.content_delete') );
 		return redirect('admin/news');
@@ -195,11 +195,11 @@ class NewsController extends NewsDeskController {
 	*/
 	public function data()
 	{
-//		$query = Content::select(array('news.id','news.name','news.description'))
+//		$query = News::select(array('news.id','news.name','news.description'))
 //			->orderBy('news.name', 'ASC');
-//		$query = Content::select('id', 'name' 'description', 'updated_at');
+//		$query = News::select('id', 'name' 'description', 'updated_at');
 //			->orderBy('name', 'ASC');
-		$query = Content::select('id', 'name', 'description', 'updated_at');
+		$query = News::select('id', 'name', 'description', 'updated_at');
 //dd($query);
 
 		return Datatables::of($query)

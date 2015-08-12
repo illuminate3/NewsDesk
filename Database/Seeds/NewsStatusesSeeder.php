@@ -35,25 +35,25 @@ class NewsStatusesSeeder extends Seeder {
 		$news_status_translations = array(
 		[
 			'name'					=> 'Draft',
-			'description'			=> 'Page is a draft',
+			'description'			=> 'Article is a draft',
 			'news_status_id'		=> 1,
 			'locale_id'				=> $locale_id
 		],
 		[
 			'name'					=> 'Publish',
-			'description'			=> 'Page is a draft',
+			'description'			=> 'Article is a draft',
 			'news_status_id'		=> 2,
 			'locale_id'				=> $locale_id
 		],
 		[
 			'name'					=> 'Unpublish',
-			'description'			=> 'Page is a draft',
+			'description'			=> 'Article is a draft',
 			'news_status_id'		=> 3,
 			'locale_id'				=> $locale_id
 		],
 		[
 			'name'					=> 'Archieve',
-			'description'			=> 'Page has been archieved',
+			'description'			=> 'Article has been archieved',
 			'news_status_id'		=> 4,
 			'locale_id'				=> $locale_id
 		],

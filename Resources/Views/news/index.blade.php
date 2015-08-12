@@ -24,7 +24,7 @@ oTable =
 @stop
 
 
-{{-- Content --}}
+{{-- News --}}
 @section('content')
 
 <div class="row">
@@ -60,15 +60,15 @@ oTable =
 	</thead>
 	<tbody>
 {{--
-		@foreach ($news as $content)
+		@foreach ($news as $news)
 			<tr>
-				<td>{{ $content->title }}</td>
-				<td>{!! $content->summary !!}</td>
-				<td>{{ $content->slug }}</td>
-				<td>{{ $content->order }}</td>
-				<td>{{ $content->present()->news_status($content->news_status_id) }}</td>
+				<td>{{ $news->title }}</td>
+				<td>{!! $news->summary !!}</td>
+				<td>{{ $news->slug }}</td>
+				<td>{{ $news->order }}</td>
+				<td>{{ $news->present()->news_status($news->news_status_id) }}</td>
 				<td>
-					<a href="/admin/news/{{ $content->id }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
+					<a href="/admin/news/{{ $news->id }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
 						<i class="fa fa-pencil fa-fw"></i>
 						{{ trans('kotoba::button.edit') }}
 					</a>

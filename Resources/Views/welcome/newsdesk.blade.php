@@ -14,7 +14,7 @@
 @section('inline-scripts')
 @stop
 
-{{-- Content --}}
+{{-- News --}}
 @section('content')
 
 	<div class="container">

@@ -27,21 +27,21 @@
 	});
 	CKEDITOR.replace( 'ckeditor' );
 	CKEDITOR.editorConfig = function( config ) {
-		config.extraAllowedContent = 'div(*)';
-		config.allowedContent=true;
+		config.extraAllowedNews = 'div(*)';
+		config.allowedNews=true;
 	};
 @stop
 
 
-{{-- Content --}}
+{{-- News --}}
 @section('content')
 
 
 <div class="row margin-top-lg">
 {!! Form::model(
-	$content,
+	$news,
 	[
-		'route' => ['admin.news.update', $content->id],
+		'route' => ['admin.news.update', $news->id],
 		'method' => 'PATCH',
 		'class' => 'form'
 	]
@@ -74,17 +74,17 @@
 	<div role="tabpanel" class="tab-pane padding fade @if ($language->locale == $lang)in active @endif" id="lang_{{{ $language->id }}}">
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}">{{ $content->translate($language->locale)->content }}</textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}">{{ $news->translate($language->locale)->content }}</textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.title') }}</label>
-				<input type="text" class="form-control" name="{{ 'title_'. $language->id }}" id="{{ 'title_'. $language->id }}" value="{{  $content->translate($language->locale)->title }}">
+				<input type="text" class="form-control" name="{{ 'title_'. $language->id }}" id="{{ 'title_'. $language->id }}" value="{{  $news->translate($language->locale)->title }}">
 			</div>
 
 			<div class="form-group">
 				<label for="summary">{{ trans('kotoba::cms.summary') }}</label>
-				<textarea class="form-control ckeditor" rows="3" name="{{ 'summary_'. $language->id }}" id="{{ 'summary_'. $language->id }}">{{ $content->translate($language->locale)->summary }}</textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'summary_'. $language->id }}" id="{{ 'summary_'. $language->id }}">{{ $news->translate($language->locale)->summary }}</textarea>
 			</div>
 
 	</div><!-- ./ $lang panel -->
@@ -113,17 +113,17 @@
 
 		<div class="form-group">
 			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
-			<input type="text" class="form-control" name="{{ 'meta_title_'. $language->id }}" id="{{ 'meta_title_'. $language->id }}" value="{{  $content->translate($language->locale)->meta_title }}">
+			<input type="text" class="form-control" name="{{ 'meta_title_'. $language->id }}" id="{{ 'meta_title_'. $language->id }}" value="{{  $news->translate($language->locale)->meta_title }}">
 		</div>
 
 		<div class="form-group">
 			<label for="title">{{ trans('kotoba::cms.meta_keywords') }}</label>
-			<input type="text" class="form-control" name="{{ 'meta_keywords_'. $language->id }}" id="{{ 'meta_keywords_'. $language->id }}" value="{{  $content->translate($language->locale)->meta_keywords }}">
+			<input type="text" class="form-control" name="{{ 'meta_keywords_'. $language->id }}" id="{{ 'meta_keywords_'. $language->id }}" value="{{  $news->translate($language->locale)->meta_keywords }}">
 		</div>
 
 		<div class="form-group">
 			<label for="title">{{ trans('kotoba::cms.meta_description') }}</label>
-			<input type="text" class="form-control" name="{{ 'meta_description_'. $language->id }}" id="{{ 'meta_description_'. $language->id }}" value="{{  $content->translate($language->locale)->meta_description }}">
+			<input type="text" class="form-control" name="{{ 'meta_description_'. $language->id }}" id="{{ 'meta_description_'. $language->id }}" value="{{  $news->translate($language->locale)->meta_description }}">
 		</div>
 
 	</div><!-- ./ $lang panel -->
@@ -149,7 +149,7 @@
 			Form::select(
 				'parent_id',
 				$pagelist,
-				$content->parent_id,
+				$news->parent_id,
 				array(
 					'class' => 'form-control chosen-select',
 					'id' => 'parent_id'
@@ -164,7 +164,7 @@
 			Form::select(
 				'user_id',
 				$users,
-				$content->user_id,
+				$news->user_id,
 				array(
 					'class' => 'form-control chosen-select'
 				)
@@ -189,7 +189,7 @@
 				Form::select(
 					'news_status_id',
 					$news_statuses,
-					$content->news_status_id,
+					$news->news_status_id,
 					array(
 						'class' => 'form-control chosen-select'
 					)
@@ -206,7 +206,7 @@
 
 	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
 		{!! Form::label('order', trans('kotoba::cms.position'), $errors->first('order'), ['class' => 'control-label']) !!}
-		{!! Form::text('order', $content->order, ['id' => 'order', 'class' => 'form-control']) !!}
+		{!! Form::text('order', $news->order, ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
 
 	<div class="form-group">
@@ -214,7 +214,7 @@
 		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_navigation" name="is_navigation" value="1" {{ $content->present()->navigation }}>
+					<input type="checkbox" id="is_navigation" name="is_navigation" value="1" {{ $news->present()->navigation }}>
 				</label>
 			</div>
 		</div>
@@ -225,7 +225,7 @@
 		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_featured" name="is_featured" value="1" {{ $content->present()->featured }}>
+					<input type="checkbox" id="is_featured" name="is_featured" value="1" {{ $news->present()->featured }}>
 				</label>
 			</div>
 		</div>
@@ -236,7 +236,7 @@
 		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $content->present()->timed }}>
+					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $news->present()->timed }}>
 				</label>
 			</div>
 		</div>
@@ -246,7 +246,7 @@
 		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
 		<div id="datepicker-container">
 			<div class="input-group date">
-				<input type="text" id="publish_start" name="publish_start" class="form-control" value="{{ $content->publish_start }}">
+				<input type="text" id="publish_start" name="publish_start" class="form-control" value="{{ $news->publish_start }}">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
 		</div>
@@ -256,7 +256,7 @@
 		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
 		<div id="datepicker-container">
 			<div class="input-group date">
-				<input type="text" id="publish_end" name="publish_end" class="form-control" value="{{ $content->publish_end }}">
+				<input type="text" id="publish_end" name="publish_end" class="form-control" value="{{ $news->publish_end }}">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
 		</div>

@@ -46,7 +46,7 @@ function()
 
 // Route::resource('pages', 'PagesController', array('except' => array('show')));
 //
-// Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
+// Route::get('{slug}', array('as' => 'news', 'uses' => 'PageController@show'))
 // 	->where('slug', App\Modules\NewsDesk\Http\Models\Page::$slugPattern);
 
 // Controllers
@@ -84,7 +84,7 @@ Route::group(['prefix' => 'admin'], function() {
 
 });
 
-Route::get('{page}', 'FrontDeskController@get_page')->where('page', '.*');
+Route::get('{news}', 'FrontDeskController@get_page')->where('news', '.*');
 
 
 
@@ -122,7 +122,7 @@ Route::group(array('prefix' => 'pages'), function () {
 
 // The slug route should be registered last since it will capture any slug-like
 // route
-Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
+Route::get('{slug}', array('as' => 'news', 'uses' => 'PageController@show'))
 	->where('slug', App\Modules\NewsDesk\Http\Models\Page::$slugPattern);
 */
 

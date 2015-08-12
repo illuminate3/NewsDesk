@@ -27,13 +27,13 @@
 	});
 	CKEDITOR.replace( 'ckeditor' );
 	CKEDITOR.editorConfig = function( config ) {
-		config.extraAllowedContent = 'div(*)';
-		config.allowedContent=true;
+		config.extraAllowedNews = 'div(*)';
+		config.allowedNews=true;
 	};
 @stop
 
 
-{{-- Content --}}
+{{-- News --}}
 @section('content')
 
 

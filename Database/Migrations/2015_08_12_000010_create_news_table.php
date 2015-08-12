@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Bluenews;
+use Illuminate\Database\Schema\Blueprint;
 
 
 class CreateNewsTable extends Migration
@@ -21,7 +21,7 @@ class CreateNewsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create($this->prefix . 'news', function(Bluenews $table) {
+		Schema::create($this->prefix . 'news', function(Blueprint $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id')->unsigned();

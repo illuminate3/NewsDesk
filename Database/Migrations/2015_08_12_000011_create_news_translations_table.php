@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Bluenews;
+use Illuminate\Database\Schema\Blueprint;
 
 
-class CreateContentTranslationsTable extends Migration
+class CreateNewsTranslationsTable extends Migration
 {
 
 	public function __construct()
@@ -22,7 +22,7 @@ class CreateContentTranslationsTable extends Migration
 	public function up()
 	{
 
-		Schema::create($this->prefix . 'content_translations', function(Bluenews $table) {
+		Schema::create($this->prefix . 'content_translations', function(Blueprint $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id')->unsigned();
@@ -41,13 +41,13 @@ class CreateContentTranslationsTable extends Migration
 			$table->string('meta_keywords')->nullable();
 			$table->string('meta_description')->nullable();
 
-			$table->integer('content_id')->unsigned()->index();
-			$table->foreign('content_id')->references('id')->on('news')->onDelete('cascade');
+			$table->integer('news_id')->unsigned()->index();
+			$table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
 
 			$table->integer('locale_id')->unsigned()->index();
 			$table->foreign('locale_id')->references('id')->on('locales')->onDelete('cascade');
 
-			$table->unique(['content_id', 'locale_id']);
+			$table->unique(['news_id', 'locale_id']);
 
 			$table->softDeletes();
 			$table->timestamps();

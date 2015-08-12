@@ -2,8 +2,8 @@
 
 namespace App\Modules\NewsDesk\Http\Controllers;
 
-use App\Modules\NewsDesk\Http\Models\Content;
-use App\Modules\NewsDesk\Http\Repositories\ContentRepository;
+use App\Modules\NewsDesk\Http\Models\News;
+use App\Modules\NewsDesk\Http\Repositories\NewsRepository;
 
 use App\Helpers\Nifty\NiftyMenus;
 
@@ -27,21 +27,21 @@ use Theme;
 class FrontDeskController extends NewsDeskController {
 
 	public function __construct(
-			Content $content,
-			ContentRepository $content_repo
+			News $news,
+			NewsRepository $news_repo
 		)
 	{
 //dd('__construct');
-		$this->content = $content;
-		$this->content_repo = $content_repo;
+		$this->news = $news;
+		$this->news_repo = $news_repo;
 
 		$lang = Session::get('locale');
-		$locales = $this->content_repo->getLocales();
+		$locales = $this->news_repo->getLocales();
 		$locale_id = 1;
 
 //		$this->hashIds = new Hashids( Config::get('app.key'), 8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' );
 
-		$this->page = Route::current()->parameter('page');
+		$this->page = Route::current()->parameter('news');
 //dd($this->page);
 		$slugs = explode('/', $this->page);
 //dd($slugs);
@@ -49,20 +49,20 @@ class FrontDeskController extends NewsDeskController {
 //dd($lastSlug);
 
 //		$this->currentPage = Page::getPage( $slug = $lastSlug );
-//		$this->currentPage = Content::getPage( $slug = $lastSlug );
-//		$this->currentPage = $this->content_repo->getPage($locale_id, $slug = $lastSlug);
+//		$this->currentPage = News::getPage( $slug = $lastSlug );
+//		$this->currentPage = $this->news_repo->getPage($locale_id, $slug = $lastSlug);
 //		$this->currentPage = new \Illuminate\Support\Collection($this->currentPage);
 
-		$page_ID = $this->content_repo->getPageID($slug = $lastSlug);
+		$page_ID = $this->news_repo->getPageID($slug = $lastSlug);
 //dd($page_ID);
-		$this->currentPage = $this->content_repo->getContent($page_ID);
+		$this->currentPage = $this->news_repo->getNews($page_ID);
 //dd($this->currentPage);
 
 //dd('here');
 //		$this->roots = Page::getRoots();
-//		$this->roots = Content::getRoots();
-//		$this->roots = $this->content_repo->getRoots($locale_id);
-//		$this->roots = Content::getRoots($locale_id);
+//		$this->roots = News::getRoots();
+//		$this->roots = $this->news_repo->getRoots($locale_id);
+//		$this->roots = News::getRoots($locale_id);
 //dd($this->roots);
 
 // 		$this->postsOrderBy = ['id', 'desc'];
@@ -84,7 +84,7 @@ class FrontDeskController extends NewsDeskController {
 // 			$root = $this->currentPage->getRoot();
 // 			$secMenu = NiftyMenus::getSecMenu($root, $this->currentPage );
 
-//			return View::make('frontends.page', ['page' => $this->currentPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+//			return View::make('frontends.page', ['news' => $this->currentPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 
 			$page = $this->currentPage;
 /*
@@ -103,7 +103,7 @@ class FrontDeskController extends NewsDeskController {
 
 		return Theme::View('modules.newsdesk.frontend.index',
 			compact(
-				'page'
+				'news'
 			));
 		}
 		else
@@ -116,14 +116,14 @@ dd('index');
 		if ( $homePage = Page::getPage( $slug = 'home-page' ) ) {
 			$mainMenu = NiftyMenus::getMainMenu( $homePage );
 			// $posts = Post::getFrontendPosts($category = 'Home Featured', $this->postsOrderBy);
-//			return View::make('frontends.index', ['page' => $homePage, /*'posts' => $posts,*/ 'mainMenu' => $mainMenu]);
+//			return View::make('frontends.index', ['news' => $homePage, /*'posts' => $posts,*/ 'mainMenu' => $mainMenu]);
 
 			$page = $homePage;
 			$mainMenu = $mainMenu;
 
 			return View('nifty.frontends.index', compact(
 				'mainMenu',
-				'page'
+				'news'
 				));
 		}
 		else
@@ -137,7 +137,7 @@ dd('contact_us');
 			$mainMenu = NiftyMenus::getMainMenu( $contact_us );
 			$root = $contact_us->getRoot();
 			$secMenu = NiftyMenus::getSecMenu($root, $contact_us);
-			return View::make('frontends.contact-us', ['page' => $contact_us, 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+			return View::make('frontends.contact-us', ['news' => $contact_us, 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
 		else
 			App::abort(404);
@@ -199,7 +199,7 @@ dd('previewPage');
 			$root = $previewPage->getRoot();
 			$secMenu = NiftyMenus::getSecMenu( $root, $previewPage );
 
-			return View::make('frontends.page', ['page' => $previewPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+			return View::make('frontends.page', ['news' => $previewPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
 		else
 			App::abort(404);
@@ -215,7 +215,7 @@ dd('get_blog');
 
 			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerPage );
 
-			return View::make('frontends.blog', ['page' => $blog, 'posts' => $posts, 'links' => $posts->links('backend.pagination.nifty'), 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+			return View::make('frontends.blog', ['news' => $blog, 'posts' => $posts, 'links' => $posts->links('backend.pagination.nifty'), 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
 		else
 			App::abort(404);
@@ -236,7 +236,7 @@ dd('get_post');
 
 			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerPage );
 
-			return View::make('frontends.post', ['page' => $post, 'posts' => $posts, 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+			return View::make('frontends.post', ['news' => $post, 'posts' => $posts, 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
 		else
 			App::abort(404);
@@ -256,7 +256,7 @@ dd('previewPost');
 
 			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerPage );
 
-			return View::make('frontends.post', ['page' => $blogPost, 'posts' => $posts, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+			return View::make('frontends.post', ['news' => $blogPost, 'posts' => $posts, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
 		else
 			App::abort(404);
@@ -272,7 +272,7 @@ dd('do_search');
 		$mainMenu = NiftyMenus::getMainMenu( $searchPage );
 		$secMenu = '';
 
-		return View::make('frontends.search', ['page' => $searchPage, 'term' => $term, 'results' => $results, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+		return View::make('frontends.search', ['news' => $searchPage, 'term' => $term, 'results' => $results, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 	}
 
 }

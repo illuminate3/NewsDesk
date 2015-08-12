@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Config;
 
 
-class ContentUpdateRequest extends FormRequest {
+class NewsUpdateRequest extends FormRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.

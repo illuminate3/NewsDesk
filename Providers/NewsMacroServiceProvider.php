@@ -8,7 +8,7 @@ use Html;
 use Lang;
 
 
-class ContentMacroServiceProvider extends ServiceProvider
+class NewsMacroServiceProvider extends ServiceProvider
 {
 
 

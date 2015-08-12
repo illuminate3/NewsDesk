@@ -10,8 +10,8 @@ use App\Modules\NewsDesk\Http\Repositories\BaseRepository as BaseRepository;
 use App\Modules\Core\Http\Repositories\LocaleRepository;
 
 use App\Modules\Core\Http\Models\Locale;
-use App\Modules\NewsDesk\Http\Models\Content;
-use App\Modules\NewsDesk\Http\Models\ContentTranslation;
+use App\Modules\NewsDesk\Http\Models\News;
+use App\Modules\NewsDesk\Http\Models\NewsTranslation;
 
 use App;
 use Auth;
@@ -24,14 +24,14 @@ use Session;
 use Illuminate\Support\Str;
 
 
-class ContentRepository extends BaseRepository {
+class NewsRepository extends BaseRepository {
 
 	/**
 	 * The Module instance.
 	 *
 	 * @var App\Modules\ModuleManager\Http\Models\Module
 	 */
-	protected $content;
+	protected $news;
 
 	/**
 	 * Create a new ModuleRepository instance.
@@ -41,15 +41,15 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function __construct(
 			LocaleRepository $locale_repo,
-			Content $content
+			News $news
 		)
 	{
 		$this->locale_repo = $locale_repo;
-		$this->model = $content;
+		$this->model = $news;
 
 		$this->id = Route::current()->parameter( 'id' );
 //		$this->pagelist = Page::getParentOptions( $exceptId = $this->id );
-//		$this->pagelist = Content::getParentOptions( $exceptId = $this->id );
+//		$this->pagelist = News::getParentOptions( $exceptId = $this->id );
 //dd($this->pagelist);
 	}
 
@@ -112,13 +112,13 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function show($id)
 	{
-		$content = $this->model->find($id);
-		$links = Content::find($id)->contentlinks;
-//$content = $this->content->show($id);
+		$news = $this->model->find($id);
+		$links = News::find($id)->contentlinks;
+//$news = $this->news->show($id);
 
-//$content = $this->model->where('id', $id)->first();
-//		$content = new Collection($content);
-//dd($content);
+//$news = $this->model->where('id', $id)->first();
+//		$news = new Collection($news);
+//dd($news);
 
 		return compact('content', 'links');
 	}
@@ -132,8 +132,8 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function edit($id)
 	{
-		$content = $this->model->find($id);
-//dd($content);
+		$news = $this->model->find($id);
+//dd($news);
 
 		$lang = Session::get('locale');
 		$locale_id = $this->locale_repo->getLocaleID($lang);
@@ -254,7 +254,7 @@ class ContentRepository extends BaseRepository {
 		];
 //dd($values);
 
-		$content = Content::create($values);
+		$news = News::create($values);
 
 //		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
@@ -279,7 +279,7 @@ class ContentRepository extends BaseRepository {
 				'meta_description'		=> $input['meta_description_'.$properties->id]
 			];
 
-			$content->update($values);
+			$news->update($values);
 		}
 
 		$this->manageBaum($input['parent_id'], null);
@@ -346,7 +346,7 @@ class ContentRepository extends BaseRepository {
 			$is_published = 1;
 		}
 
-		$content = Content::find($id);
+		$news = News::find($id);
 
 		$lang = Session::get('locale');
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
@@ -379,7 +379,7 @@ class ContentRepository extends BaseRepository {
 			'user_id'			=>  $input['user_id']
 		];
 
-		$content->update($values);
+		$news->update($values);
 
 //		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
@@ -402,7 +402,7 @@ class ContentRepository extends BaseRepository {
 				'meta_description'		=> $input['meta_description_'.$properties->id]
 			];
 
-			$content->update($values);
+			$news->update($values);
 
 		}
 
@@ -431,7 +431,7 @@ class ContentRepository extends BaseRepository {
 // 		return $locale_id;
 // 	}
 
-	public function getContentID($name)
+	public function getNewsID($name)
 	{
 
 		$id = DB::table('news')
@@ -445,14 +445,14 @@ class ContentRepository extends BaseRepository {
 	public function getParents($locale_id, $id)
 	{
 		if ($id != null ) {
-			$query = Content::select('content_translations.title AS title', 'news.id AS id')
-				->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			$query = News::select('content_translations.title AS title', 'news.id AS id')
+				->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 				->where('content_translations.locale_id', '=', $locale_id)
 				->where('news.id', '!=', $id, 'AND')
 				->get();
 		} else {
-			$query = Content::select('content_translations.title AS title', 'news.id AS id')
-			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			$query = News::select('content_translations.title AS title', 'news.id AS id')
+			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 			->where('content_translations.locale_id', '=', $locale_id)
 			->get();
 		}
@@ -468,12 +468,12 @@ class ContentRepository extends BaseRepository {
 //dd($parent_id);
 
 		if ($parent_id != 0 && $id != null) {
-			$node = Content::find($id);
+			$node = News::find($id);
 			$node->makeChildOf($parent_id);
 		}
 
 		if ($parent_id == 0 && $id != null) {
-			$node = Content::find($id);
+			$node = News::find($id);
 			$node->makeRoot();
 		}
 
@@ -485,7 +485,7 @@ class ContentRepository extends BaseRepository {
 /*
 		$page_ID = DB::table('content_translations')
 			->where('content_translations.slug', '=', $slug)
-			->pluck('content_id');
+			->pluck('news_id');
 */
 		$page_ID = DB::table('news')
 			->where('slug', '=', $slug)
@@ -495,13 +495,13 @@ class ContentRepository extends BaseRepository {
 		return $page_ID;
 	}
 
-	public function getContent($page_ID)
+	public function getNews($page_ID)
 	{
 //dd($page_ID);
- 		$content = Content::find($page_ID);
+ 		$news = News::find($page_ID);
 /*
 		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 			->where('content_translations.locale_id', '=', $locale_id)
 //			->where('news.is_current', '=', 1, 'AND')
 			->where('news.is_online', '=', 1, 'AND')
@@ -509,16 +509,16 @@ class ContentRepository extends BaseRepository {
 			->where('content_translations.slug', '=', $slug, 'AND')
 			->pluck('news.id');
 */
-//dd($content);
+//dd($news);
 
-		return $content;
+		return $news;
 	}
 
 	public function getPage($locale_id, $slug)
 	{
 //dd($slug);
 		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 			->where('content_translations.locale_id', '=', $locale_id)
 //			->where('news.is_current', '=', 1, 'AND')
 			->where('news.is_online', '=', 1, 'AND')
@@ -528,8 +528,8 @@ class ContentRepository extends BaseRepository {
 			->pluck('news.id');
 //dd($page);
 
- 		$content = Content::find($page);
-dd($content);
+ 		$news = News::find($page);
+dd($news);
 
 /*
 	   $page =  static::whereIsCurrent(1)
@@ -547,7 +547,7 @@ dd($content);
 		// $roots = Cache::rememberForever('roots', function()
 		// {
 		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 			->where('content_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
@@ -580,7 +580,7 @@ dd($content);
 		// $roots = Cache::rememberForever('roots', function()
 		// {
 		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.content_id')
+			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
 			->where('content_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
@@ -621,7 +621,7 @@ dd($content);
 // 	public function makeSlugFromTitle($title)
 // 	{
 // 		$slug = Str::slug($title);
-// 		$count = ContentTranslation::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+// 		$count = NewsTranslation::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
 //
 // 		return $count ? "{$slug}-{$count}" : $slug;
 // 	}
