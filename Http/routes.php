@@ -44,7 +44,7 @@ function()
 });
 */
 
-// Route::resource('pages', 'PagesController', array('except' => array('show')));
+// Route::resource('news', 'PagesController', array('except' => array('show')));
 //
 // Route::get('{slug}', array('as' => 'news', 'uses' => 'PageController@show'))
 // 	->where('slug', App\Modules\NewsDesk\Http\Models\Page::$slugPattern);
@@ -95,9 +95,9 @@ Route::get('{news}', 'FrontDeskController@get_page')->where('news', '.*');
 // 	));
 
 /*
-Route::resource('pages', 'PagesController', array('except' => array('show')));
+Route::resource('news', 'PagesController', array('except' => array('show')));
 
-Route::group(array('prefix' => 'pages'), function () {
+Route::group(array('prefix' => 'news'), function () {
 
 	Route::post("{id}/up", array(
 		'as' => "pages.up",

@@ -21,7 +21,7 @@ class NewsDesk extends Presenter {
 
 	public function pageName($id)
 	{
-		$title = DB::table('pages')
+		$title = DB::table('news')
 			->where('id', '=', $id)
 			->pluck('title');
 //dd($customer);
