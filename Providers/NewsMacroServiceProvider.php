@@ -69,13 +69,13 @@ class NewsMacroServiceProvider extends ServiceProvider
 
 			if( empty($node['children']) ) {
 
-				return '<li> empty child <a href="' . url('news/' . $node['slug']) . '">' . $title . '</a></li>';
+				return '<li> empty child <a href="' . url('/news/' . $node['slug']) . '">' . $title . '</a></li>';
 
 			} else {
 
 				$html = '<tr>';
 
-				$html .= '<td><a href="' . url($node['slug']) . '">' . $title . '</a></td>';
+				$html .= '<td><a href="' . url('/news/' . $node['slug']) . '">' . $title . '</a></td>';
 
 				$html .= '<td>' . $node->translate($lang)->summary . '</td>';
 
@@ -84,6 +84,10 @@ class NewsMacroServiceProvider extends ServiceProvider
 				$html .= '<td>' . $node['order'] . '</td>';
 
 				$html .= '<td>' . $node->present()->news_status($node->news_status_id) . '</td>';
+
+				$html .= '<td>' . $node->present()->isBanner($node->is_banner) . '</td>';
+
+				$html .= '<td>' . $node->present()->isFeatured($node->is_featured) . '</td>';
 
 				$html .= '<td>';
 				$html .= '

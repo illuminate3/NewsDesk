@@ -16,4 +16,8 @@ return [
 	'prefix'					=> '',
 ),
 
+'top_news_count'				=> 5,
+
+
+
 ];

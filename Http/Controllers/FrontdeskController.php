@@ -41,9 +41,9 @@ class FrontDeskController extends NewsDeskController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-/*
-//		$this->article = Route::current()->parameter('news');
-		$this->article = Route::current()->getUri();
+
+		$this->article = Route::current()->parameter('news');
+//		$this->article = Route::current()->getUri();
 //dd($this->article);
 
 		$slugs = explode('/', $this->article);
@@ -55,7 +55,7 @@ class FrontDeskController extends NewsDeskController {
 //dd($article_ID);
 		$this->currentArticle = $this->news_repo->getNews($article_ID);
 //dd($this->currentArticle);
-*/
+
 	}
 
 	public function get_article()
@@ -86,9 +86,9 @@ class FrontDeskController extends NewsDeskController {
 // 			$mainMenu = $mainMenu;
 // 			$secMenu = $secMenu;
 
-		return Theme::View('modules.newsdesk.frontend.index',
+		return Theme::View('modules.newsdesk.frontdesk.index',
 			compact(
-				'news'
+				'article'
 			));
 		}
 		else

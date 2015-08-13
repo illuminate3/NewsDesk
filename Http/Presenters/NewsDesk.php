@@ -48,19 +48,22 @@ class NewsDesk extends Presenter {
 	}
 
 
+// Checkboxes
+
+
 	/**
 	 * featured checkbox
 	 *
 	 * @return string
 	 */
-	public function navigation()
+	public function banner()
 	{
 //dd('loaded');
 		$return = '';
 
-		$navigation = $this->entity->is_navigation;
+		$banner = $this->entity->is_banner;
 //dd($featured);
-		if ( $navigation == 1 ) {
+		if ( $banner == 1 ) {
 			$return = "checked";
 		}
 
@@ -106,5 +109,43 @@ class NewsDesk extends Presenter {
 
 		return $return;
 	}
+
+
+// Is
+
+
+	/**
+	 * featured checkbox
+	 *
+	 * @return string
+	 */
+	public function isBanner()
+	{
+
+		$return = trans('kotoba::general.yes');
+		if ( $this->entity->is_banner == 0 ) {
+			$return = trans('kotoba::general.no');
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * featured checkbox
+	 *
+	 * @return string
+	 */
+	public function isFeatured()
+	{
+
+		$return = trans('kotoba::general.yes');
+		if ( $this->entity->is_featured == 0 ) {
+			$return = trans('kotoba::general.no');
+		}
+
+		return $return;
+	}
+
 
 }

@@ -210,12 +210,12 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $article;
 	}
 
-	public function scopeInNews($query)
+
+// IS
+
+	public function scopeIsBanner($query)
 	{
-		return $query
-//			->where('is_published', '=', 1);
-			->where('news_status_id', '=', 2);
-// 			->where('news_status_id', '<', 5, 'OR');
+		return $query->where('is_banner', '=', 1);
 	}
 
 	public function scopeIsFeatured($query)
@@ -223,10 +223,19 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $query->where('is_featured', '=', 1);
 	}
 
+	public function scopeIsPublished($query)
+	{
+		return $query
+			->where('news_status_id', '=', 2);
+	}
+
 	public function scopeIsTimed($query)
 	{
 		return $query->where('is_timed', '=', 1);
 	}
+
+
+// Not
 
 	public function scopeNotFeatured($query)
 	{
@@ -237,6 +246,9 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	{
 		return $query->where('is_timed', '=', 0);
 	}
+
+
+// Dates
 
 	public function scopePublishEnd($query)
 	{
@@ -255,14 +267,5 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $query->where('publish_start', '<=', $date);
 	}
 
-	public function scopeIsAccessPoint($query)
-	{
-		return $query->where('class', '=', 'nav-access');
-	}
-
-	public function scopeIsNavigation($query)
-	{
-		return $query->where('is_navigation', '=', 1);
-	}
 
 }

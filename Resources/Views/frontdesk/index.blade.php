@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ $news->title }}} :: @parent
+{{{ $article->title }}} :: @parent
 @stop
 
 @section('styles')
@@ -21,18 +21,18 @@
 
 <div class="row">
 	<h1>
-		{{ $news->title }}
+		{{ $article->title }}
 	</h1>
 </div>
 
 <div class="row">
 	<h2>
-		{!! $news->summary !!}
+		{!! $article->summary !!}
 	</h2>
 </div>
 
 <div class="row">
-	{!! $news->content !!}
+	{!! $article->content !!}
 </div>
 
 @stop

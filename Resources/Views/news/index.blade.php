@@ -52,9 +52,8 @@ oTable =
 			<th>{{ trans('kotoba::table.slug') }}</th>
 			<th>{{ trans('kotoba::table.position') }}</th>
 			<th>{{ trans('kotoba::table.online') }}</th>
-{{--
-			<th>{{ trans('kotoba::table.deleted') }}</th>
---}}
+			<th>{{ trans('kotoba::table.banner') }}</th>
+			<th>{{ trans('kotoba::table.featured') }}</th>
 			<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 		</tr>
 	</thead>

@@ -140,6 +140,17 @@
 	<div class="tab-content">
 
 images
+{{--
+	<div class="form-group">
+		{!! Form::label('featured_image', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
+		<div class="imageTarget" rel="{{ $thumbnailPath }}"></div>
+		{!! Form::hidden('featured_image', Input::old('featured_image'), ['id' => 'featured_image', 'class' => 'form-control hidden']) !!}
+	</div>
+	<div class="form-group">
+		<a class="btn btn-default btn-rect btn-grad" id="changeFeaturedImage" data-toggle="modal" data-target="#featuredImageModal">{{ trans('kotoba::general.change') }}</a>
+		<a class="btn btn-metis-3 btn-rect btn-grad" id="clearFeaturedImage">{{ trans('kotoba::general.clear') }}</a>
+	</div>
+--}}
 
 	</div>
 	</div><!-- ./ images panel -->
@@ -218,6 +229,21 @@ images
 		{!! Form::text('order', $news->order, ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
 
+
+<hr>
+
+
+	<div class="form-group">
+		<label for="is_timed" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_timed') }}</label>
+		<div class="col-sm-9">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $news->present()->timed }}>
+				</label>
+			</div>
+		</div>
+	</div>
+
 	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
 		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
 		<div id="datepicker-container">
@@ -238,18 +264,20 @@ images
 		</div>
 	</div>
 
-{{--
+
+<hr>
+
+
 	<div class="form-group">
-		<label for="is_navigation" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_navigation') }}</label>
+		<label for="is_banner" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_banner') }}</label>
 		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_navigation" name="is_navigation" value="1" {{ $news->present()->navigation }}>
+					<input type="checkbox" id="is_banner" name="is_banner" value="1" {{ $news->present()->banner }}>
 				</label>
 			</div>
 		</div>
 	</div>
---}}
 
 	<div class="form-group">
 		<label for="is_featured" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
@@ -262,39 +290,11 @@ images
 		</div>
 	</div>
 
-	<div class="form-group">
-		<label for="is_timed" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_timed') }}</label>
-		<div class="col-sm-9">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $news->present()->timed }}>
-				</label>
-			</div>
-		</div>
-	</div>
 
 </div>
 </div><!-- ./ col-6 -->
 </div><!-- ./ row -->
 
-
-
-
-
-
-
-
-{{--
-	<div class="form-group">
-		{!! Form::label('featured_image', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
-		<div class="imageTarget" rel="{{ $thumbnailPath }}"></div>
-		{!! Form::hidden('featured_image', Input::old('featured_image'), ['id' => 'featured_image', 'class' => 'form-control hidden']) !!}
-	</div>
-	<div class="form-group">
-		<a class="btn btn-default btn-rect btn-grad" id="changeFeaturedImage" data-toggle="modal" data-target="#featuredImageModal">{{ trans('kotoba::general.change') }}</a>
-		<a class="btn btn-metis-3 btn-rect btn-grad" id="clearFeaturedImage">{{ trans('kotoba::general.clear') }}</a>
-	</div>
---}}
 
 	</div>
 	</div><!-- ./ settings panel -->

@@ -178,22 +178,16 @@ class NewsRepository extends BaseRepository {
 			$class = $input['class'];
 		}
 
+		if ( !isset($input['is_banner']) ) {
+			$is_banner = 0;
+		} else {
+			$is_banner = $input['is_banner'];
+		}
+
 		if ( !isset($input['is_featured']) ) {
 			$is_featured = 0;
 		} else {
 			$is_featured = $input['is_featured'];
-		}
-
-		if ( !isset($input['is_published']) ) {
-			$is_published = 0;
-		} else {
-			$is_published = $input['is_published'];
-		}
-
-		if ( !isset($input['is_navigation']) ) {
-			$is_navigation = 0;
-		} else {
-			$is_navigation = $input['is_navigation'];
 		}
 
 		if ( !isset($input['is_timed']) ) {
@@ -224,34 +218,21 @@ class NewsRepository extends BaseRepository {
 //		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
 
 		$values = [
-//			'name'			=> $input['name'],
-//			'is_current'		=> 1,
-//			'is_online'			=> $input['is_online'],
-//			'is_online'			=> $is_online,
-//			'is_featured'		=> $input['is_featured'],
-			'is_published'		=> $is_published,
-			'is_featured'		=> $is_featured,
-			'is_timed'			=> $is_timed,
-			'is_navigation'		=> $is_navigation,
-//			'link'				=> $input['link'],
-//			'class'				=> $input['class'],
-			'class'				=> $class,
-			'order'				=> $input['order'],
-			'news_status_id'	=> $input['news_status_id'],
-//			'publish_end'		=> $input['publish_end'],
-//			'publish_start'		=> $input['publish_start'],
-			'publish_end'		=> $publish_end,
-			'publish_start'		=> $publish_start,
-//			'slug'				=> $input['title_1'],
-			'slug'				=> Str::slug($input['title_'.$app_locale_id]),
-//			'user_id'			=> 1
-			'user_id'			=>  $input['user_id']
+			'class'						=> $class,
+			'is_banner'					=> $is_banner,
+			'is_featured'				=> $is_featured,
+			'is_timed'					=> $is_timed,
+			'publish_end'				=> $publish_end,
+			'publish_start'				=> $publish_start,
+			'order'						=> $input['order'],
+			'news_status_id'			=> $input['news_status_id'],
+			'slug'						=> Str::slug($input['title_'.$app_locale_id]),
+			'user_id'					=>  $input['user_id']
 		];
 //dd($values);
 
 		$news = News::create($values);
 
-//		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
@@ -261,14 +242,9 @@ class NewsRepository extends BaseRepository {
 			App::setLocale($properties->locale);
 
 			$values = [
-				'content'		=> $input['content_'.$properties->id],
-				'summary'		=> $input['summary_'.$properties->id],
-				'title'			=> $input['title_'.$properties->id],
-
-//				'slug'			=> $input['slug_'.$properties->id],
-//				'slug'			=> Str::slug($input['title_'.$properties->id]),
-//				'slug'			=> Str::slug($input['title_'.$properties->id]),
-
+				'content'				=> $input['content_'.$properties->id],
+				'summary'				=> $input['summary_'.$properties->id],
+				'title'					=> $input['title_'.$properties->id],
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
@@ -301,28 +277,22 @@ class NewsRepository extends BaseRepository {
 			$class = $input['class'];
 		}
 
+		if ( !isset($input['is_banner']) ) {
+			$is_banner = 0;
+		} else {
+			$is_banner = $input['is_banner'];
+		}
+
 		if ( !isset($input['is_featured']) ) {
 			$is_featured = 0;
 		} else {
 			$is_featured = $input['is_featured'];
 		}
 
-		if ( !isset($input['is_published']) ) {
-			$is_published = 0;
-		} else {
-			$is_published = $input['is_published'];
-		}
-
 		if ( !isset($input['is_timed']) ) {
 			$is_timed = 0;
 		} else {
 			$is_timed = $input['is_timed'];
-		}
-
-		if ( !isset($input['is_navigation']) ) {
-			$is_navigation = 0;
-		} else {
-			$is_navigation = $input['is_navigation'];
 		}
 
 		if ( $input['publish_end'] == '' ) {
@@ -346,32 +316,18 @@ class NewsRepository extends BaseRepository {
 		$lang = Session::get('locale');
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
-//		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
 
 		$values = [
-//			'name'			=> $input['name'],
-//			'is_current'		=> 1,
-//			'is_online'			=> $input['is_online'],
-//			'is_online'			=> $is_online,
-//			'is_featured'		=> $input['is_featured'],
-			'is_published'		=> $is_published,
-			'is_featured'		=> $is_featured,
-			'is_timed'			=> $is_timed,
-			'is_navigation'		=> $is_navigation,
-//			'link'				=> $input['link'],
-//			'class'				=> $input['class'],
-			'class'				=> $class,
-			'order'				=> $input['order'],
-			'news_status_id'	=> $input['news_status_id'],
-//			'publish_end'		=> $input['publish_end'],
-//			'publish_start'		=> $input['publish_start'],
-			'publish_end'		=> $publish_end,
-			'publish_start'		=> $publish_start,
-//			'slug'				=> $input['title_1'],
-//			'slug'				=> Str::slug($input['title_'.$properties->id]),
-			'slug'				=> Str::slug($input['title_'.$app_locale_id]),
-//			'user_id'			=> 1
-			'user_id'			=>  $input['user_id']
+			'class'						=> $class,
+			'is_banner'					=> $is_banner,
+			'is_featured'				=> $is_featured,
+			'is_timed'					=> $is_timed,
+			'publish_end'				=> $publish_end,
+			'publish_start'				=> $publish_start,
+			'order'						=> $input['order'],
+			'news_status_id'			=> $input['news_status_id'],
+			'slug'						=> Str::slug($input['title_'.$app_locale_id]),
+			'user_id'					=>  $input['user_id']
 		];
 
 		$news->update($values);
@@ -386,12 +342,9 @@ class NewsRepository extends BaseRepository {
 			App::setLocale($properties->locale);
 
 			$values = [
-				'content'		=> $input['content_'.$properties->id],
-				'summary'		=> $input['summary_'.$properties->id],
-				'title'			=> $input['title_'.$properties->id],
-
-//				'slug'			=> Str::slug($input['title_'.$properties->id]),
-
+				'content'				=> $input['content_'.$properties->id],
+				'summary'				=> $input['summary_'.$properties->id],
+				'title'					=> $input['title_'.$properties->id],
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
@@ -409,6 +362,25 @@ class NewsRepository extends BaseRepository {
 
 
 // Functions ----------------------------------------------------------------------------------------------------
+
+
+	public function getUsers()
+	{
+		$users = DB::table('users')->lists('email', 'id');
+		return $users;
+	}
+
+
+	public function getNewsStatuses($locale_id)
+	{
+		$news_statuses = DB::table('news_status_translations')
+			->where('locale_id', '=', $locale_id)
+			->orderBy('id')
+			->lists('name', 'id');
+
+		return $news_statuses;
+	}
+
 
 	public function getNewsID($name)
 	{
@@ -572,37 +544,5 @@ dd($news);
 		return $article;
 	}
 
-	public function getUsers()
-	{
-		$users = DB::table('users')->lists('email', 'id');
-		return $users;
-	}
-
-	public function getNewsStatuses($locale_id)
-	{
-//		$news_statuses = DB::table('newss')->lists('name', 'id');
-//dd($news_statuses);
-/*
-		$news_statuses = DB::table('news_statuses')
-			->join('news_statuses', 'news_statuses.id', '=', 'news_status_translations.news_status_id')
-			->where('news_status_translations.locale_id', '=', $locale_id)
-			->orderBy('news_status_translations.id')
-			->get();
-*/
-		$news_statuses = DB::table('news_status_translations')
-			->where('locale_id', '=', $locale_id)
-			->orderBy('id')
-			->lists('name', 'id');
-
-		return $news_statuses;
-	}
-
-// 	public function makeSlugFromTitle($title)
-// 	{
-// 		$slug = Str::slug($title);
-// 		$count = NewsTranslation::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
-//
-// 		return $count ? "{$slug}-{$count}" : $slug;
-// 	}
 
 }

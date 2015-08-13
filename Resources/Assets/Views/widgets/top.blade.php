@@ -1,9 +1,7 @@
 <! -- Widget -->
 
-TIMED
 
 {!!
-	Menu::handler('timed')
+	Menu::handler('top')
 	->addClass('list-unstyled');
 !!}
-

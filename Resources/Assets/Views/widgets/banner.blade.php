@@ -1,8 +1,6 @@
 <! -- Widget -->
 
-FEATURED
-
 {!!
-	Menu::handler('featured')
+	Menu::handler('slider')
 	->addClass('list-unstyled');
 !!}
