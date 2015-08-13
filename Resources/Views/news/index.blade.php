@@ -3,7 +3,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::cms.content', 2) }} :: @parent
+{{ Lang::choice('kotoba::cms.article', 2) }} :: @parent
 @stop
 
 @section('styles')
@@ -36,7 +36,7 @@ oTable =
 	</a>
 	</p>
 	<i class="fa fa-paperclip fa-lg"></i>
-		{{ Lang::choice('kotoba::cms.content', 2) }}
+		{{ Lang::choice('kotoba::cms.article', 2) }}
 	<hr>
 </h1>
 </div>
@@ -59,25 +59,8 @@ oTable =
 		</tr>
 	</thead>
 	<tbody>
-{{--
-		@foreach ($news as $news)
-			<tr>
-				<td>{{ $news->title }}</td>
-				<td>{!! $news->summary !!}</td>
-				<td>{{ $news->slug }}</td>
-				<td>{{ $news->order }}</td>
-				<td>{{ $news->present()->news_status($news->news_status_id) }}</td>
-				<td>
-					<a href="/admin/news/{{ $news->id }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
-						<i class="fa fa-pencil fa-fw"></i>
-						{{ trans('kotoba::button.edit') }}
-					</a>
-				</td>
-			</tr>
-		@endforeach
---}}
 		@foreach($list as $item)
-			{!! Html::contentNodes($item, $lang) !!}
+			{!! Html::newsNodes($item, $lang) !!}
 		@endforeach
 	</tbody>
 

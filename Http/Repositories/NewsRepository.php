@@ -46,11 +46,6 @@ class NewsRepository extends BaseRepository {
 	{
 		$this->locale_repo = $locale_repo;
 		$this->model = $news;
-
-//		$this->id = Route::current()->parameter( 'id' );
-//		$this->articlelist = Article::getParentOptions( $exceptId = $this->id );
-//		$this->articlelist = News::getParentOptions( $exceptId = $this->id );
-//dd($this->articlelist);
 	}
 
 

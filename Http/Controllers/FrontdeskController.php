@@ -2,6 +2,8 @@
 
 namespace App\Modules\NewsDesk\Http\Controllers;
 
+use App\Modules\Core\Http\Repositories\LocaleRepository;
+
 use App\Modules\NewsDesk\Http\Models\News;
 use App\Modules\NewsDesk\Http\Repositories\NewsRepository;
 
@@ -25,11 +27,13 @@ use Theme;
 class FrontDeskController extends NewsDeskController {
 
 	public function __construct(
+			LocaleRepository $locale_repo,
 			News $news,
 			NewsRepository $news_repo
 		)
 	{
 //dd('__construct');
+		$this->locale_repo = $locale_repo;
 		$this->news = $news;
 		$this->news_repo = $news_repo;
 
@@ -37,38 +41,21 @@ class FrontDeskController extends NewsDeskController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-//		$this->hashIds = new Hashids( Config::get('app.key'), 8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' );
-
-		$this->article = Route::current()->parameter('news');
+/*
+//		$this->article = Route::current()->parameter('news');
+		$this->article = Route::current()->getUri();
 //dd($this->article);
+
 		$slugs = explode('/', $this->article);
 //dd($slugs);
 		$lastSlug = Route::current()->getName() == 'search' ? 'search' : $slugs[count($slugs)-1];
 //dd($lastSlug);
 
-//		$this->currentArticle = Article::getArticle( $slug = $lastSlug );
-//		$this->currentArticle = News::getArticle( $slug = $lastSlug );
-//		$this->currentArticle = $this->news_repo->getArticle($locale_id, $slug = $lastSlug);
-//		$this->currentArticle = new \Illuminate\Support\Collection($this->currentArticle);
-
 		$article_ID = $this->news_repo->getArticleID($slug = $lastSlug);
 //dd($article_ID);
 		$this->currentArticle = $this->news_repo->getNews($article_ID);
 //dd($this->currentArticle);
-
-//dd('here');
-//		$this->roots = Article::getRoots();
-//		$this->roots = News::getRoots();
-//		$this->roots = $this->news_repo->getRoots($locale_id);
-//		$this->roots = News::getRoots($locale_id);
-//dd($this->roots);
-
-// 		$this->postsOrderBy = ['id', 'desc'];
-// 		$this->postsOrderByOrder = ['order', 'asc'];
-// 		$this->postItemsNum = 10;
-// 		$this->postItemsPerArticle = 2;
-		// $this->latestNewsPosts = Post::getLatestNewsPosts($this->postItemsNum, $this->postsOrderBy);
-// 		$this->contact = ["Demo NiftyCMS", "demo@niftycms.com"];
+*/
 	}
 
 	public function get_article()

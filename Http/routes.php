@@ -64,7 +64,13 @@ Route::group(['prefix' => 'admin'], function() {
 
 });
 
-Route::get('{news}', 'FrontDeskController@get_article')->where('news', '.*');
+/*
+Route::get('blog', 'FrontendController@get_blog');
+Route::get('blog/{any}', 'FrontendController@get_post')->where('any', '.*');
+Route::get('{page}', 'FrontendController@get_page')->where('page', '.*');
+*/
+
+Route::get('/news/{news}', 'FrontDeskController@get_article')->where('news', '.*');
 
 
 
