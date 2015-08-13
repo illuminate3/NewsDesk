@@ -14,8 +14,9 @@ use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
 
 use Baum\Node;
 use Cache;
+use Config;
 use DB;
-
+use Setting;
 
 class News extends Node implements TranslatableContract, SluggableInterface {
 
@@ -208,6 +209,14 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 					   ->first();
 
 		return $article;
+	}
+
+
+// limit
+
+	public function scopeLimitTop($query)
+	{
+		return $query->limit( Setting::get('top_news_count', Config::get('news.top_news_count')) );
 	}
 
 

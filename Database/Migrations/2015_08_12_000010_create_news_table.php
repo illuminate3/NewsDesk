@@ -36,7 +36,7 @@ class CreateNewsTable extends Migration
 			$table->string('slug')->nullable();
 
 
-			$table->text('featured_image', 255)->nullable();
+			$table->string('image')->nullable();
 			$table->string('class', 50)->nullable();
 //			$table->text('link', 255)->nullable();
 

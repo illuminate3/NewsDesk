@@ -139,7 +139,6 @@ class NewsController extends NewsDeskController {
 //dd($model);
 
 		return Theme::View('modules.newsdesk.news.edit',
-//		return Theme::View('news.edit',
 			$this->news->edit($id),
 				compact(
 					'modal_title',
