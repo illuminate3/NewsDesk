@@ -59,7 +59,7 @@ class NewsMacroServiceProvider extends ServiceProvider
 	}
 
 
-		function contentTable($node, $lang) {
+		function newsTable($node, $lang) {
 //dd($node);
 
 			$title = $node->translate($lang)->title;
@@ -96,7 +96,7 @@ class NewsMacroServiceProvider extends ServiceProvider
 				$html .= '</tr>';
 
 				foreach($node['children'] as $child) {
-					$html .= contentTable($child, $lang);
+					$html .= newsTable($child, $lang);
 				}
 
 			}
@@ -109,8 +109,8 @@ class NewsMacroServiceProvider extends ServiceProvider
 		return renderNode($nodes, $mode);
 	});
 
-	Html::macro('contentNodes', function($nodes, $lang) {
-		return contentTable($nodes, $lang);
+	Html::macro('newsNodes', function($nodes, $lang) {
+		return newsTable($nodes, $lang);
 	});
 
 

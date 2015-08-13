@@ -113,7 +113,7 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 							->whereIsOnline(1)
 							->whereIsDeleted(0)
 							->whereParentId(NULL)
-// 							->where('slug', '<>', 'home-page')
+// 							->where('slug', '<>', 'home-article')
 // 							->where('slug', '<>', 'search')
 // 							->where('slug', '<>', 'terms-conditions')
 							->orderBy('order')
@@ -128,51 +128,51 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-			->where('content_translations.locale_id', '=', $locale_id)
+		$article = DB::table('news')
+			->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+			->where('news_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
 			->where('news.parent_id', '=', null, 'AND')
-//			->where('content_translations.slug', '=', $slug, 'AND')
+//			->where('news_translations.slug', '=', $slug, 'AND')
 //			->first();
 			->orderBy('order')
 			->get();
 //dd('here');
-dd($page);
+dd($article);
 
-		return $page;
+		return $article;
 	}
 
 	public static function getStaticRoots($locale_id)
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-			->where('content_translations.locale_id', '=', $locale_id)
+		$article = DB::table('news')
+			->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+			->where('news_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
 			->where('news.parent_id', '=', null, 'AND')
-//			->where('content_translations.slug', '=', $slug, 'AND')
+//			->where('news_translations.slug', '=', $slug, 'AND')
 //			->first();
 			->orderBy('order')
 			->get();
-//dd($page);
-		return $page;
+//dd($article);
+		return $article;
 	}
 
 	public static function getRootsStatic()
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-			return static::join('content_translations', 'news.id', '=', 'content_translations.news_id')
+			return static::join('news_translations', 'news.id', '=', 'news_translations.news_id')
 							->whereIsCurrent(1)
 							->whereIsOnline(1)
 							->whereIsDeleted(0)
 							->whereParentId(NULL)
-//			->where('content_translations.locale_id', '=', $locale_id)
-// 							->where('slug', '<>', 'home-page')
+//			->where('news_translations.locale_id', '=', $locale_id)
+// 							->where('slug', '<>', 'home-article')
 // 							->where('slug', '<>', 'search')
 // 							->where('slug', '<>', 'terms-conditions')
 							->orderBy('order')
@@ -199,15 +199,15 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 				->lists('title', 'id');
 	}
 
-	public static function getPage( $slug )
+	public static function getArticle( $slug )
 	{
-	   $page =  static::whereIsCurrent(1)
+	   $article =  static::whereIsCurrent(1)
 					   ->whereIsOnline(1)
 					   ->whereIsDeleted(0)
 					   ->whereSlug($slug)
 					   ->first();
 
-		return $page;
+		return $article;
 	}
 
 	public function scopeInNews($query)

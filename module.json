@@ -1,7 +1,7 @@
 {
     "name": "NewsDesk",
     "slug": "newsdesk",
-    "description": "CMS for Rakko",
+    "description": "News System for Rakko",
     "version": "1.0",
     "order": "12",
     "enabled": true

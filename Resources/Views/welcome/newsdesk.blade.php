@@ -28,7 +28,7 @@
 				</a>
 			</div>
 			<div class="quote">
-				Himwari is a CMS module for Rakko
+				NewsDesk is a news system module for Rakko
 			</div>
 		</div>
 	</div>

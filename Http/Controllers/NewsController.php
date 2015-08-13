@@ -103,7 +103,7 @@ class NewsController extends NewsDeskController {
 		$this->news->store($request->all());
 		Cache::flush();
 
-		Flash::success( trans('kotoba::cms.success.content_create') );
+		Flash::success( trans('kotoba::cms.success.news_create') );
 		return redirect('admin/news');
 	}
 
@@ -135,7 +135,7 @@ class NewsController extends NewsDeskController {
 		$modal_route = 'admin.news.destroy';
 		$modal_id = $id;
 //		$model = '$news';
-		$model = 'content';
+		$model = 'news';
 //dd($model);
 
 		return Theme::View('modules.newsdesk.news.edit',
@@ -167,7 +167,7 @@ class NewsController extends NewsDeskController {
 		$this->news->update($request->all(), $id);
 		Cache::flush();
 
-		Flash::success( trans('kotoba::cms.success.content_update') );
+		Flash::success( trans('kotoba::cms.success.news_update') );
 		return redirect('admin/news');
 	}
 
@@ -183,7 +183,7 @@ class NewsController extends NewsDeskController {
 //dd($id);
 		News::find($id)->delete();
 
-		Flash::success( trans('kotoba::cms.success.content_delete') );
+		Flash::success( trans('kotoba::cms.success.news_delete') );
 		return redirect('admin/news');
 	}
 

@@ -19,7 +19,7 @@ class NewsDesk extends Presenter {
 		return ucwords($this->entity->name);
 	}
 
-	public function pageName($id)
+	public function articleName($id)
 	{
 		$title = DB::table('news')
 			->where('id', '=', $id)

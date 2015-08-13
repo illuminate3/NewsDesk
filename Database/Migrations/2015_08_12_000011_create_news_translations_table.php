@@ -22,7 +22,7 @@ class CreateNewsTranslationsTable extends Migration
 	public function up()
 	{
 
-		Schema::create($this->prefix . 'content_translations', function(Blueprint $table) {
+		Schema::create($this->prefix . 'news_translations', function(Blueprint $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id')->unsigned();
@@ -63,7 +63,7 @@ class CreateNewsTranslationsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop($this->prefix . 'content_translations');
+		Schema::drop($this->prefix . 'news_translations');
 	}
 
 }

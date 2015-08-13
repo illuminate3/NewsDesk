@@ -74,7 +74,7 @@
 	<div role="tabpanel" class="tab-pane padding fade @if ($language->locale == $lang)in active @endif" id="lang_{{{ $language->id }}}">
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}">{{ $news->translate($language->locale)->content }}</textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'news_'. $language->id }}" id="{{ 'news_'. $language->id }}">{{ $news->translate($language->locale)->content }}</textarea>
 			</div>
 
 			<div class="form-group">
@@ -148,7 +148,7 @@
 		{!!
 			Form::select(
 				'parent_id',
-				$pagelist,
+				$articlelist,
 				$news->parent_id,
 				array(
 					'class' => 'form-control chosen-select',

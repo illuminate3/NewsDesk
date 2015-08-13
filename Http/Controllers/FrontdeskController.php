@@ -9,8 +9,8 @@ use App\Helpers\Nifty\NiftyMenus;
 
 use Illuminate\Http\Request;
 use App\Modules\NewsDesk\Http\Requests\DeleteRequest;
-// use App\Http\Requests\PageCreateRequest;
-// use App\Http\Requests\PageUpdateRequest;
+// use App\Http\Requests\ArticleCreateRequest;
+// use App\Http\Requests\ArticleUpdateRequest;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
@@ -41,25 +41,25 @@ class FrontDeskController extends NewsDeskController {
 
 //		$this->hashIds = new Hashids( Config::get('app.key'), 8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' );
 
-		$this->page = Route::current()->parameter('news');
-//dd($this->page);
-		$slugs = explode('/', $this->page);
+		$this->article = Route::current()->parameter('news');
+//dd($this->article);
+		$slugs = explode('/', $this->article);
 //dd($slugs);
 		$lastSlug = Route::current()->getName() == 'search' ? 'search' : $slugs[count($slugs)-1];
 //dd($lastSlug);
 
-//		$this->currentPage = Page::getPage( $slug = $lastSlug );
-//		$this->currentPage = News::getPage( $slug = $lastSlug );
-//		$this->currentPage = $this->news_repo->getPage($locale_id, $slug = $lastSlug);
-//		$this->currentPage = new \Illuminate\Support\Collection($this->currentPage);
+//		$this->currentArticle = Article::getArticle( $slug = $lastSlug );
+//		$this->currentArticle = News::getArticle( $slug = $lastSlug );
+//		$this->currentArticle = $this->news_repo->getArticle($locale_id, $slug = $lastSlug);
+//		$this->currentArticle = new \Illuminate\Support\Collection($this->currentArticle);
 
-		$page_ID = $this->news_repo->getPageID($slug = $lastSlug);
-//dd($page_ID);
-		$this->currentPage = $this->news_repo->getNews($page_ID);
-//dd($this->currentPage);
+		$article_ID = $this->news_repo->getArticleID($slug = $lastSlug);
+//dd($article_ID);
+		$this->currentArticle = $this->news_repo->getNews($article_ID);
+//dd($this->currentArticle);
 
 //dd('here');
-//		$this->roots = Page::getRoots();
+//		$this->roots = Article::getRoots();
 //		$this->roots = News::getRoots();
 //		$this->roots = $this->news_repo->getRoots($locale_id);
 //		$this->roots = News::getRoots($locale_id);
@@ -68,25 +68,25 @@ class FrontDeskController extends NewsDeskController {
 // 		$this->postsOrderBy = ['id', 'desc'];
 // 		$this->postsOrderByOrder = ['order', 'asc'];
 // 		$this->postItemsNum = 10;
-// 		$this->postItemsPerPage = 2;
+// 		$this->postItemsPerArticle = 2;
 		// $this->latestNewsPosts = Post::getLatestNewsPosts($this->postItemsNum, $this->postsOrderBy);
 // 		$this->contact = ["Demo NiftyCMS", "demo@niftycms.com"];
 	}
 
-	public function get_page()
+	public function get_article()
 	{
-//dd('get_page');
-//dd($this->currentPage);
-		if ( $this->currentPage ) {
-// 			$mainMenu = NiftyMenus::getMainMenu( $this->currentPage );
+//dd('get_article');
+//dd($this->currentArticle);
+		if ( $this->currentArticle ) {
+// 			$mainMenu = NiftyMenus::getMainMenu( $this->currentArticle );
 // dd($mainMenu);
-//dd($this->currentPage);
-// 			$root = $this->currentPage->getRoot();
-// 			$secMenu = NiftyMenus::getSecMenu($root, $this->currentPage );
+//dd($this->currentArticle);
+// 			$root = $this->currentArticle->getRoot();
+// 			$secMenu = NiftyMenus::getSecMenu($root, $this->currentArticle );
 
-//			return View::make('frontends.page', ['news' => $this->currentPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+//			return View::make('frontends.article', ['news' => $this->currentArticle, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 
-			$page = $this->currentPage;
+			$article = $this->currentArticle;
 /*
     0 => "meta_description"
     1 => "meta_keywords"
@@ -97,7 +97,7 @@ class FrontDeskController extends NewsDeskController {
     6 => "title"
 */
 
-//dd($page);
+//dd($article);
 // 			$mainMenu = $mainMenu;
 // 			$secMenu = $secMenu;
 
@@ -113,12 +113,12 @@ class FrontDeskController extends NewsDeskController {
 	public function index()
 	{
 dd('index');
-		if ( $homePage = Page::getPage( $slug = 'home-page' ) ) {
-			$mainMenu = NiftyMenus::getMainMenu( $homePage );
+		if ( $homeArticle = Article::getArticle( $slug = 'home-article' ) ) {
+			$mainMenu = NiftyMenus::getMainMenu( $homeArticle );
 			// $posts = Post::getFrontendPosts($category = 'Home Featured', $this->postsOrderBy);
-//			return View::make('frontends.index', ['news' => $homePage, /*'posts' => $posts,*/ 'mainMenu' => $mainMenu]);
+//			return View::make('frontends.index', ['news' => $homeArticle, /*'posts' => $posts,*/ 'mainMenu' => $mainMenu]);
 
-			$page = $homePage;
+			$article = $homeArticle;
 			$mainMenu = $mainMenu;
 
 			return View('nifty.frontends.index', compact(
@@ -133,7 +133,7 @@ dd('index');
 	public function contact_us()
 	{
 dd('contact_us');
-		if ( $contact_us = Page::getPage( $slug = 'contact-us' ) ) {
+		if ( $contact_us = Article::getArticle( $slug = 'contact-us' ) ) {
 			$mainMenu = NiftyMenus::getMainMenu( $contact_us );
 			$root = $contact_us->getRoot();
 			$secMenu = NiftyMenus::getSecMenu($root, $contact_us);
@@ -188,18 +188,18 @@ dd('do_contact_us');
 		}
 	}
 
-	public function previewPage($hashedId)
+	public function previewArticle($hashedId)
 	{
-dd('previewPage');
+dd('previewArticle');
 		$id = $this->hashIds->decrypt($hashedId)[0];
 
 		if ( $id ) {
-			$previewPage = Page::getPreviewPage( $id );
-			$mainMenu = NiftyMenus::getMainMenu( $previewPage );
-			$root = $previewPage->getRoot();
-			$secMenu = NiftyMenus::getSecMenu( $root, $previewPage );
+			$previewArticle = Article::getPreviewArticle( $id );
+			$mainMenu = NiftyMenus::getMainMenu( $previewArticle );
+			$root = $previewArticle->getRoot();
+			$secMenu = NiftyMenus::getSecMenu( $root, $previewArticle );
 
-			return View::make('frontends.page', ['news' => $previewPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+			return View::make('frontends.article', ['news' => $previewArticle, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
 		else
 			App::abort(404);
@@ -208,12 +208,12 @@ dd('previewPage');
 	public function get_blog()
 	{
 dd('get_blog');
-		if ( $blog = Page::getPage( $slug = 'blog' ) ) {
+		if ( $blog = Article::getArticle( $slug = 'blog' ) ) {
 			$mainMenu = NiftyMenus::getMainMenu( $blog );
 			$root = $blog->getRoot();
 			$secMenu = NiftyMenus::getSecMenu($root, $blog);
 
-			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerPage );
+			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerArticle );
 
 			return View::make('frontends.blog', ['news' => $blog, 'posts' => $posts, 'links' => $posts->links('backend.pagination.nifty'), 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
@@ -227,14 +227,14 @@ dd('get_post');
 		$slugs = explode( '/', Route::current()->parameter('any') );
 		$lastSlug = $slugs[count($slugs)-1];
 
-		if ( $blog = Page::getPage( $slug = 'blog' ) ) {
+		if ( $blog = Article::getArticle( $slug = 'blog' ) ) {
 			$mainMenu = NiftyMenus::getMainMenu( $blog );
 			$root = $blog->getRoot();
 			$secMenu = NiftyMenus::getSecMenu($root, $blog);
 
 			$post = Post::getFrontendPost( $lastSlug );
 
-			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerPage );
+			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerArticle );
 
 			return View::make('frontends.post', ['news' => $post, 'posts' => $posts, 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
@@ -248,13 +248,13 @@ dd('previewPost');
 		$id = $this->hashIds->decrypt($hashedId)[0];
 
 		if ( $id ) {
-			$blogPage = Page::getPage( $lug = 'blog' );
+			$blogArticle = Article::getArticle( $lug = 'blog' );
 			$blogPost = Post::find($id);
-			$mainMenu = NiftyMenus::getMainMenu( $blogPage );
-			$root = $blogPage->getRoot();
-			$secMenu = NiftyMenus::getSecMenu( $root, $blogPage );
+			$mainMenu = NiftyMenus::getMainMenu( $blogArticle );
+			$root = $blogArticle->getRoot();
+			$secMenu = NiftyMenus::getSecMenu( $root, $blogArticle );
 
-			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerPage );
+			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerArticle );
 
 			return View::make('frontends.post', ['news' => $blogPost, 'posts' => $posts, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 		}
@@ -268,11 +268,11 @@ dd('do_search');
 		$term = Sanitiser::trimInput( Input::get('term') );
 		$results = Search::getSearchResults($term);
 
-		$searchPage = Page::getPage( $slug = 'search' );
-		$mainMenu = NiftyMenus::getMainMenu( $searchPage );
+		$searchArticle = Article::getArticle( $slug = 'search' );
+		$mainMenu = NiftyMenus::getMainMenu( $searchArticle );
 		$secMenu = '';
 
-		return View::make('frontends.search', ['news' => $searchPage, 'term' => $term, 'results' => $results, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+		return View::make('frontends.search', ['news' => $searchArticle, 'term' => $term, 'results' => $results, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 	}
 
 }

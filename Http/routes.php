@@ -44,10 +44,10 @@ function()
 });
 */
 
-// Route::resource('news', 'PagesController', array('except' => array('show')));
+// Route::resource('news', 'ArticlesController', array('except' => array('show')));
 //
-// Route::get('{slug}', array('as' => 'news', 'uses' => 'PageController@show'))
-// 	->where('slug', App\Modules\NewsDesk\Http\Models\Page::$slugPattern);
+// Route::get('{slug}', array('as' => 'news', 'uses' => 'ArticleController@show'))
+// 	->where('slug', App\Modules\NewsDesk\Http\Models\Article::$slugPattern);
 
 // Controllers
 
@@ -84,46 +84,46 @@ Route::group(['prefix' => 'admin'], function() {
 
 });
 
-Route::get('{news}', 'FrontDeskController@get_page')->where('news', '.*');
+Route::get('{news}', 'FrontDeskController@get_article')->where('news', '.*');
 
 
 
-// Route::get('/', 'PageController@show');
+// Route::get('/', 'ArticleController@show');
 // Route::get('/', array(
 // 	'as' => 'home',
-// 	'uses' => 'PageController@show'
+// 	'uses' => 'ArticleController@show'
 // 	));
 
 /*
-Route::resource('news', 'PagesController', array('except' => array('show')));
+Route::resource('news', 'ArticlesController', array('except' => array('show')));
 
 Route::group(array('prefix' => 'news'), function () {
 
 	Route::post("{id}/up", array(
-		'as' => "pages.up",
-		'uses' => "PagesController@up",
+		'as' => "articles.up",
+		'uses' => "ArticlesController@up",
 	));
 	Route::post("{id}/down", array(
-		'as' => "pages.down",
-		'uses' => "PagesController@down",
+		'as' => "articles.down",
+		'uses' => "ArticlesController@down",
 	));
 
 	Route::get('export', array(
-		'as' => 'pages.export',
-		'uses' => 'PagesController@export',
+		'as' => 'articles.export',
+		'uses' => 'ArticlesController@export',
 	));
 
 	Route::get('{id}/confirm', array(
-		'as' => 'pages.confirm',
-		'uses' => 'PagesController@confirm',
+		'as' => 'articles.confirm',
+		'uses' => 'ArticlesController@confirm',
 	));
 
 });
 
 // The slug route should be registered last since it will capture any slug-like
 // route
-Route::get('{slug}', array('as' => 'news', 'uses' => 'PageController@show'))
-	->where('slug', App\Modules\NewsDesk\Http\Models\Page::$slugPattern);
+Route::get('{slug}', array('as' => 'news', 'uses' => 'ArticleController@show'))
+	->where('slug', App\Modules\NewsDesk\Http\Models\Article::$slugPattern);
 */
 
 /*

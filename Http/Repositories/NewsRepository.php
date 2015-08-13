@@ -48,9 +48,9 @@ class NewsRepository extends BaseRepository {
 		$this->model = $news;
 
 		$this->id = Route::current()->parameter( 'id' );
-//		$this->pagelist = Page::getParentOptions( $exceptId = $this->id );
-//		$this->pagelist = News::getParentOptions( $exceptId = $this->id );
-//dd($this->pagelist);
+//		$this->articlelist = Article::getParentOptions( $exceptId = $this->id );
+//		$this->articlelist = News::getParentOptions( $exceptId = $this->id );
+//dd($this->articlelist);
 	}
 
 
@@ -66,15 +66,15 @@ class NewsRepository extends BaseRepository {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-//		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
+//		$articlelist = $this->getParents( $exceptId = $this->id, $locales );
 
-// 		$pagelist = $this->getParents($locale_id, null);
-// 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
-//dd($pagelist);
-		$all_pagelist = $this->getParents($locale_id, null);
-		$pagelist = array('' => trans('kotoba::cms.no_parent'));
-		$pagelist = new Collection($pagelist);
-		$pagelist = $pagelist->merge($all_pagelist);
+// 		$articlelist = $this->getParents($locale_id, null);
+// 		$articlelist = array('' => trans('kotoba::cms.no_parent')) + $articlelist;
+//dd($articlelist);
+		$all_articlelist = $this->getParents($locale_id, null);
+		$articlelist = array('' => trans('kotoba::cms.no_parent'));
+		$articlelist = new Collection($articlelist);
+		$articlelist = $articlelist->merge($all_articlelist);
 
 
 
@@ -96,7 +96,7 @@ class NewsRepository extends BaseRepository {
 		return compact(
 			'lang',
 //			'locales',
-			'pagelist',
+			'articlelist',
 			'news_statuses',
 			'users',
 			'user_id'
@@ -113,14 +113,14 @@ class NewsRepository extends BaseRepository {
 	public function show($id)
 	{
 		$news = $this->model->find($id);
-		$links = News::find($id)->contentlinks;
+		$links = News::find($id)->newslinks;
 //$news = $this->news->show($id);
 
 //$news = $this->model->where('id', $id)->first();
 //		$news = new Collection($news);
 //dd($news);
 
-		return compact('content', 'links');
+		return compact('news', 'links');
 	}
 
 
@@ -139,15 +139,15 @@ class NewsRepository extends BaseRepository {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-//		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
+//		$articlelist = $this->getParents( $exceptId = $this->id, $locales );
 
-// 		$pagelist = $this->getParents($locale_id, $id);
-// 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
-//dd($pagelist);
-		$all_pagelist = $this->getParents($locale_id, null);
-		$pagelist = array('' => trans('kotoba::cms.no_parent'));
-		$pagelist = new Collection($pagelist);
-		$pagelist = $pagelist->merge($all_pagelist);
+// 		$articlelist = $this->getParents($locale_id, $id);
+// 		$articlelist = array('' => trans('kotoba::cms.no_parent')) + $articlelist;
+//dd($articlelist);
+		$all_articlelist = $this->getParents($locale_id, null);
+		$articlelist = array('' => trans('kotoba::cms.no_parent'));
+		$articlelist = new Collection($articlelist);
+		$articlelist = $articlelist->merge($all_articlelist);
 
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
@@ -158,10 +158,10 @@ class NewsRepository extends BaseRepository {
 //		$user_id = Auth::user()->id;
 
 		return compact(
-			'content',
+			'news',
 			'lang',
 //			'locales',
-			'pagelist',
+			'articlelist',
 			'news_statuses',
 			'users'
 			);
@@ -445,15 +445,15 @@ class NewsRepository extends BaseRepository {
 	public function getParents($locale_id, $id)
 	{
 		if ($id != null ) {
-			$query = News::select('content_translations.title AS title', 'news.id AS id')
-				->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-				->where('content_translations.locale_id', '=', $locale_id)
+			$query = News::select('news_translations.title AS title', 'news.id AS id')
+				->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+				->where('news_translations.locale_id', '=', $locale_id)
 				->where('news.id', '!=', $id, 'AND')
 				->get();
 		} else {
-			$query = News::select('content_translations.title AS title', 'news.id AS id')
-			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-			->where('content_translations.locale_id', '=', $locale_id)
+			$query = News::select('news_translations.title AS title', 'news.id AS id')
+			->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+			->where('news_translations.locale_id', '=', $locale_id)
 			->get();
 		}
 
@@ -479,34 +479,34 @@ class NewsRepository extends BaseRepository {
 
 	}
 
-	public function getPageID($slug)
+	public function getArticleID($slug)
 	{
 //dd($slug);
 /*
-		$page_ID = DB::table('content_translations')
-			->where('content_translations.slug', '=', $slug)
+		$article_ID = DB::table('news_translations')
+			->where('news_translations.slug', '=', $slug)
 			->pluck('news_id');
 */
-		$page_ID = DB::table('news')
+		$article_ID = DB::table('news')
 			->where('slug', '=', $slug)
 			->pluck('id');
-//dd($page_ID);
+//dd($article_ID);
 
-		return $page_ID;
+		return $article_ID;
 	}
 
-	public function getNews($page_ID)
+	public function getNews($article_ID)
 	{
-//dd($page_ID);
- 		$news = News::find($page_ID);
+//dd($article_ID);
+ 		$news = News::find($article_ID);
 /*
-		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-			->where('content_translations.locale_id', '=', $locale_id)
+		$article = DB::table('news')
+			->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+			->where('news_translations.locale_id', '=', $locale_id)
 //			->where('news.is_current', '=', 1, 'AND')
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
-			->where('content_translations.slug', '=', $slug, 'AND')
+			->where('news_translations.slug', '=', $slug, 'AND')
 			->pluck('news.id');
 */
 //dd($news);
@@ -514,31 +514,31 @@ class NewsRepository extends BaseRepository {
 		return $news;
 	}
 
-	public function getPage($locale_id, $slug)
+	public function getArticle($locale_id, $slug)
 	{
 //dd($slug);
-		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-			->where('content_translations.locale_id', '=', $locale_id)
+		$article = DB::table('news')
+			->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+			->where('news_translations.locale_id', '=', $locale_id)
 //			->where('news.is_current', '=', 1, 'AND')
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
-//			->where('content_translations.slug', '=', $slug, 'AND')
+//			->where('news_translations.slug', '=', $slug, 'AND')
 			->where('news.slug', '=', $slug, 'AND')
 			->pluck('news.id');
-//dd($page);
+//dd($article);
 
- 		$news = News::find($page);
+ 		$news = News::find($article);
 dd($news);
 
 /*
-	   $page =  static::whereIsCurrent(1)
+	   $article =  static::whereIsCurrent(1)
 					   ->whereIsOnline(1)
 					   ->whereIsDeleted(0)
 					   ->whereSlug($slug)
 					   ->first();
 */
-		return $page;
+		return $article;
 	}
 
 
@@ -546,24 +546,24 @@ dd($news);
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-			->where('content_translations.locale_id', '=', $locale_id)
+		$article = DB::table('news')
+			->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+			->where('news_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
 			->where('news.parent_id', '=', null, 'AND')
-//			->where('content_translations.slug', '=', $slug, 'AND')
+//			->where('news_translations.slug', '=', $slug, 'AND')
 //			->first();
 			->orderBy('order')
 			->get();
-//dd($page);
+//dd($article);
 
 /*
 			return static::whereIsCurrent(1)
 							->whereIsOnline(1)
 							->whereIsDeleted(0)
 							->whereParentId(NULL)
-							->where('slug', '<>', 'home-page')
+							->where('slug', '<>', 'home-article')
 							->where('slug', '<>', 'search')
 							->where('slug', '<>', 'terms-conditions')
 							->orderBy('order')
@@ -579,18 +579,18 @@ dd($news);
 	{
 		// $roots = Cache::rememberForever('roots', function()
 		// {
-		$page = DB::table('news')
-			->join('content_translations', 'news.id', '=', 'content_translations.news_id')
-			->where('content_translations.locale_id', '=', $locale_id)
+		$article = DB::table('news')
+			->join('news_translations', 'news.id', '=', 'news_translations.news_id')
+			->where('news_translations.locale_id', '=', $locale_id)
 			->where('news.is_online', '=', 1, 'AND')
 			->where('news.is_deleted', '=', 0, 'AND')
 			->where('news.parent_id', '=', null, 'AND')
-//			->where('content_translations.slug', '=', $slug, 'AND')
+//			->where('news_translations.slug', '=', $slug, 'AND')
 //			->first();
 			->orderBy('order')
 			->get();
-//dd($page);
-		return $page;
+//dd($article);
+		return $article;
 	}
 
 	public function getUsers()
