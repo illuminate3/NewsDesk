@@ -48,6 +48,7 @@
 <ul class="nav nav-tabs nav-justified" role="tablist">
 	<li role="presentation" class="active"><a href="#content" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
 	<li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
+	<li role="presentation"><a href="#images" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::cms.image', 2) }}</a></li>
 	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::general.setting', 2) }}</a></li>
 </ul>
 
@@ -71,7 +72,7 @@
 	<div role="tabpanel" class="tab-pane padding fade @if ($language->locale == $lang)in active @endif" id="lang_{{{ $language->id }}}">
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control ckeditor" rows="3" name="{{ 'news_'. $language->id }}" id="{{ 'news_'. $language->id }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
 			</div>
 
 			<div class="form-group">
@@ -130,6 +131,14 @@
 
 	</div>
 	</div><!-- ./ meta panel -->
+
+	<div role="tabpanel" class="tab-pane" id="images">
+	<div class="tab-content">
+
+images
+
+	</div>
+	</div><!-- ./ images panel -->
 
 	<div role="tabpanel" class="tab-pane" id="settings">
 	<div class="tab-content padding">
@@ -205,6 +214,27 @@
 		{!! Form::text('order', Input::old('order'), ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
 
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_start" name="publish_start" class="form-control">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_end" name="publish_end" class="form-control">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
+{{--
 	<div class="form-group">
 		<label for="is_navigation" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_navigation') }}</label>
 		<div class="col-sm-9">
@@ -215,6 +245,7 @@
 			</div>
 		</div>
 	</div>
+--}}
 
 	<div class="form-group">
 		<label for="is_featured" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
@@ -234,26 +265,6 @@
 				<label>
 					<input type="checkbox" id="is_timed" name="is_timed" value="1">
 				</label>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
-		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
-		<div id="datepicker-container">
-			<div class="input-group date">
-				<input type="text" id="publish_start" name="publish_start" class="form-control">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
-		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
-		<div id="datepicker-container">
-			<div class="input-group date">
-				<input type="text" id="publish_end" name="publish_end" class="form-control">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
 		</div>
 	</div>

@@ -47,7 +47,7 @@ class NewsRepository extends BaseRepository {
 		$this->locale_repo = $locale_repo;
 		$this->model = $news;
 
-		$this->id = Route::current()->parameter( 'id' );
+//		$this->id = Route::current()->parameter( 'id' );
 //		$this->articlelist = Article::getParentOptions( $exceptId = $this->id );
 //		$this->articlelist = News::getParentOptions( $exceptId = $this->id );
 //dd($this->articlelist);
@@ -94,12 +94,12 @@ class NewsRepository extends BaseRepository {
 		$user_id = Auth::user()->id;
 
 		return compact(
-			'lang',
-//			'locales',
 			'articlelist',
 			'news_statuses',
 			'users',
-			'user_id'
+			'user_id',
+			'lang',
+			'locale_id'
 			);
 	}
 
@@ -414,22 +414,6 @@ class NewsRepository extends BaseRepository {
 
 
 // Functions ----------------------------------------------------------------------------------------------------
-
-	public function getLocales()
-	{
-		$locales = Locale::all();
-		return $locales;
-	}
-
-// 	public function getLocaleID($lang)
-// 	{
-//
-// 		$locale_id = DB::table('locales')
-// 			->where('locale', '=', $lang)
-// 			->pluck('id');
-//
-// 		return $locale_id;
-// 	}
 
 	public function getNewsID($name)
 	{

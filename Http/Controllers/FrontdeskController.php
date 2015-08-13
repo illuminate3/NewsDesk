@@ -5,12 +5,10 @@ namespace App\Modules\NewsDesk\Http\Controllers;
 use App\Modules\NewsDesk\Http\Models\News;
 use App\Modules\NewsDesk\Http\Repositories\NewsRepository;
 
-use App\Helpers\Nifty\NiftyMenus;
-
 use Illuminate\Http\Request;
 use App\Modules\NewsDesk\Http\Requests\DeleteRequest;
-// use App\Http\Requests\ArticleCreateRequest;
-// use App\Http\Requests\ArticleUpdateRequest;
+use App\Http\Requests\ArticleCreateRequest;
+use App\Http\Requests\ArticleUpdateRequest;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
@@ -36,8 +34,8 @@ class FrontDeskController extends NewsDeskController {
 		$this->news_repo = $news_repo;
 
 		$lang = Session::get('locale');
-		$locales = $this->news_repo->getLocales();
-		$locale_id = 1;
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
 
 //		$this->hashIds = new Hashids( Config::get('app.key'), 8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' );
 

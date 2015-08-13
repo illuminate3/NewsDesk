@@ -3,9 +3,6 @@
 namespace App\Modules\NewsDesk\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Foundation\Bus\DispatchesCommands;
-// use Illuminate\Routing\Controller as BaseController;
-// use Illuminate\Foundation\Validation\ValidatesRequests;
 
 use Theme;
 
@@ -13,7 +10,6 @@ use Theme;
 class NewsDeskController extends Controller
 {
 
-// 	use DispatchesCommands, ValidatesRequests;
 
 	/**
 	 * Initializer.
@@ -37,5 +33,6 @@ class NewsDeskController extends Controller
 	{
 		return Theme::View('modules.newsdesk.welcome.newsdesk');
 	}
+
 
 }

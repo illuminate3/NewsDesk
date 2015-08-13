@@ -6,6 +6,8 @@
 |--------------------------------------------------------------------------
 */
 
+Route::pattern('news', '[0-9a-z]+');
+
 // Resources
 // Controllers
 
@@ -24,26 +26,6 @@ Route::group(['prefix' => 'newsdesk'], function() {
 */
 
 
-/*
-Route::group(
-[
-	'prefix' => LaravelLocalization::setLocale(),
-	'middleware' => [ 'localizationRedirect', 'localeSessionRedirect' ]
-],
-function()
-{
-	// ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP //
-// 	Route::get('/', function()
-// 	{
-// //dd(LaravelLocalization::getSupportedLocales());
-// //dd(LaravelLocalization::getSupportedLanguagesKeys());
-//dd(LaravelLocalization::getCurrentLocale());
-// 		return View::make('hello');
-// 	});
-
-});
-*/
-
 // Route::resource('news', 'ArticlesController', array('except' => array('show')));
 //
 // Route::get('{slug}', array('as' => 'news', 'uses' => 'ArticleController@show'))
@@ -60,8 +42,6 @@ function()
 //Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 Route::group(['prefix' => 'admin'], function() {
 
-	Route::pattern('id', '[0-9]+');
-
 // Controllers
 	Route::resource('news', 'NewsController');
 	Route::resource('news_statuses', 'NewsStatusesController');
@@ -77,22 +57,16 @@ Route::group(['prefix' => 'admin'], function() {
 // 		));
 
 // API DATA
-	Route::get('api/news_statuses', array(
-//		'as'=>'api.news_statuses',
-		'uses'=>'NewsStatusesController@data'
-		));
+// 	Route::get('api/news_statuses', array(
+// //		'as'=>'api.news_statuses',
+// 		'uses'=>'NewsStatusesController@data'
+// 		));
 
 });
 
 Route::get('{news}', 'FrontDeskController@get_article')->where('news', '.*');
 
 
-
-// Route::get('/', 'ArticleController@show');
-// Route::get('/', array(
-// 	'as' => 'home',
-// 	'uses' => 'ArticleController@show'
-// 	));
 
 /*
 Route::resource('news', 'ArticlesController', array('except' => array('show')));

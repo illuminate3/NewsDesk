@@ -3,6 +3,6 @@
     "slug": "newsdesk",
     "description": "News System for Rakko",
     "version": "1.0",
-    "order": "12",
+    "order": "11",
     "enabled": true
 }

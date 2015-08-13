@@ -2,6 +2,8 @@
 
 namespace App\Modules\NewsDesk\Http\Controllers;
 
+use App\Modules\Core\Http\Repositories\LocaleRepository;
+
 use App\Modules\NewsDesk\Http\Models\NewsStatus;
 use App\Modules\NewsDesk\Http\Repositories\NewsStatusRepository;
 
@@ -26,9 +28,13 @@ class NewsStatusesController extends NewsDeskController {
 	protected $status;
 
 	public function __construct(
+			LocaleRepository $locale_repo,
+			NewsStatus $status,
 			NewsStatusRepository $status_repo
 		)
 	{
+		$this->locale_repo = $locale_repo;
+		$this->status = $status;
 		$this->status_repo = $status_repo;
 // middleware
 		parent::__construct();
@@ -45,16 +51,19 @@ class NewsStatusesController extends NewsDeskController {
 	 */
 	public function index()
 	{
+
 		$lang = Session::get('locale');
-//		$locales = $this->status_repo->getLocales();
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+
 		$news_statuses = $this->status_repo->all();
 //dd($lang);
 
 		return Theme::View('modules.newsdesk.news_statuses.index',
 			compact(
+				'news_statuses',
 				'lang',
-//				'locales',
-				'news_statuses'
+				'locale_id'
 				));
 	}
 
@@ -79,7 +88,7 @@ class NewsStatusesController extends NewsDeskController {
 		NewsStatusCreateRequest $request
 		)
 	{
-		$this->status->store($request->all());
+		$this->status_repo->store($request->all());
 
 		Flash::success( trans('kotoba::general.success.status_create') );
 		return redirect('admin/news_statuses');
@@ -143,7 +152,7 @@ class NewsStatusesController extends NewsDeskController {
 		)
 	{
 //dd("update");
-		$this->status->update($request->all(), $id);
+		$this->status_repo->update($request->all(), $id);
 
 		Flash::success( trans('kotoba::general.success.status_update') );
 		return redirect('admin/news_statuses');

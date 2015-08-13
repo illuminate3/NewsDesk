@@ -72,7 +72,6 @@ class NewsController extends NewsDeskController {
 				'news',
 				'list',
 				'lang',
-				'locales',
 				'locale_id'
 			));
 	}
