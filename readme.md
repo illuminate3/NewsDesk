@@ -46,7 +46,10 @@ php artisan vendor:publish --provider="App\Modules\NewsDesk\Providers\NewsDeskSe
 php artisan vendor:publish --provider="App\Modules\NewsDesk\Providers\NewsDeskServiceProvider" --tag="vendors"
 php artisan vendor:publish --provider="App\Modules\NewsDesk\Providers\NewsDeskServiceProvider" --tag="views"
 ```
-
+```
+php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
+php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
+```
 
 ## Packages
 
@@ -59,6 +62,7 @@ The Following are packages that are specific to this module:
 
 * https://github.com/etrepat/baum
 * https://github.com/cviebrock/eloquent-sluggable
+* https://github.com/barryvdh/laravel-elfinder
 
 
 ## Screen Shots

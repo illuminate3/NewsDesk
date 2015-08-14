@@ -28,7 +28,8 @@
 	CKEDITOR.replace( 'ckeditor' );
 	CKEDITOR.editorConfig = function( config ) {
 		config.extraAllowedNews = 'div(*)';
-		config.allowedNews=true;
+		config.extraAllowedContent = 'ul(*)';
+		config.allowedContent=true;
 	};
 @stop
 
