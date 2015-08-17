@@ -4,8 +4,8 @@ namespace App\Modules\NewsDesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Codesleeve\Stapler\ORM\EloquentTrait;
-use Codesleeve\Stapler\ORM\StaplerableInterface;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
 use Laracasts\Presenter\PresentableTrait;
 
