@@ -45,7 +45,8 @@
 	[
 		'route' => ['admin.news.update', $news->id],
 		'method' => 'PATCH',
-		'class' => 'form'
+		'class' => 'form',
+		'files' => true
 	]
 ) !!}
 
@@ -141,7 +142,12 @@
 	<div role="tabpanel" class="tab-pane" id="images">
 	<div class="tab-content">
 
-images
+   <div class="form-group">
+		{{ Form::label('image', 'Image:', array('class'=>'col-md-2 control-label')) }}
+		<div class="col-sm-10">
+		  {{ Form::file('image') }}
+		</div>
+	</div>
 {{--
 	<div class="form-group">
 		{!! Form::label('featured_image', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}

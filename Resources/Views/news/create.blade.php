@@ -42,7 +42,8 @@
 {!! Form::open([
 	'url' => 'admin/news',
 	'method' => 'POST',
-	'class' => 'form-horizontal'
+	'class' => 'form-horizontal',
+	'files' => true
 ]) !!}
 
 <!-- Nav tabs -->

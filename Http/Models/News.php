@@ -4,8 +4,8 @@ namespace App\Modules\NewsDesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Codesleeve\Stapler\ORM\EloquentTrait;
+use Codesleeve\Stapler\ORM\StaplerableInterface;
 
 use Laracasts\Presenter\PresentableTrait;
 
@@ -18,6 +18,7 @@ use Config;
 use DB;
 use Setting;
 
+
 class News extends Node implements TranslatableContract, SluggableInterface {
 
 
@@ -27,22 +28,22 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 
 	protected $table = 'news';
 
-// Presenter -------------------------------------------------------
+
+// Presenter ---------------------------------------------------------------
 	protected $presenter = 'App\Modules\NewsDesk\Http\Presenters\NewsDesk';
 
 // Translation Model -------------------------------------------------------
 	protected $translator = 'App\Modules\NewsDesk\Http\Models\NewsTranslation';
 
-// DEFINE Hidden -------------------------------------------------------
+// DEFINE Hidden -----------------------------------------------------------
 	protected $hidden = [
 		'created_at',
 		'updated_at'
 		];
 
-// DEFINE Fillable -------------------------------------------------------
+// DEFINE Fillable ---------------------------------------------------------
 	protected $fillable = [
-// 		'is_deleted',
-// 		'is_online',
+ 		'image',
 		'is_featured',
 		'is_timed',
 		'is_navigation',
@@ -62,13 +63,14 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 		'title'
 		];
 
-// Sluggable Item -------------------------------------------------------
+
+// Sluggable Item ----------------------------------------------------------
 	protected $sluggable = [
 		'build_from' => 'title',
 		'save_to'    => 'slug',
 	];
 
-// Translated Columns -------------------------------------------------------
+// Translated Columns ------------------------------------------------------
 	protected $translatedAttributes = [
 		'meta_description',
 		'meta_keywords',

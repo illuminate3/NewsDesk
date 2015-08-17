@@ -51,6 +51,10 @@ class CreateNewsTable extends Migration
 
 			$table->integer('order')->nullable();
 
+// 			$table->string('image_file_name')->nullable();
+// 			$table->integer('image_file_size')->nullable();
+// 			$table->string('image_content_type')->nullable();
+// 			$table->timestamp('image_updated_at')->nullable();
 
 			$table->index('parent_id');
 			$table->index('lft');

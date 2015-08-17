@@ -21,32 +21,32 @@ class NewsStatus extends Model implements TranslatableContract {
 	 */
 	protected $table = 'news_statuses';
 
-// Presenter -------------------------------------------------------
+// Presenter ---------------------------------------------------------------
 	protected $presenter = 'App\Modules\NewsDesk\Http\Presenters\NewsDesk';
 
 // Translation Model -------------------------------------------------------
 	protected $translator = 'App\Modules\NewsDesk\Http\Models\NewsStatusTranslation';
 
-// DEFINE Hidden -------------------------------------------------------
+// DEFINE Hidden -----------------------------------------------------------
 	protected $hidden = [
 		'created_at',
 		'updated_at'
 		];
 
-// DEFINE Fillable -------------------------------------------------------
+// DEFINE Fillable ---------------------------------------------------------
 	protected $fillable = [
 		// Translatable columns
 		'name',
 		'description'
 		];
 
-// Translated Columns -------------------------------------------------------
+// Translated Columns ------------------------------------------------------
 	protected $translatedAttributes = [
 		'name',
 		'description'
 		];
 
-// DEFINE Functions --------------------------------------------------
+// DEFINE Functions --------------------------------------------------------
 
 	public function getNameAttribute()
 	{
@@ -58,7 +58,7 @@ class NewsStatus extends Model implements TranslatableContract {
 		return $this->description;
 	}
 
-// DEFINE Relationships --------------------------------------------------
+// DEFINE Relationships ----------------------------------------------------
 
 // hasMany
 // belongsTo
