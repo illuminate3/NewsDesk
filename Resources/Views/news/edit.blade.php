@@ -32,6 +32,18 @@
 		config.allowedContent=true;
 		config.filebrowserBrowseUrl = '/elfinder/ckeditor';
 	};
+
+	$("#image_id").change(function() {
+		$("#imagePreview").empty();
+		if ( $("#image_id").val()!="" ){
+			$("#imagePreview").append("<img src=\"system/files/images/" + $("#image_id").val()  + "\/thumb/" + $("#image_id").val()  + "\ />");
+		}else{
+			$("#imagePreview").append("displays image here");
+		}
+console.log($("#image_id").val());
+	});
+
+
 @stop
 
 
@@ -142,12 +154,33 @@
 	<div role="tabpanel" class="tab-pane" id="images">
 	<div class="tab-content">
 
-   <div class="form-group">
-		{{ Form::label('image', 'Image:', array('class'=>'col-md-2 control-label')) }}
-		<div class="col-sm-10">
-		  {{ Form::file('image') }}
-		</div>
+
+<div class="row">
+<div class="col-sm-6">
+<div class="padding">
+
+	<div class="form-group">
+		{!! Form::label('image_id', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
+		{!!
+			Form::select(
+				'image_id',
+				$images,
+				$news->image_id,
+				array(
+					'class' => 'form-control chosen-select',
+					'id' => 'image_id'
+				)
+			)
+		!!}
 	</div>
+
+</div>
+</div><!-- ./ col-6 -->
+<div class="col-sm-6">
+<div class="padding">
+
+<div id="imagePreview"></div>
+
 {{--
 	<div class="form-group">
 		{!! Form::label('featured_image', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
@@ -159,6 +192,10 @@
 		<a class="btn btn-metis-3 btn-rect btn-grad" id="clearFeaturedImage">{{ trans('kotoba::general.clear') }}</a>
 	</div>
 --}}
+
+</div>
+</div><!-- ./ col-6 -->
+</div><!-- ./ row -->
 
 	</div>
 	</div><!-- ./ images panel -->

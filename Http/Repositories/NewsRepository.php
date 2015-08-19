@@ -146,17 +146,21 @@ class NewsRepository extends BaseRepository {
 
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
-//dd($users);
+
 		$news_statuses = $this->getNewsStatuses($locale_id);
 		$news_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.news_status', 1) ) + $news_statuses;
+
+		$images = $this->getImages();
+		$images = array('' => trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) ) + $images;
+//dd($images);
 
 //		$user_id = Auth::user()->id;
 
 		return compact(
-			'news',
-			'lang',
-//			'locales',
 			'articlelist',
+			'images',
+			'lang',
+			'news',
 			'news_statuses',
 			'users'
 			);
@@ -363,6 +367,12 @@ class NewsRepository extends BaseRepository {
 
 // Functions ----------------------------------------------------------------------------------------------------
 
+
+	public function getImages()
+	{
+		$users = DB::table('images')->lists('image_file_name', 'id');
+		return $users;
+	}
 
 	public function getUsers()
 	{
