@@ -157,7 +157,9 @@ function setImage(select){
 <div class="padding">
 
 @if ( count($news->images) )
-asldhflkasdjhflkj
+	@foreach($news->images as $image)
+		{{ $image->id }} :: {{ $image->image_file_name }}
+	@endforeach
 @endif
 
 @if ( count($news->documents) )
