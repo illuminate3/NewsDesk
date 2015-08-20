@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\NewsDesk\Http\Repositories\BaseRepository as BaseRepository;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
+use App\Modules\Records\Http\Models\Image;
 
 use App\Modules\Core\Http\Models\Locale;
 use App\Modules\NewsDesk\Http\Models\News;
@@ -150,14 +151,19 @@ class NewsRepository extends BaseRepository {
 		$news_statuses = $this->getNewsStatuses($locale_id);
 		$news_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.news_status', 1) ) + $news_statuses;
 
+// 		$list_images = $this->getListImages();
+// 		$list_images = array('' => trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) ) + $list_images;
+
 		$images = $this->getImages();
-		$images = array('' => trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) ) + $images;
 //dd($images);
+
+		$documents = $this->getDocuments();
 
 //		$user_id = Auth::user()->id;
 
 		return compact(
 			'articlelist',
+			'documents',
 			'images',
 			'lang',
 			'news',
@@ -368,10 +374,50 @@ class NewsRepository extends BaseRepository {
 // Functions ----------------------------------------------------------------------------------------------------
 
 
+	public function attachDocument($id, $document_id)
+	{
+//dd($image_id);
+		$news = $this->model->find($id);
+		$news->documents()->attach($document_id);
+	}
+
+	public function detachDocument($id, $document_id)
+	{
+//dd($image_id);
+		$document = $this->model->find($id)->documents()->detach();
+	}
+
+
+	public function attachImage($id, $image_id)
+	{
+//dd($image_id);
+		$news = $this->model->find($id);
+		$news->images()->attach($image_id);
+	}
+
+	public function detachImage($id, $image_id)
+	{
+//dd($image_id);
+		$image = $this->model->find($id)->images()->detach();
+	}
+
+
 	public function getImages()
 	{
-		$users = DB::table('images')->lists('image_file_name', 'id');
-		return $users;
+		$images = DB::table('images')->get();
+		return $images;
+	}
+
+	public function getDocuments()
+	{
+		$documents = DB::table('documents')->get();
+		return $documents;
+	}
+
+	public function getListImages()
+	{
+		$images = DB::table('images')->lists('image_file_name', 'id');
+		return $images;
 	}
 
 	public function getUsers()

@@ -20,30 +20,27 @@
 @stop
 
 @section('inline-scripts')
-	jQuery(document).ready(function($) {
-		$(".chosen-select").chosen({
-			width: "100%"
-		});
+jQuery(document).ready(function($) {
+	$(".chosen-select").chosen({
+		width: "100%"
 	});
-	CKEDITOR.replace( 'ckeditor' );
-	CKEDITOR.editorConfig = function( config ) {
-		config.extraAllowedNews = 'div(*)';
-		config.extraAllowedContent = 'ul(*)';
-		config.allowedContent=true;
-		config.filebrowserBrowseUrl = '/elfinder/ckeditor';
-	};
-
-	$("#image_id").change(function() {
-		$("#imagePreview").empty();
-		if ( $("#image_id").val()!="" ){
-			$("#imagePreview").append("<img src=\"system/files/images/" + $("#image_id").val()  + "\/thumb/" + $("#image_id").val()  + "\ />");
-		}else{
-			$("#imagePreview").append("displays image here");
-		}
-console.log($("#image_id").val());
+	$(".chosen-multi").chosen({
+		width: "100%"
 	});
+});
 
+CKEDITOR.replace( 'ckeditor' );
+CKEDITOR.editorConfig = function( config ) {
+	config.extraAllowedNews = 'div(*)';
+	config.extraAllowedContent = 'ul(*)';
+	config.allowedContent=true;
+	config.filebrowserBrowseUrl = '/elfinder/ckeditor';
+};
 
+function setImage(select){
+	var image = document.getElementsByName("image-swap")[0];
+	image.src = select.options[select.selectedIndex].label;
+}
 @stop
 
 
@@ -66,7 +63,7 @@ console.log($("#image_id").val());
 <ul class="nav nav-tabs nav-justified" role="tablist">
 	<li role="presentation" class="active"><a href="#content" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
 	<li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
-	<li role="presentation"><a href="#images" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::cms.image', 2) }}</a></li>
+	<li role="presentation"><a href="#files" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::files.file', 2) }}</a></li>
 	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::general.setting', 2) }}</a></li>
 </ul>
 
@@ -151,7 +148,7 @@ console.log($("#image_id").val());
 	</div>
 	</div><!-- ./ meta panel -->
 
-	<div role="tabpanel" class="tab-pane" id="images">
+	<div role="tabpanel" class="tab-pane" id="files">
 	<div class="tab-content">
 
 
@@ -159,27 +156,47 @@ console.log($("#image_id").val());
 <div class="col-sm-6">
 <div class="padding">
 
-	<div class="form-group">
-		{!! Form::label('image_id', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
-		{!!
-			Form::select(
-				'image_id',
-				$images,
-				$news->image_id,
-				array(
-					'class' => 'form-control chosen-select',
-					'id' => 'image_id'
-				)
-			)
-		!!}
-	</div>
+
+	<h3>
+		{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}
+	</h3>
+
+	<hr>
+
+	<select id="image_select" name="image_id" class="form-control chosen-select" onchange="setImage(this);">
+		<option value="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
+		@foreach($images as $image)
+			<option value="{{ $image->id }}" label="../../../system/files/images/{{ $image->id }}/preview/{{ $image->image_file_name }}">{{ $image->image_file_name }}</option>
+		@endforeach
+	</select>
+
+
+	<h3 class="margin-top-xl">
+		{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}
+	</h3>
+
+	<hr>
+
+	<select multiple id="file_select" name="document_id[]" class="form-control chosen-multi" data-placeholder="{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}">
+		@foreach($documents as $document)
+			<option value="{{ $document->id }}">{{ $document->document_file_name }}</option>
+		@endforeach
+	</select>
+
 
 </div>
 </div><!-- ./ col-6 -->
 <div class="col-sm-6">
 <div class="padding">
 
-<div id="imagePreview"></div>
+
+	<h3 class="panel-title">
+		{{ Lang::choice('kotoba::cms.image', 1) }}
+	</h3>
+
+	<hr>
+
+	<img src="" name="image-swap" />
 
 {{--
 	<div class="form-group">
