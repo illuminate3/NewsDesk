@@ -108,15 +108,7 @@ class NewsRepository extends BaseRepository {
 	 */
 	public function show($id)
 	{
-		$news = $this->model->find($id);
-		$links = News::find($id)->newslinks;
-//$news = $this->news->show($id);
-
-//$news = $this->model->where('id', $id)->first();
-//		$news = new Collection($news);
-//dd($news);
-
-		return compact('news', 'links');
+		//
 	}
 
 
@@ -128,7 +120,8 @@ class NewsRepository extends BaseRepository {
 	 */
 	public function edit($id)
 	{
-		$news = $this->model->find($id);
+		$news = $this->model->with('images', 'documents')->find($id);
+//		$news = $this->model->find($id)->images->documents;
 //dd($news);
 
 		$lang = Session::get('locale');
@@ -154,17 +147,17 @@ class NewsRepository extends BaseRepository {
 // 		$list_images = $this->getListImages();
 // 		$list_images = array('' => trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) ) + $list_images;
 
-		$images = $this->getImages();
+		$get_images = $this->getImages();
 //dd($images);
 
-		$documents = $this->getDocuments();
+		$get_documents = $this->getDocuments();
 
 //		$user_id = Auth::user()->id;
 
 		return compact(
 			'articlelist',
-			'documents',
-			'images',
+			'get_documents',
+			'get_images',
 			'lang',
 			'news',
 			'news_statuses',

@@ -156,6 +156,15 @@ function setImage(select){
 <div class="col-sm-6">
 <div class="padding">
 
+@if ( count($news->images) )
+asldhflkasdjhflkj
+@endif
+
+@if ( count($news->documents) )
+	@foreach($news->documents as $document)
+		{{ $document->id }} :: {{ $document->document_file_name }}
+	@endforeach
+@endif
 
 	<h3>
 		{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}
@@ -165,7 +174,7 @@ function setImage(select){
 
 	<select id="image_select" name="image_id" class="form-control chosen-select" onchange="setImage(this);">
 		<option value="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
-		@foreach($images as $image)
+		@foreach($get_images as $image)
 			<option value="{{ $image->id }}" label="../../../system/files/images/{{ $image->id }}/preview/{{ $image->image_file_name }}">{{ $image->image_file_name }}</option>
 		@endforeach
 	</select>
@@ -178,7 +187,7 @@ function setImage(select){
 	<hr>
 
 	<select multiple id="file_select" name="document_id[]" class="form-control chosen-multi" data-placeholder="{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}">
-		@foreach($documents as $document)
+		@foreach($get_documents as $document)
 			<option value="{{ $document->id }}">{{ $document->document_file_name }}</option>
 		@endforeach
 	</select>
