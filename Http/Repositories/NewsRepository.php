@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\NewsDesk\Http\Repositories\BaseRepository as BaseRepository;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
-use App\Modules\Records\Http\Models\Image;
+use App\Modules\FileX\Http\Models\Image;
+use App\Modules\FileX\Http\Models\Document;
 
 use App\Modules\Core\Http\Models\Locale;
 use App\Modules\NewsDesk\Http\Models\News;
@@ -509,7 +510,7 @@ class NewsRepository extends BaseRepository {
 			->where('news_translations.slug', '=', $slug, 'AND')
 			->pluck('news.id');
 */
-//dd($news);
+dd($news);
 
 		return $news;
 	}

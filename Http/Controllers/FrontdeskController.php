@@ -53,7 +53,8 @@ class FrontDeskController extends NewsDeskController {
 
 		$article_ID = $this->news_repo->getArticleID($slug = $lastSlug);
 //dd($article_ID);
-		$this->currentArticle = $this->news_repo->getNews($article_ID);
+		$this->currentArticle = $this->news->with('images', 'documents')->find($article_ID);
+//		$this->currentArticle = $this->news_repo->with('images', 'documents')->getNews($article_ID);
 //dd($this->currentArticle);
 
 	}
