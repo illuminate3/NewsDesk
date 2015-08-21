@@ -20,7 +20,7 @@
 	<div class="container">
 		<div class="content">
 			<a href="/">
-				<img src="/assets/images/himwari_2.png" class="img-responsive">
+				<img src="/assets/images/newsdesk.png" class="img-responsive">
 			</a>
 			<div class="title">
 				<a href="/">
