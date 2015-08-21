@@ -40,6 +40,9 @@ CKEDITOR.editorConfig = function( config ) {
 function setImage(select){
 	var image = document.getElementsByName("image-swap")[0];
 	image.src = select.options[select.selectedIndex].label;
+		if ( image.src == "" ) {
+			$("#imagePreview").append("displays image here");
+		}
 }
 @stop
 
@@ -156,17 +159,77 @@ function setImage(select){
 <div class="col-sm-6">
 <div class="padding">
 
-@if ( count($news->images) )
-	@foreach($news->images as $image)
-		{{ $image->id }} :: {{ $image->image_file_name }}
-	@endforeach
-@endif
+	<h3>
+		{{ Lang::choice('kotoba::cms.image', 2) }}
+	</h3>
 
-@if ( count($news->documents) )
-	@foreach($news->documents as $document)
-		{{ $document->id }} :: {{ $document->document_file_name }}
-	@endforeach
-@endif
+	<hr>
+
+	@if ( count($news->images) )
+		@foreach($news->images as $image)
+
+		<div class="thumbnail">
+			<img src="<?= $image->image->url('preview') ?>" class="img-rounded">
+			<div class="caption">
+				<h3>
+					{{ $image->image_file_name }}
+				</h3>
+				<p>
+					{{ $image->image_file_size }}
+					<br>
+					{{ $image->image_content_type }}
+					<br>
+					{{ $image->image_updated_at }}
+				</p>
+			</div>
+		</div>
+
+		@endforeach
+	@endif
+
+
+	<h3>
+		{{ Lang::choice('kotoba::files.file', 2) }}
+	</h3>
+
+	<hr>
+
+	@if ( count($news->documents) )
+
+		<div class="row">
+		<table id="table" class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>{{ Lang::choice('kotoba::table.user', 1) }}</th>
+					<th>{{ Lang::choice('kotoba::table.document', 1) }}</th>
+					<th>{{ trans('kotoba::table.size') }}</th>
+					<th>{{ Lang::choice('kotoba::table.type', 1) }}</th>
+					<th>{{ trans('kotoba::table.updated') }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($news->documents as $document)
+				<tr>
+					<td>{{ $document->user_id }}</td>
+					<td>{{ $document->document_file_name }}</td>
+					<td>{{ $document->document_file_size }}</td>
+					<td>{{ $document->document_content_type }}</td>
+					<td>{{ $document->document_updated_at }}</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		</div>
+
+	@endif
+
+
+</div>
+</div><!-- ./ col-6 -->
+<div class="col-sm-6">
+<div class="padding">
+
+
 
 	<h3>
 		{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}
@@ -175,11 +238,23 @@ function setImage(select){
 	<hr>
 
 	<select id="image_select" name="image_id" class="form-control chosen-select" onchange="setImage(this);">
-		<option value="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
+		<option value="" label="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
 		@foreach($get_images as $image)
 			<option value="{{ $image->id }}" label="../../../system/files/images/{{ $image->id }}/preview/{{ $image->image_file_name }}">{{ $image->image_file_name }}</option>
 		@endforeach
 	</select>
+
+	<h4 class="margin-top-xl">
+		{{ Lang::choice('kotoba::cms.image', 1) }}
+	</h4>
+
+	<hr>
+
+	<div id="imagePreview">
+		<img src="" name="image-swap" />
+	</div>
+
+<br>
 
 
 	<h3 class="margin-top-xl">
@@ -194,20 +269,6 @@ function setImage(select){
 		@endforeach
 	</select>
 
-
-</div>
-</div><!-- ./ col-6 -->
-<div class="col-sm-6">
-<div class="padding">
-
-
-	<h3 class="panel-title">
-		{{ Lang::choice('kotoba::cms.image', 1) }}
-	</h3>
-
-	<hr>
-
-	<img src="" name="image-swap" />
 
 {{--
 	<div class="form-group">
