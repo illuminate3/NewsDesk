@@ -53,6 +53,13 @@ Route::group(['prefix' => 'newsdesk'], function() {
 Route::group(['prefix' => 'admin'], function() {
 
 // Controllers
+
+	Route::get('news/repair', array(
+		'uses'=>'NewsController@repairTree'
+		));
+
+// Resources
+
 	Route::resource('news', 'NewsController');
 	Route::resource('news_statuses', 'NewsStatusesController');
 

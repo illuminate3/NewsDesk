@@ -34,6 +34,10 @@ oTable =
 		<i class="fa fa-plus fa-fw"></i>
 		{{ trans('kotoba::button.new') }}
 	</a>
+	<a href="/admin/news/repair" class="btn btn-danger" title="{{ trans('kotoba::button.repair') }}">
+		<i class="fa fa-wrench fa-fw"></i>
+		{{ trans('kotoba::button.repair') }}
+	</a>
 	</p>
 	<i class="fa fa-paperclip fa-lg"></i>
 		{{ Lang::choice('kotoba::cms.article', 2) }}

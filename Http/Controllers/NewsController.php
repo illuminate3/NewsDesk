@@ -191,13 +191,54 @@ class NewsController extends NewsDeskController {
 	 * @param  int  $id
 	 * @return Response
 	 */
+// 	public function destroy($id)
+// 	{
+// //dd($id);
+// 		News::find($id)->delete();
+//
+// 		Flash::success( trans('kotoba::cms.success.news_delete') );
+// 		return redirect('admin/news');
+// 	}
 	public function destroy($id)
 	{
-//dd($id);
+		$node = News::find($id);
+		$parent = $node->parent()->get();
+		$children = $node->children()->get();
+//dd($parent);
+
+		foreach($node->getImmediateDescendants() as $descendant) {
+//			print_r($descendant->title . '<br>');
+			$descendant->makeSiblingOf($node);
+		}
+
 		News::find($id)->delete();
 
-		Flash::success( trans('kotoba::cms.success.news_delete') );
+		if ( News::isValidNestedSet() == false ) {
+			News::rebuild();
+		}
+
+		Flash::success( trans('kotoba::cms.success.category_delete') );
 		return redirect('admin/news');
+	}
+
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function repairTree()
+	{
+
+		if ( News::isValidNestedSet() == false ) {
+			News::rebuild();
+			Flash::success( trans('kotoba::cms.success.repaired') );
+			return redirect('admin/news');
+		}
+
+			Flash::info( trans('kotoba::cms.error.repair') );
+			return redirect('admin/news');
+
 	}
 
 
