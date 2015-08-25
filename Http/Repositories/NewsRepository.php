@@ -20,6 +20,7 @@ use Auth;
 use Cache;
 use Config;
 use DB;
+use Input;
 use Lang;
 use Route;
 use Session;
@@ -131,49 +132,7 @@ class NewsRepository extends BaseRepository {
 	 */
 	public function edit($id)
 	{
-		$news = $this->model->with('images', 'documents')->find($id);
-//		$news = $this->model->find($id)->images->documents;
-//dd($news);
-
-		$lang = Session::get('locale');
-		$locale_id = $this->locale_repo->getLocaleID($lang);
-//dd($locale_id);
-
-//		$articlelist = $this->getParents( $exceptId = $this->id, $locales );
-
-// 		$articlelist = $this->getParents($locale_id, $id);
-// 		$articlelist = array('' => trans('kotoba::cms.no_parent')) + $articlelist;
-//dd($articlelist);
-		$all_articlelist = $this->getParents($locale_id, null);
-		$articlelist = array('' => trans('kotoba::cms.no_parent'));
-		$articlelist = new Collection($articlelist);
-		$articlelist = $articlelist->merge($all_articlelist);
-
-		$users = $this->getUsers();
-		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
-
-		$news_statuses = $this->getNewsStatuses($locale_id);
-		$news_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.news_status', 1) ) + $news_statuses;
-
-// 		$list_images = $this->getListImages();
-// 		$list_images = array('' => trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) ) + $list_images;
-
-		$get_images = $this->getImages();
-//dd($images);
-
-		$get_documents = $this->getDocuments();
-
-//		$user_id = Auth::user()->id;
-
-		return compact(
-			'articlelist',
-			'get_documents',
-			'get_images',
-			'lang',
-			'news',
-			'news_statuses',
-			'users'
-			);
+		//
 	}
 
 
@@ -228,8 +187,8 @@ class NewsRepository extends BaseRepository {
 
 		$lang = Session::get('locale');
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
-//dd($locale_id);
-//		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
+
+		$slug = Str::slug($input['title_'.$app_locale_id]);
 
 		$values = [
 			'class'						=> $class,
@@ -240,12 +199,15 @@ class NewsRepository extends BaseRepository {
 			'publish_start'				=> $publish_start,
 			'order'						=> $input['order'],
 			'news_status_id'			=> $input['news_status_id'],
-			'slug'						=> Str::slug($input['title_'.$app_locale_id]),
+			'slug'						=> $slug,
 			'user_id'					=>  $input['user_id']
 		];
 //dd($values);
 
 		$news = News::create($values);
+//		$last_insert_id = DB::getPdo()->lastInsertId();
+		$last_insert_id = $this->getNewsID($slug);
+//dd($last_insert_id);
 
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
@@ -270,6 +232,20 @@ class NewsRepository extends BaseRepository {
 		$this->manageBaum($input['parent_id'], null);
 
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
+
+
+		$document_id = Input::get('document_id');
+		if ( $document_id != null ) {
+			$this->attachDocument($last_insert_id, $document_id);
+		}
+//dd($document_id);
+
+		$image_id = Input::get('image_id');
+		if ( $image_id != null ) {
+			$this->attachImage($last_insert_id, $image_id);
+		}
+
+
 		return;
 	}
 
@@ -380,7 +356,7 @@ class NewsRepository extends BaseRepository {
 
 	public function attachDocument($id, $document_id)
 	{
-//dd($image_id);
+//dd($id);
 		$news = $this->model->find($id);
 		$news->documents()->attach($document_id);
 	}
@@ -404,6 +380,21 @@ class NewsRepository extends BaseRepository {
 //dd($image_id);
 		$image = $this->model->find($id)->images()->detach();
 	}
+
+
+	public function getNewsID($slug)
+	{
+
+		$id = DB::table('news')
+			->where('slug', '=', $slug)
+			->pluck('id');
+
+		return $id;
+	}
+
+
+
+
 
 
 	public function getImages()
@@ -441,16 +432,6 @@ class NewsRepository extends BaseRepository {
 		return $news_statuses;
 	}
 
-
-	public function getNewsID($name)
-	{
-
-		$id = DB::table('news')
-			->where('name', '=', $name)
-			->pluck('id');
-
-		return $id;
-	}
 
 //	public function getParents($exceptId, $locale)
 	public function getParents($locale_id, $id)

@@ -13,11 +13,13 @@ use App\Modules\NewsDesk\Http\Requests\NewsCreateRequest;
 use App\Modules\NewsDesk\Http\Requests\NewsUpdateRequest;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 
 use Cache;
 //use Datatables;
 use Flash;
+use Lang;
 use Route;
 use Session;
 use Theme;
@@ -34,11 +36,13 @@ class NewsController extends NewsDeskController {
 
 	public function __construct(
 			LocaleRepository $locale_repo,
-			NewsRepository $news
+			News $news,
+			NewsRepository $news_repo
 		)
 	{
 		$this->locale_repo = $locale_repo;
 		$this->news = $news;
+		$this->news_repo = $news_repo;
 // middleware
 		parent::__construct();
 // middleware
@@ -59,7 +63,7 @@ class NewsController extends NewsDeskController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-		$news = $this->news->all();
+		$news = $this->news_repo->all();
 //		$news = News::getNestedList('title', 'id', '>> ');
 //dd($news);
 
@@ -85,7 +89,7 @@ class NewsController extends NewsDeskController {
 	 */
 	public function create()
 	{
-		return Theme::View('modules.newsdesk.news.create',  $this->news->create());
+		return Theme::View('modules.newsdesk.news.create',  $this->news_repo->create());
 	}
 
 
@@ -100,7 +104,7 @@ class NewsController extends NewsDeskController {
 	{
 //dd($request);
 
-		$this->news->store($request->all());
+		$this->news_repo->store($request->all());
 		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.news_create') );
@@ -116,7 +120,7 @@ class NewsController extends NewsDeskController {
 	 */
 	public function show($id)
 	{
-// 		$news = $this->news->findOrFail($id);
+// 		$news = $this->news_repo->findOrFail($id);
 //
 // 		return View::make('HR::news.show', compact('content'));
 	}
@@ -130,22 +134,62 @@ class NewsController extends NewsDeskController {
 	 */
 	public function edit($id)
 	{
+		$news = $this->news->with('images', 'documents')->find($id);
+//		$news = $this->news->find($id)->images->documents;
+//dd($news);
+
+		$lang = Session::get('locale');
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+
+//		$articlelist = $this->getParents( $exceptId = $this->id, $locales );
+
+// 		$articlelist = $this->getParents($locale_id, $id);
+// 		$articlelist = array('' => trans('kotoba::cms.no_parent')) + $articlelist;
+//dd($articlelist);
+		$all_articlelist = $this->news_repo->getParents($locale_id, null);
+		$articlelist = array('' => trans('kotoba::cms.no_parent'));
+		$articlelist = new Collection($articlelist);
+		$articlelist = $articlelist->merge($all_articlelist);
+
+		$users = $this->news_repo->getUsers();
+		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+
+		$news_statuses = $this->news_repo->getNewsStatuses($locale_id);
+		$news_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.news_status', 1) ) + $news_statuses;
+
+// 		$list_images = $this->getListImages();
+// 		$list_images = array('' => trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) ) + $list_images;
+
+		$get_images = $this->news_repo->getImages();
+//dd($images);
+
+		$get_documents = $this->news_repo->getDocuments();
+
+//		$user_id = Auth::user()->id;
+
 		$modal_title = trans('kotoba::general.command.delete');
 		$modal_body = trans('kotoba::general.ask.delete');
 		$modal_route = 'admin.news.destroy';
 		$modal_id = $id;
 //		$model = '$news';
 		$model = 'news';
-//dd($model);
+//dd($modal_title);
 
 		return Theme::View('modules.newsdesk.news.edit',
-			$this->news->edit($id),
-				compact(
-					'modal_title',
-					'modal_body',
-					'modal_route',
-					'modal_id',
-					'model'
+			compact(
+				'articlelist',
+				'get_documents',
+				'get_images',
+				'lang',
+				'news',
+				'news_statuses',
+				'users',
+				'modal_title',
+				'modal_body',
+				'modal_route',
+				'modal_id',
+				'model'
 			));
 	}
 
@@ -163,20 +207,20 @@ class NewsController extends NewsDeskController {
 	{
 //dd($request);
 
-		$this->news->update($request->all(), $id);
+		$this->news_repo->update($request->all(), $id);
 		Cache::flush();
 
 		$document_id = Input::get('document_id');
-		$this->news->detachDocument($id, $document_id);
+		$this->news_repo->detachDocument($id, $document_id);
 		if ( $document_id != null ) {
-			$this->news->attachDocument($id, $document_id);
+			$this->news_repo->attachDocument($id, $document_id);
 		}
 //dd($document_id);
 
 		$image_id = Input::get('image_id');
-		$this->news->detachImage($id, $image_id);
+		$this->news_repo->detachImage($id, $image_id);
 		if ( $image_id != null ) {
-			$this->news->attachImage($id, $image_id);
+			$this->news_repo->attachImage($id, $image_id);
 		}
 
 

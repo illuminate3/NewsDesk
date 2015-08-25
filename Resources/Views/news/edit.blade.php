@@ -237,7 +237,7 @@ function setImage(select){
 
 	<hr>
 
-	<select id="image_select" name="image_id" class="form-control chosen-select" onchange="setImage(this);">
+	<select id="image_select" name="image_id[]" class="form-control chosen-select" onchange="setImage(this);">
 		<option value="" label="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
 		@foreach($get_images as $image)
 			<option value="{{ $image->id }}" label="../../../system/files/images/{{ $image->id }}/preview/{{ $image->image_file_name }}">{{ $image->image_file_name }}</option>
@@ -468,7 +468,18 @@ function setImage(select){
 
 </div>
 
+
+
 {!! Form::close() !!}
 
+
 </div> <!-- ./ row -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	@include($activeTheme . '::' . '_partials.modal')
+</div>
+
+
 @stop
