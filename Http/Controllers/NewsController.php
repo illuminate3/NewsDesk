@@ -210,19 +210,21 @@ class NewsController extends NewsDeskController {
 		$this->news_repo->update($request->all(), $id);
 		Cache::flush();
 
-		$document_id = Input::get('document_id');
-		$this->news_repo->detachDocument($id, $document_id);
-		if ( $document_id != null ) {
-			$this->news_repo->attachDocument($id, $document_id);
-		}
-//dd($document_id);
-
-		$image_id = Input::get('image_id');
-		$this->news_repo->detachImage($id, $image_id);
-		if ( $image_id != null ) {
-			$this->news_repo->attachImage($id, $image_id);
+		if ( Input::get('previous_document_id') == null ) {
+			$document_id = Input::get('document_id');
+			if ( $document_id != null ) {
+				$this->news_repo->detachDocument($id, $document_id);
+				$this->news_repo->attachDocument($id, $document_id);
+			}
 		}
 
+		if ( Input::get('previous_image_id') == null ) {
+			$image_id = Input::get('image_id');
+			if ( $image_id != null ) {
+				$this->news_repo->detachImage($id, $image_id);
+				$this->news_repo->attachImage($id, $image_id);
+			}
+		}
 
 		Flash::success( trans('kotoba::cms.success.news_update') );
 		return redirect('admin/news');

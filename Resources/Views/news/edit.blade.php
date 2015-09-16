@@ -168,6 +168,7 @@ function setImage(select){
 	@if ( count($news->images) )
 		@foreach($news->images as $image)
 
+		{!! Form::hidden('previous_image_id', $image->id) !!}
 		<div class="thumbnail">
 			<img src="<?= $image->image->url('preview') ?>" class="img-rounded">
 			<div class="caption">
@@ -209,6 +210,7 @@ function setImage(select){
 			</thead>
 			<tbody>
 				@foreach($news->documents as $document)
+				{!! Form::hidden('previous_document_id', $document->id) !!}
 				<tr>
 					<td>{{ $document->user_id }}</td>
 					<td>{{ $document->document_file_name }}</td>
@@ -239,8 +241,8 @@ function setImage(select){
 
 	<select id="image_select" name="image_id[]" class="form-control chosen-select" onchange="setImage(this);">
 		<option value="" label="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
-		@foreach($get_images as $image)
-			<option value="{{ $image->id }}" label="../../../system/files/images/{{ $image->id }}/preview/{{ $image->image_file_name }}">{{ $image->image_file_name }}</option>
+		@foreach($get_images as $get_image)
+			<option value="{{ $get_image->id }}" label="../../../system/files/images/{{ $get_image->id }}/preview/{{ $get_image->image_file_name }}">{{ $get_image->image_file_name }}</option>
 		@endforeach
 	</select>
 

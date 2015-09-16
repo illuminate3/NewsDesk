@@ -245,6 +245,11 @@ class NewsRepository extends BaseRepository {
 			$this->attachImage($last_insert_id, $image_id);
 		}
 
+		$news = News::find(last_insert_id);
+		$values = [
+			'image_id'					=> $image_id
+		];
+		$news->update($values);
 
 		return;
 	}
@@ -301,6 +306,13 @@ class NewsRepository extends BaseRepository {
 			$is_published = 1;
 		}
 
+		if ( isset($input['previous_image_id']) ) {
+			$image_id = $input['previous_image_id'];
+		} else {
+			$image_id = null;
+		}
+
+
 		$news = News::find($id);
 
 		$lang = Session::get('locale');
@@ -309,6 +321,7 @@ class NewsRepository extends BaseRepository {
 
 		$values = [
 			'class'						=> $class,
+			'image_id'					=> $image_id,
 			'is_banner'					=> $is_banner,
 			'is_featured'				=> $is_featured,
 			'is_timed'					=> $is_timed,

@@ -44,6 +44,8 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 // DEFINE Fillable ---------------------------------------------------------
 	protected $fillable = [
  		'image',
+ 		'image_id',
+ 		'is_banner',
 		'is_featured',
 		'is_timed',
 		'is_navigation',
