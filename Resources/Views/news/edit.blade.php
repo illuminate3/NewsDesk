@@ -31,10 +31,8 @@ jQuery(document).ready(function($) {
 
 CKEDITOR.replace( 'ckeditor' );
 CKEDITOR.editorConfig = function( config ) {
-	config.extraAllowedNews = 'div(*)';
-	config.extraAllowedContent = 'ul(*)';
 	config.allowedContent=true;
-	config.filebrowserBrowseUrl = '/elfinder/ckeditor';
+	config.extraAllowedContent = 'p(*)[*]{*};div(*)[*]{*};li(*)[*]{*};ul(*)[*]{*}';
 };
 
 function setImage(select){
