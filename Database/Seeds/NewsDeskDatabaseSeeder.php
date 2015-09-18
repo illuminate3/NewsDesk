@@ -6,7 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
 
-class NewsDeskDatabaseSeeder extends Seeder {
+class NewsDeskDatabaseSeeder extends Seeder
+{
 
 	/**
 	 * Run the database seeds.
@@ -17,9 +18,11 @@ class NewsDeskDatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('App\Modules\NewsDesk\Database\Seeds\ModuleSeeder');
+		$this->call('App\Modules\NewsDesk\Database\Seeds\ModulePermissionsSeeder');
+		$this->call('App\Modules\NewsDesk\Database\Seeds\ModuleLinksSeeder');
 		$this->call('App\Modules\NewsDesk\Database\Seeds\NewsStatusesSeeder');
 
 	}
+
 
 }

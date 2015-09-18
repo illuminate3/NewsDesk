@@ -7,30 +7,35 @@ Use DB;
 use Schema;
 
 
-class ModuleSeeder extends Seeder {
+class ModuleSeeder extends Seeder
+{
+
 
 	public function run()
 	{
 
-// Permissions -------------------------------------------------------------
-		$permissions = array(
-			[
-				'name'				=> 'Manage NewsDesk',
-				'slug'				=> 'manage_newsdesk',
-				'description'		=> 'Give permission to user to manage the NewsDesk system'
-			],
-		 );
+		$cms_id = DB::table('menus')
+			->where('name', '=', 'cms')
+			->pluck('id');
 
-		if (Schema::hasTable('permissions'))
-		{
-			DB::table('permissions')->insert( $permissions );
+		$settings_id = DB::table('menus')
+			->where('name', '=', 'settings')
+			->pluck('id');
+
+		if ($cms_id == null) {
+			$cms_id = 1;
 		}
 
+		if ($settings_id == null) {
+			$settings_id = 1;
+		}
+
+
 // Links -------------------------------------------------------------------
-// Locales
+// news
 
 		$link_names = array([
-			'menu_id'				=> 1, // admin menu
+			'menu_id'				=> $cms_id,
 			'position'				=> 3,
 		]);
 
@@ -58,9 +63,9 @@ class ModuleSeeder extends Seeder {
 			DB::table('menulink_translations')->insert( $ink_name_trans );
 		}
 
-// Settings
+// news statuses
 		$link_names = array([
-			'menu_id'				=> 1, // admin menu
+			'menu_id'				=> $settings_id,
 			'position'				=> 7,
 		]);
 
@@ -89,5 +94,6 @@ class ModuleSeeder extends Seeder {
 		}
 
 	} // run
+
 
 }
