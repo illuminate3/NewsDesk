@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\NewsDesk\Database\Seeds;
+namespace App\Modules\Newsdesk\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
 
-class NewsDeskDatabaseSeeder extends Seeder
+class NewsdeskDatabaseSeeder extends Seeder
 {
 
 	/**
@@ -18,9 +18,9 @@ class NewsDeskDatabaseSeeder extends Seeder
 	{
 		Model::unguard();
 
-		$this->call('App\Modules\NewsDesk\Database\Seeds\ModulePermissionsSeeder');
-		$this->call('App\Modules\NewsDesk\Database\Seeds\ModuleLinksSeeder');
-		$this->call('App\Modules\NewsDesk\Database\Seeds\NewsStatusesSeeder');
+		$this->call('App\Modules\Newsdesk\Database\Seeds\ModulePermissionsSeeder');
+		$this->call('App\Modules\Newsdesk\Database\Seeds\ModuleLinksSeeder');
+		$this->call('App\Modules\Newsdesk\Database\Seeds\NewsStatusesSeeder');
 
 	}
 

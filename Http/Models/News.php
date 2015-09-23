@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Models;
+namespace App\Modules\Newsdesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,10 +30,10 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 
 
 // Presenter ---------------------------------------------------------------
-	protected $presenter = 'App\Modules\NewsDesk\Http\Presenters\NewsDesk';
+	protected $presenter = 'App\Modules\Newsdesk\Http\Presenters\Newsdesk';
 
 // Translation Model -------------------------------------------------------
-	protected $translator = 'App\Modules\NewsDesk\Http\Models\NewsTranslation';
+	protected $translator = 'App\Modules\Newsdesk\Http\Models\NewsTranslation';
 
 // DEFINE Hidden -----------------------------------------------------------
 	protected $hidden = [

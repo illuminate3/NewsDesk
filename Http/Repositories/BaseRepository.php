@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Repositories;
+namespace App\Modules\Newsdesk\Http\Repositories;
 
 use App\Modules\Core\Http\Models\Locale;
 

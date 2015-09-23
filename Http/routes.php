@@ -13,7 +13,7 @@ Route::pattern('news', '[0-9a-z]+');
 
 Route::group(['prefix' => 'newsdesk'], function() {
 	Route::get('welcome', [
-		'uses'=>'NewsDeskController@welcome'
+		'uses'=>'NewsdeskController@welcome'
 	]);
 });
 
@@ -39,7 +39,7 @@ Route::group(['prefix' => 'newsdesk'], function() {
 // Route::resource('news', 'ArticlesController', array('except' => array('show')));
 //
 // Route::get('{slug}', array('as' => 'news', 'uses' => 'ArticleController@show'))
-// 	->where('slug', App\Modules\NewsDesk\Http\Models\Article::$slugPattern);
+// 	->where('slug', App\Modules\Newsdesk\Http\Models\Article::$slugPattern);
 
 // Controllers
 
@@ -120,7 +120,7 @@ Route::group(array('prefix' => 'news'), function () {
 // The slug route should be registered last since it will capture any slug-like
 // route
 Route::get('{slug}', array('as' => 'news', 'uses' => 'ArticleController@show'))
-	->where('slug', App\Modules\NewsDesk\Http\Models\Article::$slugPattern);
+	->where('slug', App\Modules\Newsdesk\Http\Models\Article::$slugPattern);
 */
 
 /*

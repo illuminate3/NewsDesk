@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Controllers;
+namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
 
-use App\Modules\NewsDesk\Http\Models\NewsStatus;
-use App\Modules\NewsDesk\Http\Repositories\NewsStatusRepository;
+use App\Modules\Newsdesk\Http\Models\NewsStatus;
+use App\Modules\Newsdesk\Http\Repositories\NewsStatusRepository;
 
 use Illuminate\Http\Request;
-use App\Modules\NewsDesk\Http\Requests\DeleteRequest;
-use App\Modules\NewsDesk\Http\Requests\NewsStatusCreateRequest;
-use App\Modules\NewsDesk\Http\Requests\NewsStatusUpdateRequest;
+use App\Modules\Newsdesk\Http\Requests\DeleteRequest;
+use App\Modules\Newsdesk\Http\Requests\NewsStatusCreateRequest;
+use App\Modules\Newsdesk\Http\Requests\NewsStatusUpdateRequest;
 
 use Datatables;
 use Flash;
@@ -18,7 +18,7 @@ use Session;
 use Theme;
 
 
-class NewsStatusesController extends NewsDeskController {
+class NewsStatusesController extends NewsdeskController {
 
 	/**
 	 * Status Repository

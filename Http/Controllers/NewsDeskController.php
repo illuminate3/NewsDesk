@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Controllers;
+namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
 use Theme;
 
 
-class NewsDeskController extends Controller
+class NewsdeskController extends Controller
 {
 
 
 	/**
 	 * Initializer.
 	 *
-	 * @return \NewsDeskController
+	 * @return \NewsdeskController
 	 */
 	public function __construct()
 	{

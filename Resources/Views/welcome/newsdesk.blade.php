@@ -24,11 +24,11 @@
 			</a>
 			<div class="title">
 				<a href="/">
-					NewsDesk
+					Newsdesk
 				</a>
 			</div>
 			<div class="quote">
-				NewsDesk is a news system module for Rakko
+				Newsdesk is a news system module for Rakko
 			</div>
 		</div>
 	</div>

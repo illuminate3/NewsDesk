@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\NewsDesk\Providers;
+namespace App\Modules\Newsdesk\Providers;
 
 //use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
@@ -13,11 +13,11 @@ use Theme;
 use View;
 
 
-class NewsDeskServiceProvider extends ServiceProvider
+class NewsdeskServiceProvider extends ServiceProvider
 {
 
 	/**
-	 * Register the NewsDesk module service provider.
+	 * Register the Newsdesk module service provider.
 	 *
 	 * @return void
 	 */
@@ -34,7 +34,7 @@ class NewsDeskServiceProvider extends ServiceProvider
 
 
 	/**
-	 * Register the NewsDesk module resource namespaces.
+	 * Register the Newsdesk module resource namespaces.
 	 *
 	 * @return void
 	 */
@@ -90,8 +90,8 @@ class NewsDeskServiceProvider extends ServiceProvider
 	{
 		$app = $this->app;
 
-		$app->register('App\Modules\NewsDesk\Providers\RouteServiceProvider');
-		$app->register('App\Modules\NewsDesk\Providers\NewsMacroServiceProvider');
+		$app->register('App\Modules\Newsdesk\Providers\RouteServiceProvider');
+		$app->register('App\Modules\Newsdesk\Providers\NewsMacroServiceProvider');
 		$app->register('App\Modules\Menus\Providers\WidgetServiceProvider');
 		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');

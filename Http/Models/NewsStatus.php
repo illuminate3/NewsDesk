@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Models;
+namespace App\Modules\Newsdesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
@@ -22,10 +22,10 @@ class NewsStatus extends Model implements TranslatableContract {
 	protected $table = 'news_statuses';
 
 // Presenter ---------------------------------------------------------------
-	protected $presenter = 'App\Modules\NewsDesk\Http\Presenters\NewsDesk';
+	protected $presenter = 'App\Modules\Newsdesk\Http\Presenters\Newsdesk';
 
 // Translation Model -------------------------------------------------------
-	protected $translator = 'App\Modules\NewsDesk\Http\Models\NewsStatusTranslation';
+	protected $translator = 'App\Modules\Newsdesk\Http\Models\NewsStatusTranslation';
 
 // DEFINE Hidden -----------------------------------------------------------
 	protected $hidden = [

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\NewsDesk\Database\Seeds;
+namespace App\Modules\Newsdesk\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 Use DB;

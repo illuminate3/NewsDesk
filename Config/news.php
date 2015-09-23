@@ -2,10 +2,10 @@
 
 return [
 
-//vendor:publish --provider="App\Modules\NewsDesk\Providers\NewsDeskServiceProvider" --tag="config"
-//vendor:publish --provider="App\Modules\NewsDesk\Providers\NewsDeskServiceProvider" --tag="js"
-//vendor:publish --provider="App\Modules\NewsDesk\Providers\NewsDeskServiceProvider" --tag="plugins"
-//vendor:publish --provider="App\Modules\NewsDesk\Providers\NewsDeskServiceProvider" --tag="views"
+//vendor:publish --provider="App\Modules\Newsdesk\Providers\NewsdeskServiceProvider" --tag="config"
+//vendor:publish --provider="App\Modules\Newsdesk\Providers\NewsdeskServiceProvider" --tag="js"
+//vendor:publish --provider="App\Modules\Newsdesk\Providers\NewsdeskServiceProvider" --tag="plugins"
+//vendor:publish --provider="App\Modules\Newsdesk\Providers\NewsdeskServiceProvider" --tag="views"
 
 /*
 |--------------------------------------------------------------------------

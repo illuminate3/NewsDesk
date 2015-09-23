@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Controllers;
+namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
 
-use App\Modules\NewsDesk\Http\Models\News;
-use App\Modules\NewsDesk\Http\Repositories\NewsRepository;
+use App\Modules\Newsdesk\Http\Models\News;
+use App\Modules\Newsdesk\Http\Repositories\NewsRepository;
 
 use Illuminate\Http\Request;
-use App\Modules\NewsDesk\Http\Requests\DeleteRequest;
-use App\Modules\NewsDesk\Http\Requests\NewsCreateRequest;
-use App\Modules\NewsDesk\Http\Requests\NewsUpdateRequest;
+use App\Modules\Newsdesk\Http\Requests\DeleteRequest;
+use App\Modules\Newsdesk\Http\Requests\NewsCreateRequest;
+use App\Modules\Newsdesk\Http\Requests\NewsUpdateRequest;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Collection;
@@ -25,7 +25,7 @@ use Session;
 use Theme;
 
 
-class NewsController extends NewsDeskController {
+class NewsController extends NewsdeskController {
 
 	/**
 	 * News Repository

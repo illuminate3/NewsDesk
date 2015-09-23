@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Controllers;
+namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
 
-use App\Modules\NewsDesk\Http\Models\News;
-use App\Modules\NewsDesk\Http\Repositories\NewsRepository;
+use App\Modules\Newsdesk\Http\Models\News;
+use App\Modules\Newsdesk\Http\Repositories\NewsRepository;
 
 use Illuminate\Http\Request;
-use App\Modules\NewsDesk\Http\Requests\DeleteRequest;
+use App\Modules\Newsdesk\Http\Requests\DeleteRequest;
 use App\Http\Requests\ArticleCreateRequest;
 use App\Http\Requests\ArticleUpdateRequest;
 
@@ -24,7 +24,7 @@ use Route;
 use Theme;
 
 
-class FrontDeskController extends NewsDeskController {
+class FrontDeskController extends NewsdeskController {
 
 	public function __construct(
 			LocaleRepository $locale_repo,

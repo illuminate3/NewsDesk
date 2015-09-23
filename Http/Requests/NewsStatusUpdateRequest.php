@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Requests;
+namespace App\Modules\Newsdesk\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Config;

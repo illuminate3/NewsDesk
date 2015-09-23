@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\NewsDesk\Http\Models;
+namespace App\Modules\Newsdesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
