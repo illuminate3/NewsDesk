@@ -13,7 +13,7 @@ use Theme;
 use View;
 
 
-class NewsdeskServiceProvider extends ServiceProvider
+class NewsDeskServiceProvider extends ServiceProvider
 {
 
 	/**
