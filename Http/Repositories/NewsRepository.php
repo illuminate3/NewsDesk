@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\Newsdesk\Http\Repositories\BaseRepository as BaseRepository;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
-use App\Modules\FileX\Http\Models\Image;
-use App\Modules\FileX\Http\Models\Document;
+use App\Modules\Filex\Http\Models\Image;
+use App\Modules\Filex\Http\Models\Document;
 
 use App\Modules\Core\Http\Models\Locale;
 use App\Modules\Newsdesk\Http\Models\News;
@@ -74,28 +74,15 @@ class NewsRepository extends BaseRepository {
 		$articlelist = new Collection($articlelist);
 		$articlelist = $articlelist->merge($all_articlelist);
 
-
-
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
-//dd($users);
-//		$all_menus = $this->menu->all()->lists('name', 'id');
-// 		$all_users = $this->getUsers();
-// 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1));
-// 		$users = new Collection($users);
-// 		$users = $users->merge($all_users);
-
 
 		$news_statuses = $this->getNewsStatuses($locale_id);
 		$news_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.news_status', 1) ) + $news_statuses;
 
-
 		$get_images = $this->getImages();
-//dd($images);
 
 		$get_documents = $this->getDocuments();
-
-
 
 		$user_id = Auth::user()->id;
 

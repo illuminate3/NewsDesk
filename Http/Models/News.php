@@ -107,24 +107,18 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 // Relationships -----------------------------------------------------------
 
 // hasOne
-
-// 	public function image()
-// 	{
-// 		return $this->hasMany('App\Modules\FileX\Http\Models\Image');
-// 	}
-
 // hasMany
 // belongsTo
 // belongsToMany
 
 	public function documents()
 	{
-		return $this->belongsToMany('App\Modules\FileX\Http\Models\Document', 'document_news');
+		return $this->belongsToMany('App\Modules\Filex\Http\Models\Document', 'document_news');
 	}
 
 	public function images()
 	{
-		return $this->belongsToMany('App\Modules\FileX\Http\Models\Image', 'image_news');
+		return $this->belongsToMany('App\Modules\Filex\Http\Models\Image', 'image_news');
 	}
 
 
