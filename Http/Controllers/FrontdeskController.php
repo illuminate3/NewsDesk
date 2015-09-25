@@ -87,9 +87,32 @@ class FrontDeskController extends NewsdeskController {
 // 			$mainMenu = $mainMenu;
 // 			$secMenu = $secMenu;
 
+//		$document = $this->document->find($id);
+//		$extension = File::extension($document->document_file_name);
+		$lang = Session::get('locale');
+		$js_lang = array(
+//			'CLOSE' => trans('kotoba::button.close'),
+			'CLOSE' => "Close",
+//			'TITLE' => $document->document_file_name
+			'TITLE' => "View Document"
+		);
+
+		$modal_title = trans('kotoba::general.command.delete');
+		$modal_body = trans('kotoba::general.ask.delete');
+		$modal_route = 'admin.documents.destroy';
+		$modal_id = $article->id;
+		$model = '$document';
+
+
 		return Theme::View('modules.newsdesk.frontdesk.index',
 			compact(
-				'article'
+				'js_lang',
+				'article',
+				'modal_title',
+				'modal_body',
+				'modal_route',
+				'modal_id',
+				'model'
 			));
 		}
 		else

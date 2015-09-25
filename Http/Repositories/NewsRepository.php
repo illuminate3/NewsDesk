@@ -232,7 +232,7 @@ class NewsRepository extends BaseRepository {
 			$this->attachImage($last_insert_id, $image_id);
 		}
 
-		$news = News::find(last_insert_id);
+		$news = News::find($last_insert_id);
 		$values = [
 			'image_id'					=> $image_id
 		];

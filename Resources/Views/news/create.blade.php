@@ -26,9 +26,16 @@
 			width: "100%"
 		});
 		$('.summernote').summernote({
-			minHeight: null,             // set minimum height of editor
-			maxHeight: null,             // set maximum height of editor
-			focus: true,                 // set focus to editable area after initializing summernote
+			height: 300,				// set minimum height of editor
+			minHeight: null,			// set minimum height of editor
+			maxHeight: null,			// set maximum height of editor
+			focus: true,				// set focus to editable area after initializing summernote
+		});
+		$('.summersummary').summernote({
+			height: 100,				// set minimum height of editor
+			minHeight: null,			// set minimum height of editor
+			maxHeight: null,			// set maximum height of editor
+			focus: true,				// set focus to editable area after initializing summernote
 		});
 	});
 
@@ -82,7 +89,7 @@ function setImage(select){
 	<div role="tabpanel" class="tab-pane padding fade @if ($language->locale == $lang)in active @endif" id="lang_{{{ $language->id }}}">
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control summernote" rows="3" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
+				<textarea class="form-control summernote" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
 			</div>
 
 			<div class="form-group">
@@ -92,7 +99,7 @@ function setImage(select){
 
 			<div class="form-group">
 				<label for="summary">{{ trans('kotoba::cms.summary') }}</label>
-				<textarea class="form-control summernote" rows="3" name="{{ 'summary_'. $language->id }}" id="{{ 'summary_'. $language->id }}" placeholder="{{ trans('kotoba::cms.summary') }}"></textarea>
+				<textarea class="form-control summersummary" name="{{ 'summary_'. $language->id }}" id="{{ 'summary_'. $language->id }}" placeholder="{{ trans('kotoba::cms.summary') }}"></textarea>
 			</div>
 
 	</div><!-- ./ $lang panel -->
