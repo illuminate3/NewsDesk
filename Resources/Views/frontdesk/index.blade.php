@@ -82,24 +82,22 @@ $(function(){
 		<thead>
 			<tr>
 				<th>{{ Lang::choice('kotoba::table.document', 1) }}</th>
-				<th>{{ trans('kotoba::table.size') }}</th>
 				<th>{{ trans('kotoba::table.updated') }}</th>
-				<th>{{ Lang::choice('kotoba::table.action', 1) }}</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach($article->documents as $document)
 			<tr>
-				<td>{{ $document->document_file_name }}</td>
-				<td>{{ $document->document_file_size }}</td>
+				<td>
+					@if ( File::extension($document->document_file_name) == "pdf" )
+						<i class="fa fa-file-pdf-o fa-lg"></i>
+						<a class="view-pdf" href="{{ $document->document->url() }}">{{ $document->document_file_name }}</a>
+					@else
+						<i class="fa fa-download fa-lg"></i>
+						<a class="" href="{{ $document->document->url() }}">{{ $document->document_file_name }}</a>
+					@endif
+				</td>
 				<td>{{ $document->document_updated_at }}</td>
-<td>
-	@if ( File::extension($document->document_file_name) == "pdf" )
-		<a class="btn btn-primary btn-block view-pdf" href="{{ $document->document->url() }}">{{ trans('kotoba::button.view') }}</a>
-	@else
-		<a class="btn btn-primary btn-block" href="{{ $document->document->url() }}">{{ trans('kotoba::button.download') }}</a>
-	@endif
-</td>
 			</tr>
 			@endforeach
 		</tbody>
