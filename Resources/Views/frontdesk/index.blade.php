@@ -48,7 +48,7 @@ $(function(){
 <div class="col-sm-8 col-sm-offset-2">
 	@if ( count($article->images) )
 		@foreach($article->images as $image)
-			<img src="<?= $image->image->url('landscape') ?>" class="mg-responsive img-rounded">
+			<img src="<?= $image->image->url('landscape') ?>" class="img-responsive img-rounded">
 		@endforeach
 	@endif
 </div>
