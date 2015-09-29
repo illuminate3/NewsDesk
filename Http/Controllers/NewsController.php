@@ -17,7 +17,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 
 use Cache;
-//use Datatables;
 use Flash;
 use Lang;
 use Route;

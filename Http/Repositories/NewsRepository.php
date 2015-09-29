@@ -238,6 +238,7 @@ class NewsRepository extends BaseRepository {
 		];
 		$news->update($values);
 
+
 		return;
 	}
 
@@ -393,10 +394,6 @@ class NewsRepository extends BaseRepository {
 	}
 
 
-
-
-
-
 	public function getImages()
 	{
 		$images = DB::table('images')->get();
@@ -408,6 +405,12 @@ class NewsRepository extends BaseRepository {
 		$documents = DB::table('documents')->get();
 		return $documents;
 	}
+
+
+
+
+
+
 
 	public function getListImages()
 	{
