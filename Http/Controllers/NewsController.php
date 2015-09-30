@@ -62,7 +62,7 @@ class NewsController extends NewsdeskController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-		$news = $this->news_repo->all();
+		$news = News::all();
 //		$news = News::getNestedList('title', 'id', '>> ');
 //dd($news);
 
@@ -135,7 +135,7 @@ class NewsController extends NewsdeskController {
 	{
 		$news = $this->news->with('images', 'documents')->find($id);
 //		$news = $this->news->find($id)->images->documents;
-//dd($news);
+//dd($news->images->image_file_name);
 
 		$lang = Session::get('locale');
 		$locale_id = $this->locale_repo->getLocaleID($lang);
@@ -161,9 +161,14 @@ class NewsController extends NewsdeskController {
 // 		$list_images = array('' => trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) ) + $list_images;
 
 		$get_images = $this->news_repo->getImages();
+//		$images = $this->news_repo->getListImages();
 //dd($images);
 
 		$get_documents = $this->news_repo->getDocuments();
+		$documents = $news->documents->lists('document_file_name', 'id');
+		$allDocuments = $this->news_repo->getListDocuments();
+//dd($allDocuments);
+
 
 //		$user_id = Auth::user()->id;
 
@@ -178,8 +183,11 @@ class NewsController extends NewsdeskController {
 		return Theme::View('modules.newsdesk.news.edit',
 			compact(
 				'articlelist',
+				'documents',
+				'allDocuments',
 				'get_documents',
 				'get_images',
+//				'images',
 				'lang',
 				'news',
 				'news_statuses',
@@ -208,22 +216,6 @@ class NewsController extends NewsdeskController {
 
 		$this->news_repo->update($request->all(), $id);
 		Cache::flush();
-
-		if ( Input::get('previous_document_id') == null ) {
-			$document_id = Input::get('document_id');
-			if ( $document_id != null ) {
-				$this->news_repo->detachDocument($id, $document_id);
-				$this->news_repo->attachDocument($id, $document_id);
-			}
-		}
-
-		if ( Input::get('previous_image_id') == null ) {
-			$image_id = Input::get('image_id');
-			if ( $image_id != null ) {
-				$this->news_repo->detachImage($id, $image_id);
-				$this->news_repo->attachImage($id, $image_id);
-			}
-		}
 
 		Flash::success( trans('kotoba::cms.success.news_update') );
 		return redirect('admin/news');

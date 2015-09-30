@@ -7,6 +7,7 @@
 @stop
 
 @section('styles')
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/multi-select_v0_9_12/css/multi-select.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/bootstrap-datepicker/css/datepicker3.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.2/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
@@ -14,6 +15,7 @@
 @stop
 
 @section('scripts')
+	<script type="text/javascript" src="{{ asset('assets/vendors/multi-select_v0_9_12/js/jquery.multi-select.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/datepicker-settings.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.2/chosen.jquery.min.js') }}"></script>
@@ -22,6 +24,12 @@
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
+		$('#my-select').multiSelect(
+			{
+				selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
+				selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
+			}
+		)
 		$(".chosen-select").chosen({
 			width: "100%"
 		});
@@ -241,7 +249,7 @@ function setImage(select){
 
 	<hr>
 
-	<select id="image_select" name="image_id[]" class="form-control chosen-select" onchange="setImage(this);">
+	<select id="image_select" name="image_id" class="form-control chosen-select" onchange="setImage(this);">
 		<option value="" label="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
 		@foreach($get_images as $get_image)
 			<option value="{{ $get_image->id }}" label="../../../system/files/images/{{ $get_image->id }}/preview/{{ $get_image->image_file_name }}">{{ $get_image->image_file_name }}</option>
@@ -261,17 +269,21 @@ function setImage(select){
 <br>
 
 
-	<h3 class="margin-top-xl">
-		{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}
+	<h3>
+		<i class="fa fa-file-pdf-o fa-fw"></i>
+		{{ Lang::choice('kotoba::files.file', 2) }}
 	</h3>
 
-	<hr>
-
-	<select multiple id="file_select" name="document_id[]" class="form-control chosen-multi" data-placeholder="{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}">
-		@foreach($get_documents as $document)
-			<option value="{{ $document->id }}">{{ $document->document_file_name }}</option>
-		@endforeach
+	<select multiple="multiple" id="my-select" name="my-select[]">
+	@foreach ($allDocuments as $key => $value)
+		@if (isset($documents[$key]) )
+			<option value='{{ $key }}' selected>{{ $value }}</option>
+		@else
+			<option value='{{ $key }}'>{{ $value }}</option>
+		@endif
+	@endforeach
 	</select>
+
 
 
 {{--

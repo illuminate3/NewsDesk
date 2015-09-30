@@ -48,7 +48,7 @@ class NewsRepository extends BaseRepository {
 		)
 	{
 		$this->locale_repo = $locale_repo;
-		$this->model = $news;
+		$this->news = $news;
 	}
 
 
@@ -294,11 +294,12 @@ class NewsRepository extends BaseRepository {
 			$is_published = 1;
 		}
 
-		if ( isset($input['previous_image_id']) ) {
-			$image_id = $input['previous_image_id'];
-		} else {
-			$image_id = null;
-		}
+// 		if ( isset($input['previous_image_id']) ) {
+// 			$image_id = $input['previous_image_id'];
+// 		} else {
+// 			$image_id = null;
+// 		}
+		$image_id = $input['image_id'];
 
 
 		$news = News::find($id);
@@ -348,6 +349,36 @@ class NewsRepository extends BaseRepository {
 		$this->manageBaum($input['parent_id'], $id);
 
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
+
+// 		if ( Input::get('previous_document_id') == null ) {
+// 			$documents = Input::get('documents');
+// 			if ( $documents != null ) {
+// 				$this->news_repo->detachDocument($id, $document_id);
+// 				$this->news_repo->attachDocument($id, $document_id);
+// 			}
+// 		}
+//		$role->update($input);
+//dd($input['my-select']);
+
+		$news = $this->news->find($id);
+		if ( isset($input['my-select']) ) {
+			$news->documents()->sync($input['my-select']);
+		} else {
+			$news->documents()->detach();
+		}
+
+// 		if ( Input::get('previous_image_id') == null ) {
+// 			$image_id = Input::get('image_id');
+// 			if ( $image_id != null ) {
+// 				$this->news_repo->detachImage($id, $image_id);
+// 				$this->news_repo->attachImage($id, $image_id);
+// 			}
+// 		}
+		if ( $image_id != null ) {
+			$this->detachImage($id, $image_id);
+			$this->attachImage($id, $image_id);
+		}
+
 		return;
 	}
 
@@ -358,29 +389,42 @@ class NewsRepository extends BaseRepository {
 	public function attachDocument($id, $document_id)
 	{
 //dd($id);
-		$news = $this->model->find($id);
+		$news = $this->news->find($id);
 		$news->documents()->attach($document_id);
 	}
 
 	public function detachDocument($id, $document_id)
 	{
 //dd($image_id);
-		$document = $this->model->find($id)->documents()->detach();
+		$document = $this->news->find($id)->documents()->detach();
 	}
 
 
 	public function attachImage($id, $image_id)
 	{
 //dd($image_id);
-		$news = $this->model->find($id);
+		$news = $this->news->find($id);
 		$news->images()->attach($image_id);
 	}
 
 	public function detachImage($id, $image_id)
 	{
 //dd($image_id);
-		$image = $this->model->find($id)->images()->detach();
+		$image = $this->news->find($id)->images()->detach();
 	}
+
+
+	public function syncDocuments($documents, $id)
+	{
+//dd($documents);
+		return $this->news->documents()->sync($documents);
+	}
+
+	public function syncImages(array $images = array())
+	{
+		return $this->news->images()->sync($images);
+	}
+
 
 
 	public function getNewsID($slug)
@@ -400,9 +444,21 @@ class NewsRepository extends BaseRepository {
 		return $images;
 	}
 
+	public function getListImages()
+	{
+		$images = DB::table('images')->lists('image_file_name', 'id');
+		return $images;
+	}
+
 	public function getDocuments()
 	{
 		$documents = DB::table('documents')->get();
+		return $documents;
+	}
+
+	public function getListDocuments()
+	{
+		$documents = DB::table('documents')->lists('document_file_name', 'id');
 		return $documents;
 	}
 
@@ -411,12 +467,6 @@ class NewsRepository extends BaseRepository {
 
 
 
-
-	public function getListImages()
-	{
-		$images = DB::table('images')->lists('image_file_name', 'id');
-		return $images;
-	}
 
 	public function getUsers()
 	{
