@@ -61,6 +61,8 @@ class NewsMacroServiceProvider extends ServiceProvider
 
 		function newsTable($node, $lang) {
 //dd($node);
+//		$lang = Session::get('locale');
+		$locale_id = $this->locale_repo->getLocaleID($lang);
 
 			$title = $node->translate($lang)->title;
 			if ($node['depth'] > 0) {
@@ -83,7 +85,7 @@ class NewsMacroServiceProvider extends ServiceProvider
 
 				$html .= '<td>' . $node['order'] . '</td>';
 
-				$html .= '<td>' . $node->present()->news_status($node->news_status_id) . '</td>';
+				$html .= '<td>' . $node->present()->news_status($node->news_status_id, $locale_id) . '</td>';
 
 				$html .= '<td>' . $node->present()->isBanner($node->is_banner) . '</td>';
 

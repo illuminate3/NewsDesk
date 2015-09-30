@@ -35,12 +35,12 @@ class Newsdesk extends Presenter {
 	 *
 	 * @return string
 	 */
-	public function news_status($news_status_id)
+	public function news_status($news_status_id, $locale_id)
 	{
 //dd($news_status_id);
-//		return $news_status_id ? trans('kotoba::general.active') : trans('kotoba::general.deactivated');
 		$news_status = DB::table('news_status_translations')
 			->where('id', '=', $news_status_id)
+			->where('locale_id', '=', $locale_id, 'AND')
 			->pluck('name');
 
 		return $news_status;
