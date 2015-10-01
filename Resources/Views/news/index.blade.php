@@ -63,7 +63,7 @@ oTable =
 	</thead>
 	<tbody>
 		@foreach($list as $item)
-			{!! Html::newsNodes($item, $lang) !!}
+			{!! Html::newsNodes($item, $lang, $locale_id) !!}
 		@endforeach
 	</tbody>
 

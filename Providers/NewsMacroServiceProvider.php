@@ -59,10 +59,9 @@ class NewsMacroServiceProvider extends ServiceProvider
 	}
 
 
-		function newsTable($node, $lang) {
+		function newsTable($node, $lang, $locale_id) {
 //dd($node);
-//		$lang = Session::get('locale');
-		$locale_id = $this->locale_repo->getLocaleID($lang);
+//		$locale_id = $this->locale_repo->getLocaleID($lang);
 
 			$title = $node->translate($lang)->title;
 			if ($node['depth'] > 0) {
@@ -102,7 +101,7 @@ class NewsMacroServiceProvider extends ServiceProvider
 				$html .= '</tr>';
 
 				foreach($node['children'] as $child) {
-					$html .= newsTable($child, $lang);
+					$html .= newsTable($child, $lang, $locale_id);
 				}
 
 			}
@@ -115,8 +114,8 @@ class NewsMacroServiceProvider extends ServiceProvider
 		return renderNode($nodes, $mode);
 	});
 
-	Html::macro('newsNodes', function($nodes, $lang) {
-		return newsTable($nodes, $lang);
+	Html::macro('newsNodes', function($nodes, $lang, $locale_id) {
+		return newsTable($nodes, $lang, $locale_id);
 	});
 
 
