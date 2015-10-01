@@ -485,7 +485,6 @@ function setImage(select){
 </div>
 
 
-
 {!! Form::close() !!}
 
 
