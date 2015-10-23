@@ -92,7 +92,9 @@ class NewsdeskServiceProvider extends ServiceProvider
 
 		$app->register('App\Modules\Newsdesk\Providers\RouteServiceProvider');
 		$app->register('App\Modules\Newsdesk\Providers\NewsMacroServiceProvider');
-		$app->register('App\Modules\Menus\Providers\WidgetServiceProvider');
+		$app->register('App\Modules\Newsdesk\Providers\WidgetServiceProvider');
+		$app->register('App\Modules\Newsdesk\Providers\ViewComposerServiceProvider');
+
 		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');
 		$app->register('Barryvdh\Elfinder\ElfinderServiceProvider');
