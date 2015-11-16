@@ -36,7 +36,7 @@ class ModuleLinksSeeder extends Seeder
 
 		$link_names = array([
 			'menu_id'				=> $cms_id,
-			'status'				=> 1,
+			'status_id'				=> 1,
 			'position'				=> 3,
 		]);
 
@@ -53,6 +53,7 @@ class ModuleLinksSeeder extends Seeder
 
 		$ink_name_trans = array([
 			'title'					=> 'News',
+			'status'				=> 1,
 			'url'					=> '/admin/news',
 			'menulink_id'			=> $last_insert_id,
 			'locale_id'				=> $locale_id // English ID
@@ -66,8 +67,8 @@ class ModuleLinksSeeder extends Seeder
 // news statuses
 		$link_names = array([
 			'menu_id'				=> $settings_id,
-			'status'				=> 1,
-			'position'				=> 7,
+			'status_id'				=> 1,
+			'position'				=> 7
 		]);
 
 		if (Schema::hasTable('menulinks'))
@@ -83,6 +84,7 @@ class ModuleLinksSeeder extends Seeder
 
 		$ink_name_trans = array([
 			'title'					=> 'News Statuses',
+			'status'				=> 1,
 			'url'					=> '/admin/news_statuses',
 			'menulink_id'			=> $last_insert_id,
 			'locale_id'				=> $locale_id // English ID
