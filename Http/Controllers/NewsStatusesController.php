@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
@@ -16,7 +15,6 @@ use Datatables;
 use Flash;
 use Session;
 use Theme;
-
 
 class NewsStatusesController extends NewsdeskController {
 

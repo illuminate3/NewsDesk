@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Repositories;
 
 use Illuminate\Support\Collection;
@@ -25,7 +24,6 @@ use Lang;
 use Route;
 use Session;
 use Illuminate\Support\Str;
-
 
 class NewsRepository extends BaseRepository {
 

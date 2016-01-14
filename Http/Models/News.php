@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +16,6 @@ use Cache;
 use Config;
 use DB;
 use Setting;
-
 
 class News extends Node implements TranslatableContract, SluggableInterface {
 

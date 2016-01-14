@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Repositories;
 
 use App\Modules\Core\Http\Models\Locale;

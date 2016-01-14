@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
@@ -22,7 +21,6 @@ use Lang;
 use Route;
 use Session;
 use Theme;
-
 
 class NewsController extends NewsdeskController {
 

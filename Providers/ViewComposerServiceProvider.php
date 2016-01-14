@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -10,7 +9,6 @@ use DB;
 use Cache;
 use Schema;
 use View;
-
 
 class ViewComposerServiceProvider extends ServiceProvider
 {

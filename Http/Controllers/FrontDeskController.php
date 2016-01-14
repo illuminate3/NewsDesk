@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
@@ -22,7 +21,6 @@ use Hashids\Hashids;
 use Session;
 use Route;
 use Theme;
-
 
 class FrontDeskController extends NewsdeskController {
 

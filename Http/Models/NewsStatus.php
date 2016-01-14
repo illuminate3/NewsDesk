@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,7 +6,6 @@ use Laracasts\Presenter\PresentableTrait;
 
 use Vinkla\Translator\Translatable;
 use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
-
 
 class NewsStatus extends Model implements TranslatableContract {
 

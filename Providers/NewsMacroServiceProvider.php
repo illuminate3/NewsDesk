@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Modules\Newsdesk\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 use Html;
 use Lang;
-
 
 class NewsMacroServiceProvider extends ServiceProvider
 {

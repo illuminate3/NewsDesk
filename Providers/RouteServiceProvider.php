@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Modules\Newsdesk\Providers;
 
 use Caffeinated\Modules\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
-
 
 class RouteServiceProvider extends ServiceProvider
 {

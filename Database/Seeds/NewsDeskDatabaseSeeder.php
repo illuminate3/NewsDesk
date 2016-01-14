@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Modules\Newsdesk\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-
 
 class NewsdeskDatabaseSeeder extends Seeder
 {

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Providers;
 
 //use Illuminate\Foundation\AliasLoader;
@@ -11,7 +10,6 @@ use Lang;
 use Menu;
 use Theme;
 use View;
-
 
 class NewsdeskServiceProvider extends ServiceProvider
 {

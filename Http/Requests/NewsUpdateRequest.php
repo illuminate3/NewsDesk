@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Config;
-
 
 class NewsUpdateRequest extends FormRequest {
 

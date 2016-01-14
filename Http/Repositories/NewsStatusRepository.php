@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Newsdesk\Http\Repositories;
 
 use App\Modules\Newsdesk\Http\Models\NewsStatus;
@@ -9,7 +8,6 @@ use Cache;
 use Config;
 use DB;
 use Session;
-
 
 class NewsStatusRepository extends BaseRepository {
 
