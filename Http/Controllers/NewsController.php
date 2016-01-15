@@ -166,6 +166,9 @@ class NewsController extends NewsdeskController {
 		$documents = $news->documents->lists('document_file_name', 'id');
 		$allDocuments = $this->news_repo->getListDocuments();
 //dd($allDocuments);
+		$get_sites = $this->news_repo->getSites();
+		$sites = $news->sites->lists('name', 'id');
+		$allSites = $this->news_repo->getListSites();
 
 
 //		$user_id = Auth::user()->id;
@@ -186,6 +189,9 @@ class NewsController extends NewsdeskController {
 				'get_documents',
 				'get_images',
 //				'images',
+				'sites',
+				'allSites',
+				'get_sites',
 				'lang',
 				'news',
 				'news_statuses',

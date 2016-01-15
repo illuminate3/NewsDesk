@@ -460,6 +460,18 @@ class NewsRepository extends BaseRepository {
 		return $documents;
 	}
 
+	public function getSites()
+	{
+		$sites = DB::table('sites')->get();
+		return $sites;
+	}
+
+	public function getListSites()
+	{
+		$sites = DB::table('sites')->lists('name', 'id');
+		return $sites;
+	}
+
 
 
 
