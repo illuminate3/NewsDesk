@@ -218,7 +218,7 @@ class NewsRepository extends BaseRepository {
 
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
 
-
+// TODO fix mulitple select documents
 		$document_id = Input::get('document_id');
 		if ( $document_id != null ) {
 			$this->attachDocument($last_insert_id, $document_id);
@@ -356,13 +356,18 @@ class NewsRepository extends BaseRepository {
 // 			}
 // 		}
 //		$role->update($input);
-//dd($input['my-select']);
+//dd($input['my-select2']);
 
 		$news = $this->news->find($id);
 		if ( isset($input['my-select']) ) {
 			$news->documents()->sync($input['my-select']);
 		} else {
 			$news->documents()->detach();
+		}
+		if ( isset($input['my-select2']) ) {
+			$news->sites()->sync($input['my-select2']);
+		} else {
+			$news->sites()->detach();
 		}
 
 // 		if ( Input::get('previous_image_id') == null ) {

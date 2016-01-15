@@ -368,7 +368,7 @@ function setImage(select){
 	</h4>
 	<hr>
 
-	<select multiple="multiple" id="my-select2" name="my-select[]">
+	<select multiple="multiple" id="my-select2" name="my-select2[]">
 		@foreach ($allSites as $key => $value)
 			@if (isset($sites[$key]) )
 				<option value='{{ $key }}' selected>{{ $value }}</option>
