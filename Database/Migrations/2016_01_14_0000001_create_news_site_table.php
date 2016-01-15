@@ -33,7 +33,7 @@ class CreateNewsSiteTable extends Migration
 			$table->integer('site_id')->unsigned()->index();
 //			$table->integer('order')->unsigned()->nullable();
 
-			$table->foreign('news_id')->references('id')->on($this->prefix.'newss')->onDelete('cascade');
+			$table->foreign('news_id')->references('id')->on($this->prefix.'news')->onDelete('cascade');
 			$table->foreign('site_id')->references('id')->on($this->prefix.'sites')->onDelete('cascade');
 
 		});

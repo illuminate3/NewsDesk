@@ -1,9 +1,8 @@
 <?php
 namespace App\Modules\Newsdesk\Providers;
 
-//use Illuminate\Foundation\AliasLoader;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-
 use App;
 use Config;
 use Lang;
@@ -69,12 +68,10 @@ class NewsdeskServiceProvider extends ServiceProvider
 			__DIR__ . '/../Resources/Assets/Views/Widgets' => public_path('themes/') . Theme::getActive() . '/views/widgets/',
 		], 'views');
 
-/*
 		AliasLoader::getInstance()->alias(
-			'Menus',
-			'TypiCMS\Modules\Menus\Facades\Facade'
+			'TenantScope',
+			'AuraIsHere\LaravelMultiTenant\Facades\TenantScopeFacade'
 		);
-*/
 
 		$app = $this->app;
 
@@ -97,7 +94,7 @@ class NewsdeskServiceProvider extends ServiceProvider
 		$app = $this->app;
 
 		$app->register('App\Modules\Newsdesk\Providers\RouteServiceProvider');
-//		$app->register('Barryvdh\Elfinder\ElfinderServiceProvider');
+		$app->register('AuraIsHere\LaravelMultiTenant\LaravelMultiTenantServiceProvider');
 	}
 
 }

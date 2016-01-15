@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
 use Laracasts\Presenter\PresentableTrait;
+use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
 
 use Vinkla\Translator\Translatable;
 use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
@@ -22,6 +23,7 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 
 	use PresentableTrait;
 	use SluggableTrait;
+	use TenantScopedModelTrait;
 	use Translatable;
 
 	protected $table = 'news';
@@ -116,6 +118,11 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 	public function images()
 	{
 		return $this->belongsToMany('App\Modules\Filex\Http\Models\Image', 'image_news');
+	}
+
+	public function sites()
+	{
+		return $this->belongsToMany('App\Modules\Campus\Http\Models\Site', 'news_sites');
 	}
 
 

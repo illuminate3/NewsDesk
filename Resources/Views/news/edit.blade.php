@@ -170,12 +170,18 @@ function setImage(select){
 <div class="padding">
 
 	<h3>
-		{{ Lang::choice('kotoba::cms.image', 2) }}
+		{{ trans('kotoba::files.media') }}
 	</h3>
 
 	<hr>
 
 	@if ( count($news->images) )
+
+		<h4>
+			{{ Lang::choice('kotoba::cms.image', 1) }}
+		</h4>
+		<hr>
+
 		@foreach($news->images as $image)
 
 		{!! Form::hidden('previous_image_id', $image->id) !!}
@@ -198,14 +204,12 @@ function setImage(select){
 		@endforeach
 	@endif
 
-
-	<h3>
-		{{ Lang::choice('kotoba::files.file', 2) }}
-	</h3>
-
-	<hr>
-
 	@if ( count($news->documents) )
+
+		<h4>
+			{{ Lang::choice('kotoba::files.file', 2) }}
+		</h4>
+		<hr>
 
 		<div class="row">
 		<table id="table" class="table table-striped table-hover">
