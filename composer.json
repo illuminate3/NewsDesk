@@ -2,18 +2,12 @@
 	"name": "rakko/newsdesk",
 	"description": "NewsDesk for Rakko",
 	"keywords": ["NewsDesk", "Articles", "Rakko"],
-	"repositories": [
-	  {
-		"type": "vcs",
-		"url": "https://github.com/JamesForks/laravel-multi-tenant"
-	  }
-	],
 	"require": {
 		"laravel/framework": "5.1.*",
 		"baum/baum": "~1.1",
 		"cviebrock/eloquent-sluggable": ">=3.0.0-beta",
 		"vespakoen/menu": "3.*",
-	  "aura-is-here/laravel-multi-tenant": "dev-master"
+		"aura-is-here/laravel-multi-tenant": "dev-master"
 	},
 	"config": {
 		"preferred-install": "dist"

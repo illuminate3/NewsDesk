@@ -24,18 +24,14 @@
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
-		$('#my-select').multiSelect(
-			{
-				selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
-				selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
-			}
-		)
-		$('#my-select2').multiSelect(
-			{
-				selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
-				selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
-			}
-		)
+		$('#my-select').multiSelect({
+			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
+			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
+		})
+		$('#my-select2').multiSelect({
+			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
+			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
+		})
 		$(".chosen-select").chosen({
 			width: "100%"
 		});
@@ -340,7 +336,7 @@ function setImage(select){
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('is_online', Lang::choice('kotoba::account.user', 1), ['class' => 'control-label']) !!}
+		{!! Form::label('user_id', Lang::choice('kotoba::account.user', 1), ['class' => 'control-label']) !!}
 		{!!
 			Form::select(
 				'user_id',
@@ -385,7 +381,7 @@ function setImage(select){
 
 	@if (Auth::user()->can('manage_admin'))
 		<div class="form-group">
-			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!!
 				Form::select(
 					'news_status_id',
@@ -399,7 +395,7 @@ function setImage(select){
 		</div>
 	@else
 		<div class="form-group">
-			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!! Form::hidden('news_status_id', 1) !!}
 			{{ Lang::choice('kotoba::cms.draft', 1) }}
 		</div>
@@ -409,7 +405,6 @@ function setImage(select){
 		{!! Form::label('order', trans('kotoba::cms.position'), $errors->first('order'), ['class' => 'control-label']) !!}
 		{!! Form::text('order', $news->order, ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
-
 
 <hr>
 
@@ -453,6 +448,7 @@ function setImage(select){
 
 		<div class="well">
 		<div class="row">
+
 			<div class="form-group">
 				<label for="is_banner" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_banner') }}</label>
 				<div class="col-sm-9">
@@ -463,8 +459,10 @@ function setImage(select){
 					</div>
 				</div>
 			</div>
-		</div>		
+
+		</div>
 		<div class="row">
+
 			<div class="form-group">
 				<label for="is_featured" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
 				<div class="col-sm-9">
@@ -475,6 +473,7 @@ function setImage(select){
 					</div>
 				</div>
 			</div>
+
 		</div>
 		</div>
 

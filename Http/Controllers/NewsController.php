@@ -170,7 +170,6 @@ class NewsController extends NewsdeskController {
 		$sites = $news->sites->lists('name', 'id');
 		$allSites = $this->news_repo->getListSites();
 
-
 //		$user_id = Auth::user()->id;
 
 		$modal_title = trans('kotoba::general.command.delete');

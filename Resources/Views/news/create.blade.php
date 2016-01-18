@@ -7,6 +7,7 @@
 @stop
 
 @section('styles')
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/multi-select_v0_9_12/css/multi-select.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/bootstrap-datepicker/css/datepicker3.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.2/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
@@ -14,6 +15,7 @@
 @stop
 
 @section('scripts')
+	<script type="text/javascript" src="{{ asset('assets/vendors/multi-select_v0_9_12/js/jquery.multi-select.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/datepicker-settings.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.2/chosen.jquery.min.js') }}"></script>
@@ -22,6 +24,14 @@
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
+		$('#my-select').multiSelect({
+			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
+			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
+		})
+		$('#my-select2').multiSelect({
+			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
+			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
+		})
 		$(".chosen-select").chosen({
 			width: "100%"
 		});
@@ -57,7 +67,7 @@ function setImage(select){
 {!! Form::open([
 	'url' => 'admin/news',
 	'method' => 'POST',
-	'class' => 'form-horizontal',
+	'class' => 'form',
 	'files' => true
 ]) !!}
 
@@ -161,57 +171,58 @@ function setImage(select){
 	<h3>
 		{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}
 	</h3>
-
 	<hr>
 
-	<select id="image_select" name="image_id" class="form-control chosen-select" onchange="setImage(this);">
-		<option value="" label="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
-		@foreach($get_images as $image)
-			<option value="{{ $image->id }}" label="../../../system/files/images/{{ $image->id }}/preview/{{ $image->image_file_name }}">{{ $image->image_file_name }}</option>
-		@endforeach
-	</select>
+	<div class="row">
+		<div class="col-sm-12">
 
-	<h4 class="margin-top-xl">
-		{{ Lang::choice('kotoba::cms.image', 1) }}
-	</h4>
+			<select id="image_select" name="image_id" class="form-control chosen-select" onchange="setImage(this);">
+				<option value="" label="">{{ trans('kotoba::general.command.select_an') . '&nbsp;' . Lang::choice('kotoba::cms.image', 1) }}</option>
+				@foreach($get_images as $image)
+					<option value="{{ $image->id }}" label="../../../system/files/images/{{ $image->id }}/preview/{{ $image->image_file_name }}">{{ $image->image_file_name }}</option>
+				@endforeach
+			</select>
 
-	<hr>
+		<h4 class="margin-top-xl">
+			{{ Lang::choice('kotoba::cms.image', 1) }}
+		</h4>
+		<hr>
 
-	<div id="imagePreview">
-		<img src="" name="image-swap" />
+		<div id="imagePreview">
+			<img src="" name="image-swap" />
+		</div>
+
+		</div>
 	</div>
-
 
 </div>
 </div><!-- ./ col-6 -->
 <div class="col-sm-6">
 <div class="padding">
 
+	<div class="row">
+		<div class="col-sm-12">
 
-	<h3 class="margin-top-xl">
-		{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}
-	</h3>
-
-	<hr>
-
-	<select multiple id="file_select" name="document_id[]" class="form-control chosen-multi" data-placeholder="{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}">
-		@foreach($get_documents as $document)
-			<option value="{{ $document->id }}">{{ $document->document_file_name }}</option>
-		@endforeach
-	</select>
-
+		<h3>
+			{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}
+		</h3>
+		<hr>
 
 {{--
-	<div class="form-group">
-		{!! Form::label('featured_image', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
-		<div class="imageTarget" rel="{{ $thumbnailPath }}"></div>
-		{!! Form::hidden('featured_image', Input::old('featured_image'), ['id' => 'featured_image', 'class' => 'form-control hidden']) !!}
-	</div>
-	<div class="form-group">
-		<a class="btn btn-default btn-rect btn-grad" id="changeFeaturedImage" data-toggle="modal" data-target="#featuredImageModal">{{ trans('kotoba::general.change') }}</a>
-		<a class="btn btn-metis-3 btn-rect btn-grad" id="clearFeaturedImage">{{ trans('kotoba::general.clear') }}</a>
-	</div>
+		<select multiple id="file_select" name="document_id[]" class="form-control chosen-multi" data-placeholder="{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}">
+			@foreach($get_documents as $document)
+				<option value="{{ $document->id }}">{{ $document->document_file_name }}</option>
+			@endforeach
+		</select>
 --}}
+		<select multiple="multiple" id="my-select" name="my-select[]">
+			@foreach($get_documents as $document)
+				<option value="{{ $document->id }}">{{ $document->document_file_name }}</option>
+			@endforeach
+		</select>
+
+		</div>
+	</div>
 
 </div>
 </div><!-- ./ col-6 -->
@@ -244,7 +255,7 @@ function setImage(select){
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('is_online', Lang::choice('kotoba::account.user', 1), ['class' => 'control-label']) !!}
+		{!! Form::label('user_id', Lang::choice('kotoba::account.user', 1), ['class' => 'control-label']) !!}
 		{!!
 			Form::select(
 				'user_id',
@@ -257,10 +268,31 @@ function setImage(select){
 		!!}
 	</div>
 
-	<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
-		{!! Form::label('class', trans('kotoba::cms.class'), $errors->first('link'), ['class' => 'control-label']) !!}
-		{!! Form::text('class', Input::old('class'), ['id' => 'class', 'class' => 'form-control', 'placeholder' => trans('kotoba::cms.class')]) !!}
-	</div>
+
+	<br>
+
+	<h4>
+		<i class="fa fa-building-o fa-fw"></i>
+		{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::hr.site', 2) }}
+	</h4>
+	<hr>
+
+	<select multiple="multiple" id="my-select2" name="my-select2[]">
+		@foreach ($allSites as $key => $value)
+			@if (isset($sites[$key]) )
+				<option value='{{ $key }}' selected>{{ $value }}</option>
+			@else
+				<option value='{{ $key }}'>{{ $value }}</option>
+			@endif
+		@endforeach
+	</select>
+
+	{{--
+		<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
+			{!! Form::label('class', trans('kotoba::cms.class'), $errors->first('link'), ['class' => 'control-label']) !!}
+			{!! Form::text('class', Input::old('class'), ['id' => 'class', 'class' => 'form-control', 'placeholder' => trans('kotoba::cms.class')]) !!}
+		</div>
+	--}}
 
 </div>
 </div><!-- ./ col-6 -->
@@ -269,7 +301,7 @@ function setImage(select){
 
 	@if (Auth::user()->can('manage_admin'))
 		<div class="form-group">
-			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!!
 				Form::select(
 					'news_status_id',
@@ -283,7 +315,7 @@ function setImage(select){
 		</div>
 	@else
 		<div class="form-group">
-			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!! Form::hidden('news_status_id', 1) !!}
 			{{ Lang::choice('kotoba::cms.draft', 1) }}
 		</div>
@@ -294,76 +326,82 @@ function setImage(select){
 		{!! Form::text('order', Input::old('order'), ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
 
+	<hr>
 
-<hr>
+	<div class="well">
 
-
-	<div class="form-group">
-		<label for="is_timed" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_timed') }}</label>
-		<div class="col-sm-9">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="is_timed" name="is_timed" value="1">
-				</label>
+		<div class="form-group">
+			<label for="is_timed" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_timed') }}</label>
+			<div class="col-sm-9">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="is_timed" name="is_timed" value="1">
+					</label>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
-		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
-		<div id="datepicker-container">
-			<div class="input-group date">
-				<input type="text" id="publish_start" name="publish_start" class="form-control">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+		<div class="form-group {{ $errors->first('publish_start') ? 'has-error' : '' }}">
+			{!! Form::label('publish_start', trans('kotoba::cms.publish_start'), $errors->first('publish_start'), ['class' => 'control-label']) !!}
+			<div id="datepicker-container">
+				<div class="input-group date">
+					<input type="text" id="publish_start" name="publish_start" class="form-control">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
-		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
-		<div id="datepicker-container">
-			<div class="input-group date">
-				<input type="text" id="publish_end" name="publish_end" class="form-control">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+		<div class="form-group {{ $errors->first('publish_end') ? 'has-error' : '' }}">
+			{!! Form::label('publish_end', trans('kotoba::cms.publish_end'), $errors->first('publish_end'), ['class' => 'control-label']) !!}
+			<div id="datepicker-container">
+				<div class="input-group date">
+					<input type="text" id="publish_end" name="publish_end" class="form-control">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				</div>
 			</div>
 		</div>
+
 	</div>
 
 
-<hr>
+		<hr>
 
+		<div class="well">
+			<div class="row">
 
-	<div class="form-group">
-		<label for="is_banner" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_banner') }}</label>
-		<div class="col-sm-9">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="is_banner" name="is_banner" value="1">
-				</label>
+				<div class="form-group">
+					<label for="is_banner" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_banner') }}</label>
+					<div class="col-sm-9">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="is_banner" name="is_banner" value="1">
+							</label>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+
+				<div class="form-group">
+					<label for="is_featured" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+					<div class="col-sm-9">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="is_featured" name="is_featured" value="1">
+							</label>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
-	</div>
 
-	<div class="form-group">
-		<label for="is_featured" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
-		<div class="col-sm-9">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="is_featured" name="is_featured" value="1">
-				</label>
-			</div>
-		</div>
-	</div>
 
 
 </div>
 </div><!-- ./ col-6 -->
 </div><!-- ./ row -->
-
-
-
-
-
 
 
 
@@ -384,26 +422,31 @@ function setImage(select){
 
 </div><!-- ./ tab panes -->
 
-<hr>
+	<hr>
 
-<div class="form-group">
-<div class="col-sm-12">
-	<input class="btn btn-success btn-block" type="submit" value="{{ trans('kotoba::button.save') }}">
-</div>
-</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<input class="btn btn-success btn-block" type="submit" value="{{ trans('kotoba::button.save') }}">
+		</div>
+	</div>
 
-<div class="row">
-<div class="col-sm-6">
-	<a href="/admin/news" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
-		<i class="fa fa-times fa-fw"></i>
-		{{ trans('kotoba::button.cancel') }}
-	</a>
-</div>
+	<br>
 
-<div class="col-sm-6">
-	<input class="btn btn-default btn-block" type="reset" value="{{ trans('kotoba::button.reset') }}">
-</div>
-</div>
+	<div class="row">
+
+		<div class="col-sm-6">
+			<a href="/admin/news" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
+				<i class="fa fa-times fa-fw"></i>
+				{{ trans('kotoba::button.cancel') }}
+			</a>
+		</div>
+
+		<div class="col-sm-6">
+			<input class="btn btn-default btn-block" type="reset" value="{{ trans('kotoba::button.reset') }}">
+		</div>
+
+	</div>
+
 
 {!! Form::close() !!}
 

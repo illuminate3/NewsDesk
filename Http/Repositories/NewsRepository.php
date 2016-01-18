@@ -84,10 +84,17 @@ class NewsRepository extends BaseRepository {
 
 		$user_id = Auth::user()->id;
 
+		$get_sites = $this->getSites();
+//		$sites = $news->sites->lists('name', 'id');
+		$allSites = $this->getListSites();
+//dd($allSites);
+
 		return compact(
 			'articlelist',
 			'get_documents',
 			'get_images',
+			'get_sites',
+			'allSites',
 			'news_statuses',
 			'users',
 			'user_id',
@@ -130,12 +137,13 @@ class NewsRepository extends BaseRepository {
 	{
 //dd($input);
 
+/*
 		if ( !isset($input['class']) ) {
 			$class = null;
 		} else {
 			$class = $input['class'];
 		}
-
+*/
 		if ( !isset($input['is_banner']) ) {
 			$is_banner = 0;
 		} else {
@@ -176,7 +184,7 @@ class NewsRepository extends BaseRepository {
 		$slug = Str::slug($input['title_'.$app_locale_id]);
 
 		$values = [
-			'class'						=> $class,
+//			'class'						=> $class,
 			'is_banner'					=> $is_banner,
 			'is_featured'				=> $is_featured,
 			'is_timed'					=> $is_timed,
@@ -219,11 +227,22 @@ class NewsRepository extends BaseRepository {
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
 
 // TODO fix mulitple select documents
-		$document_id = Input::get('document_id');
-		if ( $document_id != null ) {
-			$this->attachDocument($last_insert_id, $document_id);
-		}
+//		$document_id = Input::get('document_id');
+//		if ( $document_id != null ) {
+//			$this->attachDocument($last_insert_id, $document_id);
+//		}
 //dd($document_id);
+		$news = $this->news->find($id);
+		if ( isset($input['my-select']) ) {
+			$news->documents()->sync($input['my-select']);
+		} else {
+			$news->documents()->detach();
+		}
+		if ( isset($input['my-select2']) ) {
+			$news->sites()->sync($input['my-select2']);
+		} else {
+			$news->sites()->detach();
+		}
 
 		$image_id = Input::get('image_id');
 		if ( $image_id != null ) {
@@ -252,12 +271,13 @@ class NewsRepository extends BaseRepository {
 	{
 //dd($input);
 
+/*
 		if ( !isset($input['class']) ) {
 			$class = null;
 		} else {
 			$class = $input['class'];
 		}
-
+*/
 		if ( !isset($input['is_banner']) ) {
 			$is_banner = 0;
 		} else {
@@ -307,7 +327,7 @@ class NewsRepository extends BaseRepository {
 //dd($locale_id);
 
 		$values = [
-			'class'						=> $class,
+//			'class'						=> $class,
 			'image_id'					=> $image_id,
 			'is_banner'					=> $is_banner,
 			'is_featured'				=> $is_featured,
