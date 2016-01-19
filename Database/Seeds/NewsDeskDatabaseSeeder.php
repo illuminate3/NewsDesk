@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Newsdesk\Database\Seeds;
 
 use Illuminate\Database\Seeder;

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Newsdesk\Http\Presenters;
 
 use Laracasts\Presenter\Presenter;

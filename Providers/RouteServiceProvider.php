@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Newsdesk\Providers;
 
 use Caffeinated\Modules\Providers\RouteServiceProvider as ServiceProvider;

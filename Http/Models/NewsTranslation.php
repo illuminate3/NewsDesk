@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Newsdesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;

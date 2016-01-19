@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Http\Controllers\Controller;

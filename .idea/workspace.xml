@@ -2,12 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94e48d37-561e-45e8-9334-a4b2f6590f35" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/ModulePermissionsSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/ModulePermissionsSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/NewsStatusesSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/NewsStatusesSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/FrontDeskController.php" afterPath="$PROJECT_DIR$/Http/Controllers/FrontDeskController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/NewsController.php" afterPath="$PROJECT_DIR$/Http/Controllers/NewsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/NewsStatusesController.php" afterPath="$PROJECT_DIR$/Http/Controllers/NewsStatusesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/NewsdeskController.php" afterPath="$PROJECT_DIR$/Http/Controllers/NewsdeskController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/News.php" afterPath="$PROJECT_DIR$/Http/Models/News.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/NewsStatus.php" afterPath="$PROJECT_DIR$/Http/Models/NewsStatus.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/NewsStatusTranslation.php" afterPath="$PROJECT_DIR$/Http/Models/NewsStatusTranslation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/NewsTranslation.php" afterPath="$PROJECT_DIR$/Http/Models/NewsTranslation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Presenters/Newsdesk.php" afterPath="$PROJECT_DIR$/Http/Presenters/Newsdesk.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/BaseRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/BaseRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/NewsRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/NewsRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Views/news/create.blade.php" afterPath="$PROJECT_DIR$/Resources/Views/news/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Views/news/edit.blade.php" afterPath="$PROJECT_DIR$/Resources/Views/news/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/NewsStatusRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/NewsStatusRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/DeleteRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/DeleteRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsCreateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsCreateRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsStatusCreateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsStatusCreateRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsStatusUpdateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsStatusUpdateRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsUpdateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsUpdateRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/NewsMacroServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/NewsMacroServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/RouteServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/RouteServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/ViewComposerServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/ViewComposerServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/WidgetServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/WidgetServiceProvider.php" />
     </list>
     <ignored path="Newsdesk.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,13 +58,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="News.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="News.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Http/Models/News.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20997587">
-              <caret line="268" column="0" selection-start-line="268" selection-start-column="0" selection-end-line="268" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.875">
+              <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
               <folding>
-                <element signature="e#51#90#0#PHP" expanded="true" />
+                <element signature="e#52#91#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,13 +114,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewsController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NewsController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-95.291664">
-              <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.33386967">
+              <caret line="162" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
               <folding>
-                <marker date="1453149514000" expanded="true" signature="6942:7044" placeholder="..." />
+                <marker date="1453223507000" expanded="true" signature="6943:7045" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -121,9 +140,9 @@
         <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsStatusesController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-18.0">
-              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+              <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
               <folding>
-                <marker date="1452793655000" expanded="true" signature="4052:4154" placeholder="..." />
+                <marker date="1453223507000" expanded="true" signature="4053:4155" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -133,7 +152,7 @@
         <entry file="file://$PROJECT_DIR$/Http/Repositories/NewsRepository.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-7.9607844">
-              <caret line="140" column="33" selection-start-line="140" selection-start-column="28" selection-end-line="140" selection-end-column="33" />
+              <caret line="141" column="33" selection-start-line="141" selection-start-column="28" selection-end-line="141" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -153,7 +172,7 @@
         <entry file="file://$PROJECT_DIR$/Http/Models/NewsStatus.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -175,10 +194,10 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Http/Models/News.php" />
         <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/Http/Controllers/NewsController.php" />
         <option value="$PROJECT_DIR$/Resources/Views/news/edit.blade.php" />
         <option value="$PROJECT_DIR$/Resources/Views/news/create.blade.php" />
         <option value="$PROJECT_DIR$/Http/Repositories/NewsRepository.php" />
+        <option value="$PROJECT_DIR$/Http/Controllers/NewsController.php" />
       </list>
     </option>
   </component>
@@ -649,7 +668,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="23" width="2532" height="1413" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23614457" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944834" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -699,7 +718,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#51#90#0#PHP" expanded="true" />
+            <element signature="e#52#91#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -729,7 +748,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="213" column="20" selection-start-line="213" selection-start-column="20" selection-end-line="213" selection-end-column="20" />
           <folding>
-            <marker date="1453149514000" expanded="true" signature="6942:7044" placeholder="..." />
+            <marker date="1453223507000" expanded="true" signature="6943:7045" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -747,7 +766,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1452793655000" expanded="true" signature="4052:4154" placeholder="..." />
+            <marker date="1453223507000" expanded="true" signature="4053:4155" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -837,7 +856,7 @@
     <entry file="file://$PROJECT_DIR$/Http/Models/NewsStatus.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -884,19 +903,9 @@
     <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsStatusesController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.0">
-          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
           <folding>
-            <marker date="1452793655000" expanded="true" signature="4052:4154" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-95.291664">
-          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
-          <folding>
-            <marker date="1453149514000" expanded="true" signature="6942:7044" placeholder="..." />
+            <marker date="1453223507000" expanded="true" signature="4053:4155" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -944,17 +953,27 @@
     <entry file="file://$PROJECT_DIR$/Http/Repositories/NewsRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.9607844">
-          <caret line="140" column="33" selection-start-line="140" selection-start-column="28" selection-end-line="140" selection-end-column="33" />
+          <caret line="141" column="33" selection-start-line="141" selection-start-column="28" selection-end-line="141" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Http/Models/News.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20997587">
-          <caret line="268" column="0" selection-start-line="268" selection-start-column="0" selection-end-line="268" selection-end-column="0" />
+        <state vertical-scroll-proportion="-10.875">
+          <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
           <folding>
-            <element signature="e#51#90#0#PHP" expanded="true" />
+            <element signature="e#52#91#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33386967">
+          <caret line="162" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding>
+            <marker date="1453223507000" expanded="true" signature="6943:7045" placeholder="..." />
           </folding>
         </state>
       </provider>

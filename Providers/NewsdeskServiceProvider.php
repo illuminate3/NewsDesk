@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Newsdesk\Providers;
 
 use Illuminate\Foundation\AliasLoader;

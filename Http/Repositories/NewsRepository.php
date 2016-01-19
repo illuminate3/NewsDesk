@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Newsdesk\Http\Repositories;
 
 use Illuminate\Support\Collection;
