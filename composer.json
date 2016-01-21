@@ -6,8 +6,7 @@
 		"laravel/framework": "5.1.*",
 		"baum/baum": "~1.1",
 		"cviebrock/eloquent-sluggable": ">=3.0.0-beta",
-		"vespakoen/menu": "3.*",
-		"aura-is-here/laravel-multi-tenant": "dev-master"
+		"vespakoen/menu": "3.*"
 	},
 	"config": {
 		"preferred-install": "dist"

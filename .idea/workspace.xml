@@ -2,31 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94e48d37-561e-45e8-9334-a4b2f6590f35" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/ModulePermissionsSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/ModulePermissionsSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/NewsStatusesSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/NewsStatusesSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/FrontDeskController.php" afterPath="$PROJECT_DIR$/Http/Controllers/FrontDeskController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/NewsController.php" afterPath="$PROJECT_DIR$/Http/Controllers/NewsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/NewsStatusesController.php" afterPath="$PROJECT_DIR$/Http/Controllers/NewsStatusesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/NewsdeskController.php" afterPath="$PROJECT_DIR$/Http/Controllers/NewsdeskController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/News.php" afterPath="$PROJECT_DIR$/Http/Models/News.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/NewsStatus.php" afterPath="$PROJECT_DIR$/Http/Models/NewsStatus.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/NewsStatusTranslation.php" afterPath="$PROJECT_DIR$/Http/Models/NewsStatusTranslation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/NewsTranslation.php" afterPath="$PROJECT_DIR$/Http/Models/NewsTranslation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Presenters/Newsdesk.php" afterPath="$PROJECT_DIR$/Http/Presenters/Newsdesk.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/BaseRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/BaseRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/NewsRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/NewsRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/NewsStatusRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/NewsStatusRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/DeleteRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/DeleteRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsCreateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsCreateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsStatusCreateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsStatusCreateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsStatusUpdateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsStatusUpdateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/NewsUpdateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/NewsUpdateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/NewsMacroServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/NewsMacroServiceProvider.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/RouteServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/RouteServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/ViewComposerServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/ViewComposerServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/WidgetServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/WidgetServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
     </list>
     <ignored path="Newsdesk.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,24 +27,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2016_01_14_0000001_create_news_site_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Database/Migrations/2016_01_14_0000001_create_news_site_table.php">
+      <file leaf-file-name="News.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Http/Models/News.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.541667">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-26.0">
+              <caret line="26" column="2" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
+              <folding>
+                <element signature="e#52#91#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="News.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Http/Models/News.php">
+      <file leaf-file-name="ModuleLinksSeeder.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.875">
-              <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
-              <folding>
-                <element signature="e#52#91#0#PHP" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-0.03861625">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -114,10 +93,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewsController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NewsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33386967">
+            <state vertical-scroll-proportion="-17.291666">
               <caret line="162" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
               <folding>
                 <marker date="1453223507000" expanded="true" signature="6943:7045" placeholder="..." />
@@ -129,9 +108,21 @@
       <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/composer.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.0">
-              <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+            <state vertical-scroll-proportion="-16.0">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewsdeskServiceProvider.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-27.791666">
+              <caret line="81" column="82" selection-start-line="81" selection-start-column="82" selection-end-line="81" selection-end-column="82" />
+              <folding>
+                <element signature="e#50#88#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -161,18 +152,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewsStatus.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Http/Models/NewsStatus.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -188,16 +169,16 @@
       <list>
         <option value="$PROJECT_DIR$/Database/Migrations/2015_08_12_000010_create_news_table.php" />
         <option value="$PROJECT_DIR$/Database/Migrations/2015_08_12_000004_create_newsstatuses_table.php" />
-        <option value="$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php" />
         <option value="$PROJECT_DIR$/Config/tenant.php" />
         <option value="$PROJECT_DIR$/Database/Migrations/2016_01_14_0000001_create_news_site_table.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/Http/Models/News.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/Resources/Views/news/edit.blade.php" />
         <option value="$PROJECT_DIR$/Resources/Views/news/create.blade.php" />
         <option value="$PROJECT_DIR$/Http/Repositories/NewsRepository.php" />
         <option value="$PROJECT_DIR$/Http/Controllers/NewsController.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php" />
+        <option value="$PROJECT_DIR$/Http/Models/News.php" />
       </list>
     </option>
   </component>
@@ -667,10 +648,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="23" width="2532" height="1413" extended-state="0" />
-    <editor active="false" />
+    <frame x="1920" y="23" width="2532" height="1413" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23614457" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23614457" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944834" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -831,13 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.764706">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Database/Migrations/2015_08_12_000010_create_news_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.941176">
@@ -861,14 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Config/tenant.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3924775">
@@ -888,14 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.541667">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.0">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -958,23 +916,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.291666">
+          <caret line="162" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding>
+            <marker date="1453223507000" expanded="true" signature="6943:7045" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Providers/NewsdeskServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.791666">
+          <caret line="81" column="82" selection-start-line="81" selection-start-column="82" selection-end-line="81" selection-end-column="82" />
+          <folding>
+            <element signature="e#50#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Http/Models/News.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.875">
-          <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
+        <state vertical-scroll-proportion="-26.0">
+          <caret line="26" column="2" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
           <folding>
             <element signature="e#52#91#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Http/Controllers/NewsController.php">
+    <entry file="file://$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33386967">
-          <caret line="162" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
-          <folding>
-            <marker date="1453223507000" expanded="true" signature="6943:7045" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-0.03861625">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
