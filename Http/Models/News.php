@@ -235,6 +235,13 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $article;
 	}
 
+// Scopes --------------------------------------------------
+
+	public function scopeLocale($query, $locale_id)
+	{
+//dd($locale_id);
+		return $query->where('locale_id', '=', $locale_id);
+	}
 
 // limit
 
@@ -258,8 +265,7 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 
 	public function scopeIsPublished($query)
 	{
-		return $query
-			->where('news_status_id', '=', 2);
+		return $query->where('news_status_id', '=', 2);
 	}
 
 	public function scopeIsTimed($query)
@@ -290,14 +296,14 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		$date = date("Y-m-d");
 	//dd($date);
 	//	return $query->where('created_at', '>', $today->modify('-7 days'));
-		return $query->where('publish_end', '>=', $date);
+		return $query->where('publish_end', '>=', $date . " 23:59:59");
 	}
 
 	public function scopePublishStart($query)
 	{
 		$date = date("Y-m-d");
 	//dd($date);
-		return $query->where('publish_start', '<=', $date);
+		return $query->where('publish_start', '<=', $date . " 00:00:00");
 	}
 
 
