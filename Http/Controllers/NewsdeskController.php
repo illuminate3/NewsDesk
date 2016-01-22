@@ -8,7 +8,7 @@ use Theme;
 
 class NewsdeskController extends Controller
 {
-
+/* todo update cviebrock/eloquent-sluggable */
 
 	/**
 	 * Initializer.

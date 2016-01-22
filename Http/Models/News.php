@@ -20,7 +20,7 @@ use DB;
 use Setting;
 
 class News extends Node implements TranslatableContract, SluggableInterface {
-
+/* todo upgrade to the new vinkla/translator */
 
 	use PresentableTrait;
 	use SluggableTrait;
