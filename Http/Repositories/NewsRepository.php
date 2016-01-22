@@ -233,7 +233,7 @@ class NewsRepository extends BaseRepository {
 //			$this->attachDocument($last_insert_id, $document_id);
 //		}
 //dd($document_id);
-		$news = $this->news->find($id);
+		$news = $this->news->find($last_insert_id);
 		if ( isset($input['my-select']) ) {
 			$news->documents()->sync($input['my-select']);
 		} else {
