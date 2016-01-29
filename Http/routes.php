@@ -7,6 +7,7 @@
 */
 
 Route::pattern('news', '[0-9a-z]+');
+Route::pattern('id', '[0-9]+');
 
 // Resources
 // Controllers
@@ -18,12 +19,20 @@ Route::group(['prefix' => 'newsdesk'], function() {
 });
 
 
+/*
+Route::get('blog', 'FrontendController@get_blog');
+Route::get('blog/{any}', 'FrontendController@get_post')->where('any', '.*');
+Route::get('{page}', 'FrontendController@get_page')->where('page', '.*');
+*/
 
-// Route::group(array('before' => 'auth'), function()
-// {
-// 	\Route::get('elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
-// 	\Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
-// 	\Route::get('elfinder/ckeditor4', 'Barryvdh\Elfinder\ElfinderController@showCKeditor4');
+Route::get('/news/{news}', 'FrontDeskController@get_article')->where('news', '.*');
+Route::get('/news-archives', 'FrontDeskController@getArchives')->where('news', '.*');
+
+
+// Route::group(['prefix' => 'news'], function() {
+//
+// 	Route::get('/change/{site_id}', 'NewsdeskController@changeSite');
+//
 // });
 
 
@@ -58,6 +67,8 @@ Route::group(['prefix' => 'admin'], function() {
 		'uses'=>'NewsController@repairTree'
 		));
 
+	Route::get('/change-site/{id}', 'NewsdeskController@changeSite');
+
 // Resources
 
 	Route::resource('news', 'NewsController');
@@ -80,14 +91,6 @@ Route::group(['prefix' => 'admin'], function() {
 // 		));
 
 });
-
-/*
-Route::get('blog', 'FrontendController@get_blog');
-Route::get('blog/{any}', 'FrontendController@get_post')->where('any', '.*');
-Route::get('{page}', 'FrontendController@get_page')->where('page', '.*');
-*/
-
-Route::get('/news/{news}', 'FrontDeskController@get_article')->where('news', '.*');
 
 
 

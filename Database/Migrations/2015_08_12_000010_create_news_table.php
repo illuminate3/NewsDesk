@@ -35,15 +35,17 @@ class CreateNewsTable extends Migration
 			$table->string('slug')->nullable();
 
 
-			$table->integer('image_id')->nullable();
-			$table->string('class', 50)->nullable();
+// 			$table->integer('image_id')->nullable();
+// 			$table->string('class', 50)->nullable();
 //			$table->text('link', 255)->nullable();
 
 			$table->tinyInteger('news_status_id')->default(0);
 
+			$table->tinyInteger('is_alert')->default(0);
 			$table->tinyInteger('is_banner')->default(0);
 			$table->tinyInteger('is_featured')->default(0);
 			$table->tinyInteger('is_timed')->default(0);
+			$table->tinyInteger('is_zone')->default(0);
 
 			$table->date('publish_start')->nullable();
 			$table->date('publish_end')->nullable();

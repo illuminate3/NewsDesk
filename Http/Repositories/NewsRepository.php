@@ -138,13 +138,12 @@ class NewsRepository extends BaseRepository {
 	{
 //dd($input);
 
-/*
-		if ( !isset($input['class']) ) {
-			$class = null;
+		if ( !isset($input['is_alert']) ) {
+			$is_alert = 0;
 		} else {
-			$class = $input['class'];
+			$is_alert = $input['is_alert'];
 		}
-*/
+
 		if ( !isset($input['is_banner']) ) {
 			$is_banner = 0;
 		} else {
@@ -161,6 +160,12 @@ class NewsRepository extends BaseRepository {
 			$is_timed = 0;
 		} else {
 			$is_timed = $input['is_timed'];
+		}
+
+		if ( !isset($input['is_zone']) ) {
+			$is_zone = 0;
+		} else {
+			$is_zone = $input['is_zone'];
 		}
 
 		if ( $input['publish_end'] == '' ) {
@@ -185,10 +190,11 @@ class NewsRepository extends BaseRepository {
 		$slug = Str::slug($input['title_'.$app_locale_id]);
 
 		$values = [
-//			'class'						=> $class,
+			'is_alert'					=> $is_alert,
 			'is_banner'					=> $is_banner,
 			'is_featured'				=> $is_featured,
 			'is_timed'					=> $is_timed,
+			'is_zone'					=> $is_zone,
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
 			'order'						=> $input['order'],
@@ -272,13 +278,12 @@ class NewsRepository extends BaseRepository {
 	{
 //dd($input);
 
-/*
-		if ( !isset($input['class']) ) {
-			$class = null;
+		if ( !isset($input['is_alert']) ) {
+			$is_alert = 0;
 		} else {
-			$class = $input['class'];
+			$is_alert = $input['is_alert'];
 		}
-*/
+
 		if ( !isset($input['is_banner']) ) {
 			$is_banner = 0;
 		} else {
@@ -295,6 +300,12 @@ class NewsRepository extends BaseRepository {
 			$is_timed = 0;
 		} else {
 			$is_timed = $input['is_timed'];
+		}
+
+		if ( !isset($input['is_zone']) ) {
+			$is_zone = 0;
+		} else {
+			$is_zone = $input['is_zone'];
 		}
 
 		if ( $input['publish_end'] == '' ) {
@@ -328,11 +339,11 @@ class NewsRepository extends BaseRepository {
 //dd($locale_id);
 
 		$values = [
-//			'class'						=> $class,
-			'image_id'					=> $image_id,
+			'is_alert'					=> $is_alert,
 			'is_banner'					=> $is_banner,
 			'is_featured'				=> $is_featured,
 			'is_timed'					=> $is_timed,
+			'is_zone'					=> $is_zone,
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
 			'order'						=> $input['order'],
@@ -490,6 +501,14 @@ class NewsRepository extends BaseRepository {
 	{
 		$sites = DB::table('sites')->get();
 		return $sites;
+	}
+
+	public function getSiteName($site_id)
+	{
+		$site_name = DB::table('sites')
+			->where('id', '=', $site_id)
+			->pluck('name');
+		return $site_name;
 	}
 
 	public function getListSites()

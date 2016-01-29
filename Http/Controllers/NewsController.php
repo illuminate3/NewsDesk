@@ -17,10 +17,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 
 use Cache;
+//use Config;
 use Flash;
 use Lang;
 use Route;
 use Session;
+//use TenantScope;
 use Theme;
 
 class NewsController extends NewsdeskController {
@@ -61,19 +63,57 @@ class NewsController extends NewsdeskController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
+// Alerts
+		$alerts = News::IsAlert()->get();
+		$alert_list = News::IsAlert()->get();
+		$alert_list = $alert_list->toHierarchy();
+//dd($alerts);
+
+// Archived
+		$archives = News::IsArchived()->get();
+		$archive_list = News::IsArchived()->get();
+		$archive_list = $archive_list->toHierarchy();
+//dd($archives);
+
+
+// Draft
+		$drafts = News::IsDraft()->get();
+		$draft_list = News::IsDraft()->get();
+		$draft_list = $draft_list->toHierarchy();
+//dd($drafts);
+
+
+// Published
+		$published = News::IsPublished()->NotAlert()->get();
+		$publish_list = News::IsPublished()->NotAlert()->get();
+		$publish_list = $publish_list->toHierarchy();
+//dd($published);
+
+
+/*
 		$news = News::all();
 //		$news = News::getNestedList('title', 'id', '>> ');
-//dd($news);
-
 		$list = News::all();
 		$list = $list->toHierarchy();
 //dd($list);
-
+*/
+//		$sites = $news->sites->lists('name', 'id');
+		$cache_site_id = Cache::get('siteId');
+		$site_name = $this->news_repo->getSiteName($cache_site_id);
+//dd($site_name);
 
 		return Theme::View('modules.newsdesk.news.index',
 			compact(
-				'news',
-				'list',
+				'alerts',
+				'alert_list',
+				'archives',
+				'archive_list',
+				'drafts',
+				'draft_list',
+				'published',
+				'publish_list',
+				'site_name',
+//				'cache_site_id',
 				'lang',
 				'locale_id'
 			));

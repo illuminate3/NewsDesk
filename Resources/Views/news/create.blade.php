@@ -370,6 +370,20 @@ function setImage(select){
 			<div class="row">
 
 				<div class="form-group">
+					<label for="is_alert" class="col-sm-3 control-label">{{ Lang::choice('kotoba::general.alert', 1) }}</label>
+					<div class="col-sm-9">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="is_alert" name="is_alert" value="1">
+							</label>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+
+				<div class="form-group">
 					<label for="is_banner" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_banner') }}</label>
 					<div class="col-sm-9">
 						<div class="checkbox">
@@ -395,8 +409,21 @@ function setImage(select){
 				</div>
 
 			</div>
-		</div>
+			<div class="row">
 
+				<div class="form-group">
+					<label for="is_zone" class="col-sm-3 control-label">{{ Lang::choice('kotoba::shop.zone', 1) }}</label>
+					<div class="col-sm-9">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="is_zone" name="is_zone" value="1">
+							</label>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 
 
 </div>

@@ -54,7 +54,7 @@ class NewsStatusesSeeder extends Seeder
 		],
 		[
 			'name'					=> 'Archive',
-			'description'			=> 'Article has been archieved',
+			'description'			=> 'Article has been archived',
 			'news_status_id'		=> 4,
 			'locale_id'				=> $locale_id
 		],

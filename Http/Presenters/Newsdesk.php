@@ -55,6 +55,26 @@ class Newsdesk extends Presenter {
 	 *
 	 * @return string
 	 */
+	public function alert()
+	{
+//dd('loaded');
+		$return = '';
+
+		$alert = $this->entity->is_alert;
+//dd($featured);
+		if ( $alert == 1 ) {
+			$return = "checked";
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * featured checkbox
+	 *
+	 * @return string
+	 */
 	public function banner()
 	{
 //dd('loaded');
@@ -110,6 +130,26 @@ class Newsdesk extends Presenter {
 	}
 
 
+	/**
+	 * featured checkbox
+	 *
+	 * @return string
+	 */
+	public function zoned()
+	{
+//dd('loaded');
+		$return = '';
+
+		$zoned = $this->entity->is_zone;
+//dd($featured);
+		if ( $zoned == 1 ) {
+			$return = "checked";
+		}
+
+		return $return;
+	}
+
+
 // Is
 
 
@@ -118,12 +158,22 @@ class Newsdesk extends Presenter {
 	 *
 	 * @return string
 	 */
-	public function isBanner()
+	public function isAlert()
 	{
-
+/*
 		$return = trans('kotoba::general.yes');
-		if ( $this->entity->is_banner == 0 ) {
+		if ( $this->entity->is_alert == 0 ) {
 			$return = trans('kotoba::general.no');
+		}
+		return $return;
+*/
+		$return = '';
+		$alert = $this->entity->is_alert;
+
+		if ( $alert == 1 ) {
+			$return = '<span class="glyphicon glyphicon-ok text-success"></span>';
+		} else {
+			$return = '<span class="glyphicon glyphicon-remove text-danger"></span>';
 		}
 
 		return $return;
@@ -135,15 +185,77 @@ class Newsdesk extends Presenter {
 	 *
 	 * @return string
 	 */
+	public function isBanner()
+	{
+/*
+		$return = trans('kotoba::general.yes');
+		if ( $this->entity->is_banner == 0 ) {
+			$return = trans('kotoba::general.no');
+		}
+		return $return;
+*/
+		$return = '';
+		$banner = $this->entity->is_banner;
+
+		if ( $banner == 1 ) {
+			$return = '<span class="glyphicon glyphicon-ok text-success"></span>';
+		} else {
+			$return = '<span class="glyphicon glyphicon-remove text-danger"></span>';
+		}
+
+		return $return;
+
+	}
+
+
+	/**
+	 * featured checkbox
+	 *
+	 * @return string
+	 */
 	public function isFeatured()
 	{
-
+/*
 		$return = trans('kotoba::general.yes');
 		if ( $this->entity->is_featured == 0 ) {
 			$return = trans('kotoba::general.no');
 		}
+		return $return;
+*/
+		$return = '';
+		$featured = $this->entity->is_featured;
+
+		if ( $featured == 1 ) {
+			$return = '<span class="glyphicon glyphicon-ok text-success"></span>';
+		} else {
+			$return = '<span class="glyphicon glyphicon-remove text-danger"></span>';
+		}
 
 		return $return;
+
+	}
+
+
+	public function isZone()
+	{
+/*
+		$return = trans('kotoba::general.yes');
+		if ( $this->entity->is_zone == 0 ) {
+			$return = trans('kotoba::general.no');
+		}
+		return $return;
+*/
+		$return = '';
+		$zone = $this->entity->is_zone;
+
+		if ( $zone == 1 ) {
+			$return = '<span class="glyphicon glyphicon-ok text-success"></span>';
+		} else {
+			$return = '<span class="glyphicon glyphicon-remove text-danger"></span>';
+		}
+
+		return $return;
+
 	}
 
 

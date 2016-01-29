@@ -9,7 +9,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 
 use Laracasts\Presenter\PresentableTrait;
 //use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
-use App\Modules\Newsdesk\Http\Traits\TenantableTrait;
+//use App\Modules\Newsdesk\Http\Traits\TenantableTrait;
 
 use Vinkla\Translator\Translatable;
 use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
@@ -20,13 +20,13 @@ use Config;
 use DB;
 use Setting;
 
-class News extends Node implements TranslatableContract, SluggableInterface {
+class AdminNews extends Node implements TranslatableContract, SluggableInterface {
 /* todo upgrade to the new vinkla/translator */
 
 	use PresentableTrait;
 	use SluggableTrait;
 //	use TenantScopedModelTrait;
-	use TenantableTrait;
+//	use TenantableTrait;
 	use Translatable;
 
 	protected $table = 'news';

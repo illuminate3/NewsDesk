@@ -85,9 +85,13 @@ class NewsMacroServiceProvider extends ServiceProvider
 
 				$html .= '<td>' . $node->present()->news_status($node->news_status_id, $locale_id) . '</td>';
 
+				$html .= '<td>' . $node->present()->isAlert($node->is_alert) . '</td>';
+
 				$html .= '<td>' . $node->present()->isBanner($node->is_banner) . '</td>';
 
 				$html .= '<td>' . $node->present()->isFeatured($node->is_featured) . '</td>';
+
+				$html .= '<td>' . $node->present()->isZone($node->is_zone) . '</td>';
 
 				$html .= '<td>';
 				$html .= '
@@ -109,12 +113,51 @@ class NewsMacroServiceProvider extends ServiceProvider
 	}
 
 
-	Html::macro('newsNodes', function($nodes, $mode) {
-		return renderNode($nodes, $mode);
-	});
+		function newsTableArchives($node, $lang, $locale_id) {
+//dd($node);
+//		$locale_id = $this->locale_repo->getLocaleID($lang);
+
+			$title = $node->translate($lang)->title;
+			if ($node['depth'] > 0) {
+				$title = str_repeat('>', $node['depth']) . ' ' . $title;
+			}
+
+			if( empty($node['children']) ) {
+
+				return '<li> empty child <a href="' . url('/news/' . $node['slug']) . '">' . $title . '</a></li>';
+
+			} else {
+
+				$html = '<tr>';
+
+				$html .= '<td><a href="' . url('/news/' . $node['slug']) . '">' . $title . '</a></td>';
+
+				$html .= '<td><a href="' . url('/news/' . $node['slug']) . '">' . $node->translate($lang)->summary . '</a></td>';
+
+//				$html .= '<td>' . $node->translate($lang)->summary . '</td>';
+
+				$html .= '</tr>';
+
+				foreach($node['children'] as $child) {
+					$html .= newsTable($child, $lang, $locale_id);
+				}
+
+			}
+
+			return $html;
+	}
+
+
+// 	Html::macro('newsNodes', function($nodes, $mode) {
+// 		return renderNode($nodes, $mode);
+// 	});
 
 	Html::macro('newsNodes', function($nodes, $lang, $locale_id) {
 		return newsTable($nodes, $lang, $locale_id);
+	});
+
+	Html::macro('newsNodesArchives', function($nodes, $lang, $locale_id) {
+		return newsTableArchives($nodes, $lang, $locale_id);
 	});
 
 

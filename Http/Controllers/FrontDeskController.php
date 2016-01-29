@@ -21,6 +21,7 @@ use Flash;
 use Hashids\Hashids;
 use Session;
 use Route;
+use TenantScope;
 use Theme;
 
 class FrontDeskController extends NewsdeskController {
@@ -52,7 +53,7 @@ class FrontDeskController extends NewsdeskController {
 
 		$article_ID = $this->news_repo->getArticleID($slug = $lastSlug);
 //dd($article_ID);
-		$this->currentArticle = $this->news->with('images', 'documents')->find($article_ID);
+		$this->currentArticle = $this->news->with('images', 'documents', 'sites')->find($article_ID);
 //		$this->currentArticle = $this->news_repo->with('images', 'documents')->getNews($article_ID);
 //dd($this->currentArticle);
 
@@ -118,6 +119,51 @@ class FrontDeskController extends NewsdeskController {
 			App::abort(404);
 	}
 
+	public function getArchives()
+	{
+
+		$lang = Session::get('locale');
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+//dd(session()->get('siteId'));
+
+// $models = News::all()->with('sites');
+// dd($models);
+//TenantScope::addTenant( Config::get('tenant.default_tenant_columns'), session()->get('siteId') );
+//TenantScope::addTenant('site_id', 1);
+
+// 		$archives = News::IsPublished()->NotAlert()->get();
+// //		$archives = News::all();
+// dd($archives);
+// 		$archive_list = News::all();
+
+/*
+// Archived
+		$archives = News::IsArchived()->get();
+		$archive_list = News::IsArchived()->get();
+		$archive_list = $archive_list->toHierarchy();
+//dd($archives);
+*/
+// 		$archives = News::all();
+// 		$archive_list = News::all();
+// 		$list = $archive_list->toHierarchy();
+		$archives = News::IsPublished()->NotAlert()->get();
+//		$archives = $this->news->with('sites')->IsPublished()->NotAlert()->get();
+//dd($archives);
+		$archive_list = News::IsPublished()->NotAlert()->get();
+		$archive_list = $archive_list->toHierarchy();
+
+
+		return Theme::View('modules.newsdesk.frontdesk.archives',
+			compact(
+				'archives',
+				'archive_list',
+				'lang',
+				'locale_id'
+			));
+	}
+
+
 	public function index()
 	{
 dd('index');
@@ -138,149 +184,5 @@ dd('index');
 			App::abort(404);
 	}
 
-	public function contact_us()
-	{
-dd('contact_us');
-		if ( $contact_us = Article::getArticle( $slug = 'contact-us' ) ) {
-			$mainMenu = NiftyMenus::getMainMenu( $contact_us );
-			$root = $contact_us->getRoot();
-			$secMenu = NiftyMenus::getSecMenu($root, $contact_us);
-			return View::make('frontends.contact-us', ['news' => $contact_us, 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
-		}
-		else
-			App::abort(404);
-	}
-
-	public function do_contact_us()
-	{
-dd('do_contact_us');
-		$inputs = [];
-		foreach(Input::all() as $key=>$input)
-		{
-			$inputs[$key] = Sanitiser::trimInput($input);
-		}
-
-		$rules = [
-					'name' => 'required|max:255',
-					'email' => 'required|email',
-					'subject' => 'required',
-					'message' => 'required'
-				];
-
-		$validation = MyValidations::validate($inputs, $rules);
-
-		if($validation != NULL) {
-			return Redirect::back()->withErrors($validation)->withInput();
-		}
-
-		else {
-    		$data = [ 'name' => $inputs['name'], 'emailbody' => $inputs['message'] ];
-    		$to_email = $this->contact[1];
-    		$to_name = $this->contact[0];
-
-			$issent =
-			Mail::send('emails.contact-us', $data, function($message) use ($inputs, $to_email, $to_name)
-			{
-			    $message->from($inputs['email'], $inputs['name'])->to($to_email, $to_name)->subject('Website Contact Us: ' . $inputs['subject']);
-			});
-
-			if ($issent) {
-				$feedback = ['success', 'Message successfully sent. We will be in touch soon'];
-			}
-
-			else {
-				$feedback = ['failure', 'Your email was not sent. Kindly try again.'];
-			}
-
-			return Redirect::to('contact-us')->with($feedback[0], $feedback[1]);
-		}
-	}
-
-	public function previewArticle($hashedId)
-	{
-dd('previewArticle');
-		$id = $this->hashIds->decrypt($hashedId)[0];
-
-		if ( $id ) {
-			$previewArticle = Article::getPreviewArticle( $id );
-			$mainMenu = NiftyMenus::getMainMenu( $previewArticle );
-			$root = $previewArticle->getRoot();
-			$secMenu = NiftyMenus::getSecMenu( $root, $previewArticle );
-
-			return View::make('frontends.article', ['news' => $previewArticle, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
-		}
-		else
-			App::abort(404);
-	}
-
-	public function get_blog()
-	{
-dd('get_blog');
-		if ( $blog = Article::getArticle( $slug = 'blog' ) ) {
-			$mainMenu = NiftyMenus::getMainMenu( $blog );
-			$root = $blog->getRoot();
-			$secMenu = NiftyMenus::getSecMenu($root, $blog);
-
-			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerArticle );
-
-			return View::make('frontends.blog', ['news' => $blog, 'posts' => $posts, 'links' => $posts->links('backend.pagination.nifty'), 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
-		}
-		else
-			App::abort(404);
-	}
-
-	public function get_post()
-	{
-dd('get_post');
-		$slugs = explode( '/', Route::current()->parameter('any') );
-		$lastSlug = $slugs[count($slugs)-1];
-
-		if ( $blog = Article::getArticle( $slug = 'blog' ) ) {
-			$mainMenu = NiftyMenus::getMainMenu( $blog );
-			$root = $blog->getRoot();
-			$secMenu = NiftyMenus::getSecMenu($root, $blog);
-
-			$post = Post::getFrontendPost( $lastSlug );
-
-			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerArticle );
-
-			return View::make('frontends.post', ['news' => $post, 'posts' => $posts, 'active' => '', 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
-		}
-		else
-			App::abort(404);
-	}
-
-	public function previewPost($hashedId)
-	{
-dd('previewPost');
-		$id = $this->hashIds->decrypt($hashedId)[0];
-
-		if ( $id ) {
-			$blogArticle = Article::getArticle( $lug = 'blog' );
-			$blogPost = Post::find($id);
-			$mainMenu = NiftyMenus::getMainMenu( $blogArticle );
-			$root = $blogArticle->getRoot();
-			$secMenu = NiftyMenus::getSecMenu( $root, $blogArticle );
-
-			$posts = Post::getFrontendPosts( $this->postsOrderBy, $this->postItemsNum, $this->postItemsPerArticle );
-
-			return View::make('frontends.post', ['news' => $blogPost, 'posts' => $posts, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
-		}
-		else
-			App::abort(404);
-	}
-
-	public function do_search()
-	{
-dd('do_search');
-		$term = Sanitiser::trimInput( Input::get('term') );
-		$results = Search::getSearchResults($term);
-
-		$searchArticle = Article::getArticle( $slug = 'search' );
-		$mainMenu = NiftyMenus::getMainMenu( $searchArticle );
-		$secMenu = '';
-
-		return View::make('frontends.search', ['news' => $searchArticle, 'term' => $term, 'results' => $results, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
-	}
 
 }
