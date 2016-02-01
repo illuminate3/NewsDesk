@@ -44,10 +44,12 @@ $(document).ready(function() {
 		<i class="fa fa-plus fa-fw"></i>
 		{{ trans('kotoba::button.new') }}
 	</a>
-	<a href="/admin/news/repair" class="btn btn-danger" title="{{ trans('kotoba::button.repair') }}">
-		<i class="fa fa-wrench fa-fw"></i>
-		{{ trans('kotoba::button.repair') }}
-	</a>
+	@if ( Auth::user()->is('super_admin') )
+		<a href="/admin/news/repair" class="btn btn-danger" title="{{ trans('kotoba::button.repair') }}">
+			<i class="fa fa-wrench fa-fw"></i>
+			{{ trans('kotoba::button.repair') }}
+		</a>
+	@endif
 {{--
 	<div class="dropdown pull-right padding-right">
 		<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

@@ -379,7 +379,7 @@ function setImage(select){
 <div class="col-sm-6">
 <div class="padding">
 
-	@if (Auth::user()->can('manage_admin'))
+	@if (Auth::user()->can('super_admin'))
 		<div class="form-group">
 			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!!
@@ -396,8 +396,8 @@ function setImage(select){
 	@else
 		<div class="form-group">
 			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
-			{!! Form::hidden('news_status_id', 1) !!}
-			{{ Lang::choice('kotoba::cms.draft', 1) }}
+			{!! Form::hidden('news_status_id', $default_publish_status) !!}
+			{{ Lang::choice('kotoba::cms.draft', $default_publish_status) }}
 		</div>
 	@endif
 
@@ -526,26 +526,41 @@ function setImage(select){
 <br>
 
 <div class="row">
+@if ( (Auth::user()->id == $news->user_id) || (Auth::user()->is('super_admin')) )
 
-<div class="col-sm-4">
-	<a href="/admin/news" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
-		<i class="fa fa-times fa-fw"></i>
-		{{ trans('kotoba::button.cancel') }}
-	</a>
-</div>
+	<div class="col-sm-4">
+		<a href="/admin/news" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
+			<i class="fa fa-times fa-fw"></i>
+			{{ trans('kotoba::button.cancel') }}
+		</a>
+	</div>
 
-<div class="col-sm-4">
-	<input class="btn btn-default btn-block" type="reset" value="{{ trans('kotoba::button.reset') }}">
-</div>
+	<div class="col-sm-4">
+		<input class="btn btn-default btn-block" type="reset" value="{{ trans('kotoba::button.reset') }}">
+	</div>
 
-<div class="col-sm-4">
-<!-- Button trigger modal -->
-	<a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-block" title="{{ trans('kotoba::button.delete') }}">
-		<i class="fa fa-trash-o fa-fw"></i>
-		{{ trans('kotoba::general.command.delete') }}
-	</a>
-</div>
+	<div class="col-sm-4">
+	<!-- Button trigger modal -->
+		<a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-block" title="{{ trans('kotoba::button.delete') }}">
+			<i class="fa fa-trash-o fa-fw"></i>
+			{{ trans('kotoba::general.command.delete') }}
+		</a>
+	</div>
 
+@else
+
+	<div class="col-sm-6">
+		<a href="/admin/news" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
+			<i class="fa fa-times fa-fw"></i>
+			{{ trans('kotoba::button.cancel') }}
+		</a>
+	</div>
+
+	<div class="col-sm-6">
+		<input class="btn btn-default btn-block" type="reset" value="{{ trans('kotoba::button.reset') }}">
+	</div>
+
+@endif
 </div>
 
 

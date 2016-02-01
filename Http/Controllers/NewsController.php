@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 
 use Cache;
-//use Config;
+use Config;
 use Flash;
 use Lang;
 use Route;
@@ -213,6 +213,8 @@ class NewsController extends NewsdeskController {
 
 //		$user_id = Auth::user()->id;
 
+		$default_publish_status = Config::get('news.default_publish_status', '1');
+
 		$modal_title = trans('kotoba::general.command.delete');
 		$modal_body = trans('kotoba::general.ask.delete');
 		$modal_route = 'admin.news.destroy';
@@ -224,6 +226,7 @@ class NewsController extends NewsdeskController {
 		return Theme::View('modules.newsdesk.news.edit',
 			compact(
 				'articlelist',
+				'default_publish_status',
 				'documents',
 				'allDocuments',
 				'get_documents',

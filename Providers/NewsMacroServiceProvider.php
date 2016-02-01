@@ -4,6 +4,7 @@ namespace App\Modules\Newsdesk\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Auth;
 use Html;
 use Lang;
 
@@ -94,11 +95,19 @@ class NewsMacroServiceProvider extends ServiceProvider
 				$html .= '<td>' . $node->present()->isZone($node->is_zone) . '</td>';
 
 				$html .= '<td>';
-				$html .= '
-					<a href="/admin/news/' . $node['id'] . '/edit" class="btn btn-success" title="' . trans("kotoba::button.edit") . '">
-						<i class="fa fa-pencil fa-fw"></i>' . trans("kotoba::button.edit") . '
-					</a>
-						';
+					if ( (Auth::user()->id == $node['user_id']) || (Auth::user()->is('super_admin')) ) {
+						$html .= '
+							<a href="/admin/news/' . $node['id'] . '/edit" class="btn btn-success" title="' . trans("kotoba::button.edit") . '">
+								<i class="fa fa-pencil fa-fw"></i>' . trans("kotoba::button.edit") . '
+							</a>
+							';
+					} else {
+						$html .= '
+							<a href="/news/' . $node['slug'] . '" class="btn btn-primary" title="' . trans("kotoba::button.view") . '">
+								<i class="fa fa-search fa-fw"></i>' . trans("kotoba::button.view") . '
+							</a>
+							';
+					}
 				 $html .= '</td>';
 
 				$html .= '</tr>';

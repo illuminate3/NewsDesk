@@ -90,8 +90,11 @@ class NewsRepository extends BaseRepository {
 		$allSites = $this->getListSites();
 //dd($allSites);
 
+		$default_publish_status = Config::get('news.default_publish_status', '1');
+
 		return compact(
 			'articlelist',
+			'default_publish_status',
 			'get_documents',
 			'get_images',
 			'get_sites',
@@ -184,6 +187,12 @@ class NewsRepository extends BaseRepository {
 			$is_published = 1;
 		}
 
+		if ( Auth::user()->is('super_admin') ) {
+			$news_status_id = $input['news_status_id'];
+		} else {
+			$news_status_id = Config::get('news.default_publish_status', '2');
+		}
+
 		$lang = Session::get('locale');
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 
@@ -198,9 +207,9 @@ class NewsRepository extends BaseRepository {
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
 			'order'						=> $input['order'],
-			'news_status_id'			=> $input['news_status_id'],
+			'news_status_id'			=> $news_status_id,
 			'slug'						=> $slug,
-			'user_id'					=>  $input['user_id']
+			'user_id'					=> $input['user_id']
 		];
 //dd($values);
 
@@ -324,6 +333,13 @@ class NewsRepository extends BaseRepository {
 			$is_published = 1;
 		}
 
+		if ( Auth::user()->is('super_admin') ) {
+			$news_status_id = $input['news_status_id'];
+		} else {
+			$news_status_id = Config::get('news.default_publish_status', '1');
+		}
+
+
 // 		if ( isset($input['previous_image_id']) ) {
 // 			$image_id = $input['previous_image_id'];
 // 		} else {
@@ -347,9 +363,9 @@ class NewsRepository extends BaseRepository {
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
 			'order'						=> $input['order'],
-			'news_status_id'			=> $input['news_status_id'],
+			'news_status_id'			=> $news_status_id,
 			'slug'						=> Str::slug($input['title_'.$app_locale_id]),
-			'user_id'					=>  $input['user_id']
+			'user_id'					=> $input['user_id']
 		];
 
 		$news->update($values);

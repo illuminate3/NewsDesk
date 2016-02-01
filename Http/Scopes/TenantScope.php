@@ -29,7 +29,7 @@ class TenantScope implements ScopeInterface
 //dd(Auth::user());
 //dd(Session::get('siteId'));
 //dd(Cache::get('siteId'));
-/*
+
 		if ( Auth::user() != null) {
 			if ( Auth::user()->can('manage_newsdesk') ) {
 			}
@@ -45,10 +45,10 @@ class TenantScope implements ScopeInterface
 			}
 
 		}
-*/
 
 
 
+/*
 			if (Session::has('siteId'))
 			{
 				$siteId = session('siteId');
@@ -57,7 +57,7 @@ class TenantScope implements ScopeInterface
 					$query->where('sites.id', $siteId);
 				});
 			}
-
+*/
 
 
 	}

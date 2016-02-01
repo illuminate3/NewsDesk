@@ -299,7 +299,7 @@ function setImage(select){
 <div class="col-sm-6">
 <div class="padding">
 
-	@if (Auth::user()->can('manage_admin'))
+	@if (Auth::user()->can('super_admin'))
 		<div class="form-group">
 			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!!
@@ -316,8 +316,8 @@ function setImage(select){
 	@else
 		<div class="form-group">
 			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
-			{!! Form::hidden('news_status_id', 1) !!}
-			{{ Lang::choice('kotoba::cms.draft', 1) }}
+			{!! Form::hidden('news_status_id', $default_publish_status) !!}
+			{{ Lang::choice('kotoba::cms.draft', $default_publish_status) }}
 		</div>
 	@endif
 
