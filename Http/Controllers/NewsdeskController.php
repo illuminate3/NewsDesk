@@ -22,6 +22,7 @@ class NewsdeskController extends Controller
 // middleware
 		$this->middleware('auth');
 		$this->middleware('admin');
+		$this->middleware('newsdesk');
 	}
 
 

@@ -18,6 +18,7 @@ return [
 
 'top_news_count'				=> 5,
 
+'auth_fail_redirect'			=> '/admin/dashboard',
 
 
 ];
