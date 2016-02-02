@@ -264,7 +264,7 @@ $(document).ready(function() {
 		@endif
 
 	</div>
-	</div><!-- ./ alert panel -->
+	</div><!-- ./ archive panel -->
 
 </div><!-- ./ tab panes -->
 
