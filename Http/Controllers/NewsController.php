@@ -65,28 +65,32 @@ class NewsController extends NewsdeskController {
 
 // Alerts
 		$alerts = News::IsAlert()->get();
-		$alert_list = News::IsAlert()->get();
-		$alert_list = $alert_list->toHierarchy();
+// 		$alert_list = News::IsAlert()->get();
+// 		$alert_list = $alert_list->toHierarchy();
+		$alert_list = $alerts->toHierarchy();
 //dd($alerts);
 
 // Archived
 		$archives = News::IsArchived()->get();
-		$archive_list = News::IsArchived()->get();
-		$archive_list = $archive_list->toHierarchy();
+// 		$archive_list = News::IsArchived()->get();
+// 		$archive_list = $archive_list->toHierarchy();
+		$archive_list = $archives->toHierarchy();
 //dd($archives);
 
 
 // Draft
 		$drafts = News::IsDraft()->get();
-		$draft_list = News::IsDraft()->get();
-		$draft_list = $draft_list->toHierarchy();
+// 		$draft_list = News::IsDraft()->get();
+// 		$draft_list = $draft_list->toHierarchy();
+		$draft_list = $drafts->toHierarchy();
 //dd($drafts);
 
 
 // Published
 		$published = News::IsPublished()->NotAlert()->get();
-		$publish_list = News::IsPublished()->NotAlert()->get();
-		$publish_list = $publish_list->toHierarchy();
+// 		$publish_list = News::IsPublished()->NotAlert()->get();
+// 		$publish_list = $publish_list->toHierarchy();
+		$publish_list = $published->toHierarchy();
 //dd($published);
 
 
