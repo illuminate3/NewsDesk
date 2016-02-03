@@ -397,7 +397,7 @@ function setImage(select){
 		<div class="form-group">
 			{!! Form::label('news_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!! Form::hidden('news_status_id', $default_publish_status) !!}
-			{{ Lang::choice('kotoba::cms.draft', $default_publish_status) }}
+			{{ Lang::choice('kotoba::cms.draft', 1) }}
 		</div>
 	@endif
 
