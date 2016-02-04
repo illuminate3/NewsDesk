@@ -24,11 +24,11 @@
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
-		$('#my-select').multiSelect({
+		$('#file_select').multiSelect({
 			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
 			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
 		})
-		$('#my-select2').multiSelect({
+		$('#site_select').multiSelect({
 			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
 			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
 		})
@@ -281,7 +281,7 @@ function setImage(select){
 	</h4>
 	<hr>
 
-	<select multiple="multiple" id="my-select" name="my-select[]">
+	<select multiple="multiple" id="file_select" name="document_id[]">
 	@foreach ($allDocuments as $key => $value)
 		@if (isset($documents[$key]) )
 			<option value='{{ $key }}' selected>{{ $value }}</option>
@@ -364,7 +364,7 @@ function setImage(select){
 	</h4>
 	<hr>
 
-	<select multiple="multiple" id="my-select2" name="my-select2[]">
+	<select multiple="multiple" id="site_select" name="sites_id[]">
 		@foreach ($allSites as $key => $value)
 			@if (isset($sites[$key]) )
 				<option value='{{ $key }}' selected>{{ $value }}</option>

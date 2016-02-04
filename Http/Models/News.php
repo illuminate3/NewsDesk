@@ -9,7 +9,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 
 use Laracasts\Presenter\PresentableTrait;
 //use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
-use App\Modules\Newsdesk\Http\Traits\TenantableTrait;
+use App\Modules\Core\Http\Traits\TenantableTrait;
 
 use Vinkla\Translator\Translatable;
 use Vinkla\Translator\Contracts\Translatable as TranslatableContract;

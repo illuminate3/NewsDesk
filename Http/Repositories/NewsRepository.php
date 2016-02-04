@@ -141,6 +141,12 @@ class NewsRepository extends BaseRepository {
 	{
 //dd($input);
 
+		if ( !isset($input['order']) ) {
+			$order = 1;
+		} else {
+			$order = $input['order'];
+		}
+
 		if ( !isset($input['is_alert']) ) {
 			$is_alert = 0;
 		} else {
@@ -183,10 +189,6 @@ class NewsRepository extends BaseRepository {
 			$publish_start = $input['publish_start'];
 		}
 
-		if ( ($input['news_status_id'] == 3 || $input['news_status_id'] == 4) ) {
-			$is_published = 1;
-		}
-
 		if ( Auth::user()->is('super_admin') ) {
 			$news_status_id = $input['news_status_id'];
 		} else {
@@ -206,7 +208,7 @@ class NewsRepository extends BaseRepository {
 			'is_zone'					=> $is_zone,
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
-			'order'						=> $input['order'],
+			'order'						=> $order,
 			'news_status_id'			=> $news_status_id,
 			'slug'						=> $slug,
 			'user_id'					=> $input['user_id']
@@ -249,13 +251,13 @@ class NewsRepository extends BaseRepository {
 //		}
 //dd($document_id);
 		$news = $this->news->find($last_insert_id);
-		if ( isset($input['my-select']) ) {
-			$news->documents()->sync($input['my-select']);
+		if ( isset($input['document_id']) ) {
+			$news->documents()->sync($input['document_id']);
 		} else {
 			$news->documents()->detach();
 		}
-		if ( isset($input['my-select2']) ) {
-			$news->sites()->sync($input['my-select2']);
+		if ( isset($input['sites_id']) ) {
+			$news->sites()->sync($input['sites_id']);
 		} else {
 			$news->sites()->detach();
 		}
@@ -286,6 +288,12 @@ class NewsRepository extends BaseRepository {
 	public function update($input, $id)
 	{
 //dd($input);
+
+		if ( !isset($input['order']) ) {
+			$order = 1;
+		} else {
+			$order = $input['order'];
+		}
 
 		if ( !isset($input['is_alert']) ) {
 			$is_alert = 0;
@@ -354,6 +362,8 @@ class NewsRepository extends BaseRepository {
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
+		$slug = Str::slug($input['title_'.$app_locale_id]);
+
 		$values = [
 			'is_alert'					=> $is_alert,
 			'is_banner'					=> $is_banner,
@@ -362,15 +372,14 @@ class NewsRepository extends BaseRepository {
 			'is_zone'					=> $is_zone,
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
-			'order'						=> $input['order'],
+			'order'						=> $order,
 			'news_status_id'			=> $news_status_id,
-			'slug'						=> Str::slug($input['title_'.$app_locale_id]),
+			'slug'						=> $slug,
 			'user_id'					=> $input['user_id']
 		];
 
 		$news->update($values);
 
-//		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
@@ -404,16 +413,16 @@ class NewsRepository extends BaseRepository {
 // 			}
 // 		}
 //		$role->update($input);
-//dd($input['my-select2']);
+//dd($input['site_select']);
 
 		$news = $this->news->find($id);
-		if ( isset($input['my-select']) ) {
-			$news->documents()->sync($input['my-select']);
+		if ( isset($input['document_id']) ) {
+			$news->documents()->sync($input['document_id']);
 		} else {
 			$news->documents()->detach();
 		}
-		if ( isset($input['my-select2']) ) {
-			$news->sites()->sync($input['my-select2']);
+		if ( isset($input['sites_id']) ) {
+			$news->sites()->sync($input['sites_id']);
 		} else {
 			$news->sites()->detach();
 		}
