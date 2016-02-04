@@ -11,5 +11,10 @@
 	<dd>
 		<a href="{{ URL::to('/admin/news') }}">{{ $total_articles }}</a>
 	</dd>
+	<dt>
+		{{ Lang::choice('kotoba::cms.draft', 2) }}
+	</dt>
+	<dd>
+		<a href="{{ URL::to('/admin/news') }}">{{ $news_drafts }}</a>
+	</dd>
 </dl>
-
