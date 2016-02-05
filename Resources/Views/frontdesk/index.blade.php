@@ -3,7 +3,21 @@
 {{-- Web site Title --}}
 @section('title')
 {{{ $article->title }}} :: @parent
+	<meta name="description" content="{!! $article->meta_description !!}" />
 @stop
+
+{{-- Web site Title --}}
+@section('activeTheme')
+	<meta name="keywords" content="{!! $article->meta_keywords !!}" />
+{!! $article->meta_keywords !!}
+@stop
+
+{{-- Web site description --}}
+@section('description')
+	<meta name="description" content="{!! $article->meta_description !!}" />
+@stop
+
+
 
 @section('styles')
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pdf_viewer.css') }}">
@@ -42,7 +56,6 @@ $(function(){
 	</h1>
 	<hr>
 </div>
-
 
 <div class="row">
 <div class="col-sm-8 col-sm-offset-2">

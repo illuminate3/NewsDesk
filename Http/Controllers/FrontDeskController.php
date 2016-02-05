@@ -19,6 +19,8 @@ use Carbon\Carbon;
 use Config;
 use Flash;
 use Hashids\Hashids;
+use Meta;
+//use SEOMeta;
 use Session;
 use Route;
 use TenantScope;
@@ -73,6 +75,7 @@ class FrontDeskController extends NewsdeskController {
 //			return View::make('frontends.article', ['news' => $this->currentArticle, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 
 			$article = $this->currentArticle;
+			$this->setSEO($article);
 /*
     0 => "meta_description"
     1 => "meta_keywords"
@@ -164,24 +167,15 @@ class FrontDeskController extends NewsdeskController {
 	}
 
 
-	public function index()
+	public function setSEO($article)
 	{
-dd('index');
-		if ( $homeArticle = Article::getArticle( $slug = 'home-article' ) ) {
-			$mainMenu = NiftyMenus::getMainMenu( $homeArticle );
-			// $posts = Post::getFrontendPosts($category = 'Home Featured', $this->postsOrderBy);
-//			return View::make('frontends.index', ['news' => $homeArticle, /*'posts' => $posts,*/ 'mainMenu' => $mainMenu]);
-
-			$article = $homeArticle;
-			$mainMenu = $mainMenu;
-
-			return View('nifty.frontends.index', compact(
-				'mainMenu',
-				'news'
-				));
-		}
-		else
-			App::abort(404);
+//dd($article);
+// 		SEOMeta::setTitle($article->meta_title);
+// 		SEOMeta::setDescription($article->meta_description);
+// 		SEOMeta::setKeywords($article->meta_keywords);
+		Meta::setTitle($article->meta_title);
+		Meta::setDescription($article->meta_description);
+		Meta::setKeywords($article->meta_keywords);
 	}
 
 
