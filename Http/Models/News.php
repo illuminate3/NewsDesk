@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
 use Laracasts\Presenter\PresentableTrait;
-//use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
+use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
 use App\Modules\Core\Http\Traits\TenantableTrait;
 
 use Vinkla\Translator\Translatable;

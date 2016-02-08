@@ -9,7 +9,6 @@
 {{-- Web site Title --}}
 @section('activeTheme')
 	<meta name="keywords" content="{!! $article->meta_keywords !!}" />
-{!! $article->meta_keywords !!}
 @stop
 
 {{-- Web site description --}}

@@ -75,7 +75,8 @@ class FrontDeskController extends NewsdeskController {
 //			return View::make('frontends.article', ['news' => $this->currentArticle, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 
 			$article = $this->currentArticle;
-			$this->setSEO($article);
+//dd($article);
+			$this->setSeo($article);
 /*
     0 => "meta_description"
     1 => "meta_keywords"
@@ -164,18 +165,6 @@ class FrontDeskController extends NewsdeskController {
 				'lang',
 				'locale_id'
 			));
-	}
-
-
-	public function setSEO($article)
-	{
-//dd($article);
-// 		SEOMeta::setTitle($article->meta_title);
-// 		SEOMeta::setDescription($article->meta_description);
-// 		SEOMeta::setKeywords($article->meta_keywords);
-		Meta::setTitle($article->meta_title);
-		Meta::setDescription($article->meta_description);
-		Meta::setKeywords($article->meta_keywords);
 	}
 
 

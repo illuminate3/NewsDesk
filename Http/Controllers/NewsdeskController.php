@@ -4,12 +4,17 @@ namespace App\Modules\Newsdesk\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use App\Modules\Core\Http\Traits\SeoTrait;
+
 use Cache;
 //use Session;
 use Theme;
 
 class NewsdeskController extends Controller
 {
+
+	use SeoTrait;
+
 /* todo update cviebrock/eloquent-sluggable */
 
 	/**
