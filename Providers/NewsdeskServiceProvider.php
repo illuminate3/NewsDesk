@@ -69,10 +69,10 @@ class NewsdeskServiceProvider extends ServiceProvider
 			__DIR__ . '/../Resources/Assets/Views/Widgets' => public_path('themes/') . Theme::getActive() . '/views/widgets/',
 		], 'views');
 
-		AliasLoader::getInstance()->alias(
-			'TenantScope',
-			'AuraIsHere\LaravelMultiTenant\Facades\TenantScopeFacade'
-		);
+// 		AliasLoader::getInstance()->alias(
+// 			'TenantScope',
+// 			'AuraIsHere\LaravelMultiTenant\Facades\TenantScopeFacade'
+// 		);
 
 		$app = $this->app;
 
@@ -94,7 +94,7 @@ class NewsdeskServiceProvider extends ServiceProvider
 		$app = $this->app;
 
 		$app->register('App\Modules\Newsdesk\Providers\RouteServiceProvider');
-		$app->register('AuraIsHere\LaravelMultiTenant\LaravelMultiTenantServiceProvider');
+//		$app->register('AuraIsHere\LaravelMultiTenant\LaravelMultiTenantServiceProvider');
 	}
 
 }
