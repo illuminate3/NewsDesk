@@ -151,10 +151,10 @@ class FrontDeskController extends NewsdeskController {
 // 		$archives = News::all();
 // 		$archive_list = News::all();
 // 		$list = $archive_list->toHierarchy();
-		$archives = News::IsPublished()->NotAlert()->get();
+		$archives = News::IsPublished()->NotAlert()->SiteID()->get();
 //		$archives = $this->news->with('sites')->IsPublished()->NotAlert()->get();
 //dd($archives);
-		$archive_list = News::IsPublished()->NotAlert()->get();
+		$archive_list = News::IsPublished()->NotAlert()->SiteID()->get();
 		$archive_list = $archive_list->toHierarchy();
 
 

@@ -1,4 +1,4 @@
-@extends($theme_back)
+@extends($theme_front)
 
 
 {{-- Web site Title --}}
@@ -35,22 +35,13 @@ oTable =
 
 <div class="row">
 <h1>
-	<p class="pull-right">
-	<a href="/admin/news/create" class="btn btn-primary" title="{{ trans('kotoba::button.new') }}">
-		<i class="fa fa-plus fa-fw"></i>
-		{{ trans('kotoba::button.new') }}
-	</a>
-	<a href="/admin/news/repair" class="btn btn-danger" title="{{ trans('kotoba::button.repair') }}">
-		<i class="fa fa-wrench fa-fw"></i>
-		{{ trans('kotoba::button.repair') }}
-	</a>
-	</p>
-	<i class="fa fa-paperclip fa-lg"></i>
+	<i class="fa fa-newspaper-o fa-lg"></i>
 		{{ Lang::choice('kotoba::cms.article', 2) }}
+{{--
 		{{ Session::get('siteId') }}
 -
 		{{ Cache::get('siteId') }}
-
+--}}
 	<hr>
 </h1>
 </div>
