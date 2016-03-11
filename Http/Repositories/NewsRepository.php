@@ -313,16 +313,17 @@ class NewsRepository extends BaseRepository {
 			$is_featured = $input['is_featured'];
 		}
 
-		if ( !isset($input['is_timed']) ) {
-			$is_timed = 0;
-		} else {
-			$is_timed = $input['is_timed'];
-		}
-
 		if ( !isset($input['is_zone']) ) {
 			$is_zone = 0;
 		} else {
 			$is_zone = $input['is_zone'];
+		}
+
+/*
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+		} else {
+			$is_timed = $input['is_timed'];
 		}
 
 		if ( $input['publish_end'] == '' ) {
@@ -334,6 +335,16 @@ class NewsRepository extends BaseRepository {
 		if ( $input['publish_start'] == '' ) {
 			$publish_start = null;
 		} else {
+			$publish_start = $input['publish_start'];
+		}
+*/
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+			$publish_end = null;
+			$publish_start = null;
+		} else {
+			$is_timed = $input['is_timed'];
+			$publish_end = $input['publish_end'];
 			$publish_start = $input['publish_start'];
 		}
 

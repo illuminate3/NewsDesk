@@ -257,6 +257,7 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	{
 //		return $query->where('site_id', '=', 11);
 				$siteId = Cache::get('siteId');
+//dd($siteId);
 				return $query->whereHas('sites', function($query) use($siteId)
 				{
 					$query->where('sites.id', $siteId);
@@ -298,7 +299,14 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 
 	public function scopeIsTimed($query)
 	{
-		return $query->where('is_timed', '=', 1);
+//		return $query->where('is_timed', '=', 1);
+
+		$date = date("Y-m-d");
+		return $query
+			->where('is_timed', '=', 1)
+			->where('publish_start', '<=', $date . " 00:00:00")
+			->where('publish_end', '>=', $date . " 23:59:59");
+
 	}
 
 	public function scopeIsZone($query)
