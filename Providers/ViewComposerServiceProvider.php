@@ -25,11 +25,12 @@ class ViewComposerServiceProvider extends ServiceProvider
 	public function boot()
 	{
 //		$total_articles = $this->getAllArticles();
-		$news_drafts = $this->getNewsDrafts();
-//		$total_sites = $this->getAllSites();
-
 //		View::share('total_articles', $total_articles);
-		View::share('news_drafts', $news_drafts);
+
+// 		View::share('news_drafts', $news_drafts);
+// 		$news_drafts = $this->getNewsDrafts();
+
+//		$total_sites = $this->getAllSites();
 //		View::share('total_sites', $total_sites);
 
 	}
