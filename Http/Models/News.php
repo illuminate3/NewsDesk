@@ -126,7 +126,7 @@ class News extends Node implements TranslatableContract, SluggableInterface {
 
 	public function sites()
 	{
-		return $this->belongsToMany('App\Modules\Campus\Http\Models\Site', 'news_site');
+		return $this->belongsToMany('App\Modules\Core\Http\Models\Site', 'news_site');
 	}
 
 
