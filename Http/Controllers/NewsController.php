@@ -195,7 +195,10 @@ class NewsController extends NewsdeskController {
 		$articlelist = $articlelist->merge($all_articlelist);
 
 		$users = $this->news_repo->getUsers();
-		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+		$user_select = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) );
+		$user_select = new Collection($user_select);
+		$users = $user_select->merge($users);
 
 		$news_statuses = $this->news_repo->getNewsStatuses($locale_id);
 		$news_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.news_status', 1) ) + $news_statuses;

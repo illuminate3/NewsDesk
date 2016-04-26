@@ -260,6 +260,7 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 //dd($siteId);
 				return $query->whereHas('sites', function($query) use($siteId)
 				{
+//dd($siteId);
 					$query->where('sites.id', $siteId);
 				});
 	}

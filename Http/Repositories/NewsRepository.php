@@ -26,6 +26,7 @@ use Route;
 use Session;
 use Illuminate\Support\Str;
 
+
 class NewsRepository extends BaseRepository {
 
 	/**
