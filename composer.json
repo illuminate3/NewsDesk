@@ -4,8 +4,7 @@
 	"keywords": ["NewsDesk", "Articles", "Rakko"],
 	"require": {
 		"laravel/framework": "5.1.*",
-		"baum/baum": "~1.1",
-		"vespakoen/menu": "3.*"
+		"baum/baum": "~1.1"
 	},
 	"config": {
 		"preferred-install": "dist"

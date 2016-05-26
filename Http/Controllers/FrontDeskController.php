@@ -20,7 +20,6 @@ use Config;
 use Flash;
 use Hashids\Hashids;
 use Meta;
-//use SEOMeta;
 use Session;
 use Route;
 use TenantScope;
@@ -76,7 +75,13 @@ class FrontDeskController extends NewsdeskController {
 
 			$article = $this->currentArticle;
 //dd($article);
-			$this->setSeo($article);
+
+//Meta::setTitle($article->meta_title);
+Meta::setKeywords($article->meta_keywords);
+Meta::setDescription($article->meta_description);
+
+
+
 /*
     0 => "meta_description"
     1 => "meta_keywords"
