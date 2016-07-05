@@ -425,7 +425,8 @@ class NewsRepository extends BaseRepository {
 // 			}
 // 		}
 //		$role->update($input);
-//dd($input['site_select']);
+
+//dd($input['sites_id']);
 
 		$news = $this->news->find($id);
 		if ( isset($input['document_id']) ) {
@@ -616,6 +617,7 @@ class NewsRepository extends BaseRepository {
 
 	}
 
+
 	public function getArticleID($slug)
 	{
 //dd($slug);
@@ -631,6 +633,7 @@ class NewsRepository extends BaseRepository {
 
 		return $article_ID;
 	}
+
 
 	public function getNews($article_ID)
 	{

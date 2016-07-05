@@ -18,6 +18,7 @@ use Baum\Node;
 use Cache;
 use Config;
 use DB;
+//use Session;
 use Setting;
 
 class News extends Node implements TranslatableContract, SluggableInterface {
@@ -256,13 +257,13 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	public function scopeSiteID($query)
 	{
 //		return $query->where('site_id', '=', 11);
-				$siteId = Cache::get('siteId');
+		$siteId = Cache::get('siteId');
 //dd($siteId);
-				return $query->whereHas('sites', function($query) use($siteId)
-				{
+		return $query->whereHas('sites', function($query) use($siteId)
+		{
 //dd($siteId);
-					$query->where('sites.id', $siteId);
-				});
+			$query->where('sites.id', $siteId);
+		});
 	}
 
 
@@ -297,6 +298,8 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	{
 		return $query->where('news_status_id', '=', 2);
 	}
+
+
 
 	public function scopeIsTimed($query)
 	{

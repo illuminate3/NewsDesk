@@ -52,9 +52,10 @@ class FrontDeskController extends NewsdeskController {
 		$lastSlug = Route::current()->getName() == 'search' ? 'search' : $slugs[count($slugs)-1];
 //dd($lastSlug);
 
-		$article_ID = $this->news_repo->getArticleID($slug = $lastSlug);
+		$article_ID = $this->news_repo->getArticleID($lastSlug);
 //dd($article_ID);
-		$this->currentArticle = $this->news->with('images', 'documents', 'sites')->find($article_ID);
+
+		$this->currentArticle = News::IsPublished()->SiteID()->with('images', 'documents', 'sites')->find($article_ID);
 //		$this->currentArticle = $this->news_repo->with('images', 'documents')->getNews($article_ID);
 //dd($this->currentArticle);
 
@@ -62,71 +63,57 @@ class FrontDeskController extends NewsdeskController {
 
 	public function get_article()
 	{
-//dd('get_article');
-//dd($this->currentArticle);
-		if ( $this->currentArticle ) {
-// 			$mainMenu = NiftyMenus::getMainMenu( $this->currentArticle );
-// dd($mainMenu);
-//dd($this->currentArticle);
-// 			$root = $this->currentArticle->getRoot();
-// 			$secMenu = NiftyMenus::getSecMenu($root, $this->currentArticle );
 
-//			return View::make('frontends.article', ['news' => $this->currentArticle, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
+		if ( $this->currentArticle ) {
+//dd($this->currentArticle);
 
 			$article = $this->currentArticle;
 //dd($article);
 
-//Meta::setTitle($article->meta_title);
-Meta::setKeywords($article->meta_keywords);
-Meta::setDescription($article->meta_description);
-
-
-
 /*
-    0 => "meta_description"
-    1 => "meta_keywords"
-    2 => "meta_title"
-    3 => "content"
-    4 => "slug"
-    5 => "summary"
-    6 => "title"
+0 => "meta_description"
+1 => "meta_keywords"
+2 => "meta_title"
+3 => "content"
+4 => "slug"
+5 => "summary"
+6 => "title"
 */
+//			Meta::setTitle($article->meta_title);
+			Meta::setKeywords($article->meta_keywords);
+			Meta::setDescription($article->meta_description);
 
-//dd($article);
-// 			$mainMenu = $mainMenu;
-// 			$secMenu = $secMenu;
+			$lang = Session::get('locale');
+			$js_lang = array(
+//				'CLOSE' => trans('kotoba::button.close'),
+//				'TITLE' => $document->document_file_name
+				'CLOSE' => "Close",
+				'TITLE' => "View Document"
+			);
 
-//		$document = $this->document->find($id);
-//		$extension = File::extension($document->document_file_name);
-		$lang = Session::get('locale');
-		$js_lang = array(
-//			'CLOSE' => trans('kotoba::button.close'),
-			'CLOSE' => "Close",
-//			'TITLE' => $document->document_file_name
-			'TITLE' => "View Document"
-		);
+			$modal_title = trans('kotoba::general.command.delete');
+			$modal_body = trans('kotoba::general.ask.delete');
+			$modal_route = 'admin.documents.destroy';
+			$modal_id = $article->id;
+			$model = '$document';
 
-		$modal_title = trans('kotoba::general.command.delete');
-		$modal_body = trans('kotoba::general.ask.delete');
-		$modal_route = 'admin.documents.destroy';
-		$modal_id = $article->id;
-		$model = '$document';
+			return Theme::View('modules.newsdesk.frontdesk.index',
+				compact(
+					'js_lang',
+					'article',
+					'modal_title',
+					'modal_body',
+					'modal_route',
+					'modal_id',
+					'model'
+				));
 
-
-		return Theme::View('modules.newsdesk.frontdesk.index',
-			compact(
-				'js_lang',
-				'article',
-				'modal_title',
-				'modal_body',
-				'modal_route',
-				'modal_id',
-				'model'
-			));
-		}
-		else
+		} else {
 			App::abort(404);
+		}
+
 	}
+
 
 	public function getArchives()
 	{
