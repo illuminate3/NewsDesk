@@ -72,6 +72,7 @@ class NewsdeskServiceProvider extends ServiceProvider
 		$app = $this->app;
 
 		$app->register('App\Modules\Newsdesk\Providers\ViewComposerServiceProvider');
+		$app->register('App\Modules\Newsdesk\Providers\NewsEventServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');
 		$app->register('App\Modules\Newsdesk\Providers\NewsMacroServiceProvider');
 		$app->register('App\Modules\Newsdesk\Providers\WidgetServiceProvider');

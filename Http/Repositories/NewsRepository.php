@@ -15,6 +15,9 @@ use App\Modules\Core\Http\Models\Locale;
 use App\Modules\Newsdesk\Http\Models\News;
 use App\Modules\Newsdesk\Http\Models\NewsTranslation;
 
+use App\Modules\Newsdesk\Events\NewsWasCreated;
+use App\Modules\Newsdesk\Events\NewsWasUpdated;
+
 use App;
 use Auth;
 use Cache;
@@ -191,9 +194,13 @@ class NewsRepository extends BaseRepository {
 		}
 
 		if ( Auth::user()->is('super_admin') ) {
-			$news_status_id = $input['news_status_id'];
+			if ( $input['news_status_id'] == '' ) {
+				$news_status_id = Config::get('news.default_publish_status', '1');
+			} else {
+				$news_status_id = $input['news_status_id'];
+			}
 		} else {
-			$news_status_id = Config::get('news.default_publish_status', '2');
+			$news_status_id = Config::get('news.default_publish_status', '1');
 		}
 
 		$lang = Session::get('locale');
@@ -274,6 +281,7 @@ class NewsRepository extends BaseRepository {
 		];
 		$news->update($values);
 
+		\Event::fire(new NewsWasCreated($news));
 
 		return;
 	}
@@ -451,6 +459,8 @@ class NewsRepository extends BaseRepository {
 			$this->detachImage($id, $image_id);
 			$this->attachImage($id, $image_id);
 		}
+
+		\Event::fire(new NewsWasUpdated($news));
 
 		return;
 	}
@@ -649,7 +659,7 @@ class NewsRepository extends BaseRepository {
 			->where('news_translations.slug', '=', $slug, 'AND')
 			->pluck('news.id');
 */
-dd($news);
+//dd($news);
 
 		return $news;
 	}
@@ -669,7 +679,7 @@ dd($news);
 //dd($article);
 
  		$news = News::find($article);
-dd($news);
+//dd($news);
 
 /*
 	   $article =  static::whereIsCurrent(1)
