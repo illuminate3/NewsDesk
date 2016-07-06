@@ -25,12 +25,15 @@ $(document).ready(function() {
 	});
 
 	$('#table-publish').DataTable({
+		stateSave: true,
 		'pageLength': 25
 		});
 	$('#table-draft').DataTable( {
+		stateSave: true,
 		'pageLength': 25
 		});
 	$('#table-archive').DataTable( {
+		stateSave: true,
 		'pageLength': 25
 		});
 

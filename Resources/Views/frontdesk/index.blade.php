@@ -3,20 +3,12 @@
 {{-- Web site Title --}}
 @section('title')
 {{{ $article->title }}} :: @parent
-	<meta name="description" content="{!! $article->meta_description !!}" />
 @stop
 
-{{-- Web site Title --}}
-@section('activeTheme')
-	<meta name="keywords" content="{!! $article->meta_keywords !!}" />
+@section('seo')
+	<meta name="keywords" content="{{ Meta::getKeywords() }}" />
+	<meta name="description" content="{{ Meta::getDescription() }}" />
 @stop
-
-{{-- Web site description --}}
-@section('description')
-	<meta name="description" content="{!! $article->meta_description !!}" />
-@stop
-
-
 
 @section('styles')
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pdf_viewer.css') }}">
@@ -48,12 +40,15 @@ $(function(){
 {{-- News --}}
 @section('content')
 
+<div class="container-fluid padding-left-xl padding-right-xl">
 
 <div class="row">
+<div class="col-sm-12">
 	<h1>
 		{{ $article->title }}
 	</h1>
 	<hr>
+</div>
 </div>
 
 <div class="row">
@@ -66,15 +61,17 @@ $(function(){
 </div>
 </div>
 
-{{--
-<div class="row">
-	<h2>
-		{!! $article->summary !!}
-	</h2>
-</div>
---}}
 
-<div class="row padding-xl">
+<!-- well -->
+<div class="well">
+	<h3>
+		{!! $article->summary !!}
+	</h3>
+</div>
+<!-- well -->
+
+
+<div class="row">
 <div class="col-sm-12">
 	{!! $article->content !!}
 </div>
@@ -117,6 +114,8 @@ $(function(){
 	</div>
 
 @endif
+
+</div> <!-- ./container -->
 
 
 <!-- Modal -->
