@@ -190,7 +190,7 @@ class NewsController extends NewsdeskController {
 // 		$articlelist = array('' => trans('kotoba::cms.no_parent')) + $articlelist;
 //dd($articlelist);
 		$all_articlelist = $this->news_repo->getParents($locale_id, null);
-		$articlelist = array('' => trans('kotoba::cms.no_parent'));
+		$articlelist = array('0' => trans('kotoba::cms.no_parent'));
 		$articlelist = new Collection($articlelist);
 		$articlelist = $articlelist->merge($all_articlelist);
 

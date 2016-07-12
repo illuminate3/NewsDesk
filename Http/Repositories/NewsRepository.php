@@ -223,10 +223,13 @@ class NewsRepository extends BaseRepository {
 		];
 //dd($values);
 
-		$news = News::create($values);
+		$news = News::insert($values);
 //		$last_insert_id = DB::getPdo()->lastInsertId();
 		$last_insert_id = $this->getNewsID($slug);
 //dd($last_insert_id);
+
+		$news = News::find($last_insert_id);
+//dd($news);
 
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
@@ -275,11 +278,10 @@ class NewsRepository extends BaseRepository {
 			$this->attachImage($last_insert_id, $image_id);
 		}
 
-		$news = News::find($last_insert_id);
-		$values = [
+		$news_values = [
 			'image_id'					=> $image_id
 		];
-		$news->update($values);
+		$news->update($news_values);
 
 		\Event::fire(new NewsWasCreated($news));
 
@@ -614,6 +616,10 @@ class NewsRepository extends BaseRepository {
 	public function manageBaum($parent_id, $id)
 	{
 //dd($parent_id);
+
+		if ($parent_id == "" ) {
+			$parent_id = 0;
+		}
 
 		if ($parent_id != 0 && $id != null) {
 			$node = News::find($id);
