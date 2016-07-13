@@ -16,6 +16,7 @@
 
 @section('scripts')
 	<script type="text/javascript" src="{{ asset('assets/vendors/multi-select_v0_9_12/js/jquery.multi-select.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/quicksearch/jquery.quicksearch.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/datepicker-settings.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.2/chosen.jquery.min.js') }}"></script>
@@ -27,11 +28,46 @@
 		$('#file_select').multiSelect({
 			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
 			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
-		})
+		});
+
 		$('#site_select').multiSelect({
-			selectableHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
-			selectionHeader: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>"
-		})
+			selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='{{ Lang::choice('kotoba::general.search', 1) }}'>",
+			selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='{{ Lang::choice('kotoba::general.search', 1) }}'>",
+
+			selectableFooter: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.available') }}</div>",
+			selectionFooter: "<div class='bg-primary padding-md'>{{ trans('kotoba::general.assigned') }}</div>",
+
+			afterInit: function(ms){
+				var that = this,
+				$selectableSearch = that.$selectableUl.prev(),
+				$selectionSearch = that.$selectionUl.prev(),
+				selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+				selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+				that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+				.on('keydown', function(e){
+					if (e.which === 40){
+						that.$selectableUl.focus();
+						return false;
+					}
+				});
+				that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+				.on('keydown', function(e){
+					if (e.which == 40){
+						that.$selectionUl.focus();
+						return false;
+					}
+				});
+			},
+			afterSelect: function(){
+				this.qs1.cache();
+				this.qs2.cache();
+			},
+			afterDeselect: function(){
+				this.qs1.cache();
+				this.qs2.cache();
+			}
+		});
+
 		$(".chosen-select").chosen({
 			width: "100%"
 		});
