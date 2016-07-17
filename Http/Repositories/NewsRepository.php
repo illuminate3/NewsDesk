@@ -563,7 +563,11 @@ class NewsRepository extends BaseRepository {
 
 	public function getListSites()
 	{
-		$sites = DB::table('sites')->lists('name', 'id');
+//		$sites = DB::table('sites')->lists('name', 'id');
+		$sites = DB::table('sites')
+			->where('status_id', '=', 1)
+			->lists('name', 'id');
+
 		return $sites;
 	}
 
