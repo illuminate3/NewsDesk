@@ -4,6 +4,8 @@ namespace App\Modules\Newsdesk\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Modules\Core\Http\Models\Site;
+
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
@@ -20,6 +22,7 @@ use Config;
 use DB;
 //use Session;
 use Setting;
+
 
 class News extends Node implements TranslatableContract, SluggableInterface {
 /* todo upgrade to the new vinkla/translator */
@@ -239,7 +242,31 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $article;
 	}
 
+
+// Functions -----------------------------------------------
+
+
+	public function getDomainSlug()
+	{
+		$domain = $_SERVER['SERVER_NAME'];
+		$slugs = explode('.', $domain);
+		$domain_slug = $slugs[0];
+//dd($domain_slug);
+
+		return $domain_slug;
+	}
+
+
+	public function getsiteID($domain_slug)
+	{
+		$siteID = Site::where('slug', $domain_slug)->pluck('id');
+
+		return $siteID;
+	}
+
+
 // Scopes --------------------------------------------------
+
 
 	public function scopeLocale($query, $locale_id)
 	{
@@ -256,13 +283,17 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 
 	public function scopeSiteID($query)
 	{
-//		return $query->where('site_id', '=', 11);
-		$siteId = Cache::get('siteId');
+//		$site_id = Cache::get('siteId');
 //dd($siteId);
-		return $query->whereHas('sites', function($query) use($siteId)
+
+		$domain_slug = $this->getDomainSlug();
+		$siteID = $this->getsiteID($domain_slug);
+//dd($siteID);
+
+		return $query->whereHas('sites', function($query) use($siteID)
 		{
 //dd($siteId);
-			$query->where('sites.id', $siteId);
+			$query->where('sites.id', $siteID);
 		});
 	}
 
