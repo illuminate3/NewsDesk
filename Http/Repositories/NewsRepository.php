@@ -14,6 +14,7 @@ use App\Modules\Filex\Http\Models\Document;
 use App\Modules\Core\Http\Models\Locale;
 use App\Modules\Newsdesk\Http\Models\News;
 use App\Modules\Newsdesk\Http\Models\NewsTranslation;
+use App\Modules\Profiles\Http\Models\Profile;
 
 use App\Modules\Newsdesk\Events\NewsWasCreated;
 use App\Modules\Newsdesk\Events\NewsWasUpdated;
@@ -78,7 +79,8 @@ class NewsRepository extends BaseRepository {
 		$articlelist = $articlelist->merge($all_articlelist);
 
 		$users = $this->getUsers();
-		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+// 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+		$users->prepend(trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1), 0 );
 
 		$news_statuses = $this->getNewsStatuses($locale_id);
 		$news_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.news_status', 1) ) + $news_statuses;
@@ -579,7 +581,8 @@ class NewsRepository extends BaseRepository {
 
 	public function getUsers()
 	{
-		$users = DB::table('users')->lists('email', 'id');
+//		$users = DB::table('users')->lists('email', 'id');
+		$users = Profile::all()->lists('full_email', 'id');
 		return $users;
 	}
 
