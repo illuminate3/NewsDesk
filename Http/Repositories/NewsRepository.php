@@ -633,6 +633,8 @@ class NewsRepository extends BaseRepository {
 			$node->makeChildOf($parent_id);
 		}
 
+		News::rebuild();
+
 		if ($parent_id == 0 && $id != null) {
 			$node = News::find($id);
 //			$node->makeRoot();
