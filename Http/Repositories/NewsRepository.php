@@ -635,7 +635,9 @@ class NewsRepository extends BaseRepository {
 
 		if ($parent_id == 0 && $id != null) {
 			$node = News::find($id);
-			$node->makeRoot();
+//			$node->makeRoot();
+			$node->parent_id = null;
+			$node->save();
 		}
 
 	}
